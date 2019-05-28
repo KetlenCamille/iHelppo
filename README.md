@@ -1,10 +1,13 @@
 # iHelppo
 
 O projeto será um gerenciamento de atividades/tarefas diárias voltado
-para um aplicativo, a partir dos seguintes requisitos:
+para um aplicativo, a partir dos seguintes requisitos: 
+<br>
 ● Funcionalidades do Projeto
+<br>
 1. O sistema deverá permitir o cadastro, alteração, exclusão/inativação e
-listagem do Usuário.
+listagem de Usuário.
+<br>
 2. O sistema deverá permitir o cadastro, alteração, exclusão/inativação e
 listagem da Atividade.
 <br>

@@ -5,6 +5,10 @@ para um aplicativo, a partir dos seguintes requisitos:
 <br>
 ● Funcionalidades do Projeto
 <br>
+
+
+
+
 1. O sistema deverá permitir o cadastro, alteração, exclusão/inativação e
 listagem de Usuário.
 <br>
@@ -30,11 +34,13 @@ realizadas.
 que tenha a interação com o Despertador, avisando a hora daquela
 atividade.
 <br>
+<br>
 ● Descrição das funcionalidades
 <br>
 O sistema contará com as entidades: Usuário, Atividade e Categoria.
 Cada uma delas tendo a possibilidade de cadastrar um novo item, alterar os dados de
 um item já existente, excluir/desativar, e também fazer a listagem dos itens.
+<br>
 <br>
 <b>● Usuário</b>
 <br>

@@ -2,7 +2,7 @@
 
 O projeto será um gerenciamento de atividades/tarefas diárias voltado
 para um aplicativo, a partir dos seguintes requisitos:
-<br>
+● Funcionalidades do Projeto
 1. O sistema deverá permitir o cadastro, alteração, exclusão/inativação e
 listagem do Usuário.
 2. O sistema deverá permitir o cadastro, alteração, exclusão/inativação e
@@ -28,11 +28,12 @@ que tenha a interação com o Despertador, avisando a hora daquela
 atividade.
 <br>
 ● Descrição das funcionalidades
+<br>
 O sistema contará com as entidades: Usuário, Atividade e Categoria.
 Cada uma delas tendo a possibilidade de cadastrar um novo item, alterar os dados de
 um item já existente, excluir/desativar, e também fazer a listagem dos itens.
 <br>
-<b>Usuário</b>
+<b>● Usuário</b>
 <br>
 O usuário deverá se cadastrar no sistema, efetuar o login, e então poderá criar uma
 atividade. Tendo uma atividade criada, o usuário poderá cancelar a atividade,

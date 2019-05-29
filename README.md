@@ -4,11 +4,6 @@ O projeto será um gerenciamento de atividades/tarefas diárias voltado
 para um aplicativo, a partir dos seguintes requisitos: 
 <br>
 ● Funcionalidades do Projeto
-<br>
-
-
-
-
 1. O sistema deverá permitir o cadastro, alteração, exclusão/inativação e
 listagem de Usuário.
 <br>

@@ -1,6 +1,7 @@
 package edu.up.ihelppo.view;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,10 +12,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import edu.up.ihelppo.R;
+import edu.up.ihelppo.dal.UsuarioDAO;
 import edu.up.ihelppo.model.Usuario;
 
 public class CadastroUsuario extends AppCompatActivity {
@@ -36,15 +41,20 @@ public class CadastroUsuario extends AppCompatActivity {
     }
 
     public void btnCadastrarUsuarioClick(View view) {
+        //Criando usuário
         Usuario usuario = new Usuario();
         usuario.setNome(edtNome.getText().toString());
         usuario.setSobrenome(edtSobrenome.getText().toString());
         usuario.setEmail(edtEmail.getText().toString());
-        //usuario.setDataNascimento(edtDataNasc.getText().toString());
+        usuario.setDataNascimento(edtDataNasc.getText().toString());
         usuario.setSenha(edtSenha.getText().toString());
 
         //Chamar DAO
+        long id = UsuarioDAO.cadastrarUsuario(this, usuario);
+        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
-        //Criar Intent pra Main
+        //Redirecionando pra Main (tela de ínicio)
+        Intent intent = new Intent(CadastroUsuario.this, MainActivity.class );
+        startActivity(intent);
     }
 }

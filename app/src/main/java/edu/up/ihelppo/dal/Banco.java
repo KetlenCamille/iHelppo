@@ -61,7 +61,7 @@ public class Banco extends SQLiteOpenHelper{
         db.execSQL(SQL_DELETAR_TABELA_CATEGORIA);
     }
 
-    //Cadastrar Categoria
+    /* ----------- CATEGORIA -------------- */
     public long cadastrarCategoria(Categoria categoria) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -71,6 +71,34 @@ public class Banco extends SQLiteOpenHelper{
         return db.insert(Contrato.TabelaCategoria.NOME_DA_TABELA, null, values);
     }
 
+    //Listar Usuário
+    public ArrayList<Categoria> listarCategorias(){
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        //
+        String[] colunas = {
+                Contrato.TabelaCategoria.COLUNA_ID,
+                Contrato.TabelaCategoria.COLUNA_DESCRICAO
+        };
+
+        Cursor cursor = db.query(Contrato.TabelaCategoria.NOME_DA_TABELA, colunas, null,null,null,null, null);
+
+        //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
+        if(cursor.getCount()> 0)
+        {
+            do{
+                Categoria categoria = new Categoria();
+                categoria.setIdCategoria(cursor.getInt(0));
+                categoria.setDescricao(cursor.getString(1));
+                categorias.add(categoria);
+            }while(cursor.moveToNext());
+        }
+        return categorias;
+    }
+
+    /* ------------- USUÁRIO ---------------- */
     public long cadastrarUsuario(Usuario usuario){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -83,6 +111,7 @@ public class Banco extends SQLiteOpenHelper{
 
         return  db.insert(Contrato.TabelaUsuario.NOME_DA_TABELA, null, values);
     }
+
     //Listar Usuário
     public ArrayList<Usuario> listarUsuarios(){
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();

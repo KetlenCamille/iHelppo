@@ -83,7 +83,7 @@ public class Banco extends SQLiteOpenHelper{
 
         return  db.insert(Contrato.TabelaUsuario.NOME_DA_TABELA, null, values);
     }
-
+    //Listar Usuário
     public ArrayList<Usuario> listarUsuarios(){
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
         SQLiteDatabase db = getReadableDatabase();
@@ -134,5 +134,14 @@ public class Banco extends SQLiteOpenHelper{
         String[] argumentos = {String.valueOf(usuario.getIdUsuario())};
 
         return db.update(Contrato.TabelaUsuario.NOME_DA_TABELA, values, condicao, argumentos);
+    }
+
+    //Remover Usuário
+    public long removerUsuario(Usuario usuario){
+        SQLiteDatabase db = getWritableDatabase();
+        String condicao = Contrato.TabelaUsuario.COLUNA_ID + " = ?";
+        String[] argumentos = {String.valueOf(usuario.getIdUsuario())};
+
+        return db.delete(Contrato.TabelaUsuario.NOME_DA_TABELA, condicao, argumentos);
     }
 }

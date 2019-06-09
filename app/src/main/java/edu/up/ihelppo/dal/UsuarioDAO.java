@@ -10,4 +10,9 @@ public class UsuarioDAO {
         Banco banco = new Banco(context);
         return banco.cadastrarUsuario(usuario);
     }
+
+    public static long alterarUsuario(Context context, Usuario usuario) {
+        Banco banco = new Banco(context);
+        return banco.alterarUsuario(usuario);
+    }
 }

@@ -83,4 +83,21 @@ public class Banco extends SQLiteOpenHelper{
 
         return  db.insert(Contrato.TabelaUsuario.NOME_DA_TABELA, null, values);
     }
+
+    public long alterarUsuario(Usuario usuario){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Contrato.TabelaUsuario.COLUNA_NOME, usuario.getNome());
+        values.put(Contrato.TabelaUsuario.COLUNA_SOBRENOME, usuario.getSobrenome());
+        values.put(Contrato.TabelaUsuario.COLUNA_EMAIL, usuario.getNome());
+        values.put(Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO, usuario.getDataNascimento());
+        values.put(Contrato.TabelaUsuario.COLUNA_SENHA, usuario.getSenha());
+
+        //No lugar do valor para comparar, colocar o ponto de interrogação
+        String condicao = Contrato.TabelaUsuario.COLUNA_ID + " = ?";
+        String[] argumentos = {String.valueOf(usuario.getIdUsuario())};
+
+        return db.update(Contrato.TabelaUsuario.NOME_DA_TABELA, values, condicao, argumentos);
+    }
 }

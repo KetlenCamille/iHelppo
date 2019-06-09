@@ -98,7 +98,7 @@ public class Banco extends SQLiteOpenHelper{
         return categorias;
     }
 
-    //Alterar Usuário
+    //Alterar Categoria
     public long alterarCategoria(Categoria categoria){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -110,6 +110,15 @@ public class Banco extends SQLiteOpenHelper{
         String[] argumentos = {String.valueOf(categoria.getIdCategoria())};
 
         return db.update(Contrato.TabelaCategoria.NOME_DA_TABELA, values, condicao, argumentos);
+    }
+
+    //Remover Categoria
+    public long removerCategoria(Categoria categoria){
+        SQLiteDatabase db = getWritableDatabase();
+        String condicao = Contrato.TabelaCategoria.COLUNA_ID + " = ?";
+        String[] argumentos = {String.valueOf(categoria.getIdCategoria())};
+
+        return db.delete(Contrato.TabelaCategoria.NOME_DA_TABELA, condicao, argumentos);
     }
 
     /* ------------- USUÁRIO ---------------- */

@@ -31,7 +31,7 @@ public class Banco extends SQLiteOpenHelper{
     private static final String SQL_DELETAR_TABELA_CATEGORIA =
             "DROP TABLE IF EXISTS " + Contrato.TabelaCategoria.NOME_DA_TABELA;
 
-    /*---------------- USUÁRIO -------------------*/
+    /*---------------- USUARIO -------------------*/
     private static final String CRIAR_TABELA_USUARIO =
             "CREATE TABLE IF NOT EXISTS" + Contrato.TabelaUsuario.NOME_DA_TABELA + " (" +
                     Contrato.TabelaUsuario.COLUNA_ID + TIPO_INTEIRO + "PRIMARY KEY AUTOINCREMENT" + VIRGULA +
@@ -84,6 +84,41 @@ public class Banco extends SQLiteOpenHelper{
         return  db.insert(Contrato.TabelaUsuario.NOME_DA_TABELA, null, values);
     }
 
+    public ArrayList<Usuario> listarUsuarios(){
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        //
+        String[] colunas = {
+                Contrato.TabelaUsuario.COLUNA_ID,
+                Contrato.TabelaUsuario.COLUNA_NOME,
+                Contrato.TabelaUsuario.COLUNA_SOBRENOME,
+                Contrato.TabelaUsuario.COLUNA_EMAIL,
+                Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO,
+                Contrato.TabelaUsuario.COLUNA_SENHA
+        };
+
+        Cursor cursor = db.query(Contrato.TabelaUsuario.NOME_DA_TABELA, colunas, null,null,null,null, null);
+
+        //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
+        if(cursor.getCount()> 0)
+        {
+            do{
+                Usuario usuario = new Usuario();
+                usuario.setIdUsuario(cursor.getInt(0));
+                usuario.setNome(cursor.getString(1));
+                usuario.setSobrenome(cursor.getString(2));
+                usuario.setEmail(cursor.getString(3));
+                usuario.setDataNascimento(cursor.getString(4));
+                usuario.setSenha(cursor.getString(5));
+                usuarios.add(usuario);
+            }while(cursor.moveToNext());
+        }
+        return usuarios;
+    }
+
+    //Alterar Usuário
     public long alterarUsuario(Usuario usuario){
         SQLiteDatabase db = getWritableDatabase();
 

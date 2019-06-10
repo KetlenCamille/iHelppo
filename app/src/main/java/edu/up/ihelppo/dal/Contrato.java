@@ -21,7 +21,7 @@ public final class Contrato {
         public static final String COLUNA_SOBRENOME = "Sobrenome";
         public static final String COLUNA_EMAIL = "Email";
         public static final String COLUNA_SENHA = "Senha";
-        public static final String COLUNA_DATANASCIMENTO = "Data de Nascimento";
+        public static final String COLUNA_DATANASCIMENTO = "DataNascimento";
     }
 
 }

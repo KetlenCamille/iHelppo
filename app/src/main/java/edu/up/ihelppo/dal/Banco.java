@@ -32,13 +32,13 @@ public class Banco extends SQLiteOpenHelper{
             "DROP TABLE IF EXISTS " + Contrato.TabelaCategoria.NOME_DA_TABELA;
 
     /*---------------- USUARIO -------------------*/
-    private static final String CRIAR_TABELA_USUARIO =
-            "CREATE TABLE IF NOT EXISTS" + Contrato.TabelaUsuario.NOME_DA_TABELA + " (" +
-                    Contrato.TabelaUsuario.COLUNA_ID + TIPO_INTEIRO + "PRIMARY KEY AUTOINCREMENT" + VIRGULA +
+    private static final String SQL_CRIAR_TABELA_USUARIO =
+            "CREATE TABLE IF NOT EXISTS " + Contrato.TabelaUsuario.NOME_DA_TABELA + " (" +
+                    Contrato.TabelaUsuario.COLUNA_ID + TIPO_INTEIRO + " PRIMARY KEY AUTOINCREMENT" + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_NOME + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_SOBRENOME + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_EMAIL + TIPO_TEXTO + VIRGULA +
-                    Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO + TIPO_TEXTO  +
+                    Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO + TIPO_TEXTO  + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_SENHA + TIPO_TEXTO + ")";
 
     private static final String SQL_DELETAR_TABELA_USUARIO =
@@ -53,6 +53,7 @@ public class Banco extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         Log.v("CRIAR_BANCO", SQL_CRIAR_TABELA_CATEGORIA);
         db.execSQL(SQL_CRIAR_TABELA_CATEGORIA);
+        db.execSQL(SQL_CRIAR_TABELA_USUARIO);
     }
 
     @Override
@@ -128,7 +129,7 @@ public class Banco extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put(Contrato.TabelaUsuario.COLUNA_NOME, usuario.getNome());
         values.put(Contrato.TabelaUsuario.COLUNA_SOBRENOME, usuario.getSobrenome());
-        values.put(Contrato.TabelaUsuario.COLUNA_EMAIL, usuario.getNome());
+        values.put(Contrato.TabelaUsuario.COLUNA_EMAIL, usuario.getEmail());
         values.put(Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO, usuario.getDataNascimento());
         values.put(Contrato.TabelaUsuario.COLUNA_SENHA, usuario.getSenha());
 

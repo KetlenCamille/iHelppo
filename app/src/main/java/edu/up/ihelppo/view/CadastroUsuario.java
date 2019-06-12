@@ -53,8 +53,8 @@ public class CadastroUsuario extends AppCompatActivity {
         long id = UsuarioDAO.cadastrarUsuario(this, usuario);
         Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
-        /*Redirecionando pra Main (tela de ínicio)
+        /*Redirecionando pra Main (tela de ínicio)*/
         Intent intent = new Intent(CadastroUsuario.this, MainActivity.class );
-        startActivity(intent);*/
+        startActivity(intent);
     }
 }

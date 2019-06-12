@@ -24,4 +24,25 @@ public final class Contrato {
         public static final String COLUNA_DATANASCIMENTO = "DataNascimento";
     }
 
+    public static abstract class TabelaAtividade implements  BaseColumns{
+        public static final String NOME_DA_TABELA = "tb_Atividades";
+        public static final String COLUNA_ID = "IdAtividade";
+        public static final String COLUNA_ID_USUARIO = "IdUsuario";
+        public static final String COLUNA_ID_CATEGORIA = "IdCategoria";
+        public static final String COLUNA_ID_DIASDASEMANA = "IdDiaSemana";
+        public static final String COLUNA_TITULO = "Titulo";
+        public static final String COLUNA_DESCRICAO = "Descricao";
+        public static final String COLUNA_DATA_CRIACAO = "DataCriacao";
+        public static final String COLUNA_DATA_VENCIMENTO = "DataVencimento";
+    }
+
+    public static abstract class TabelaDiasDaSemana implements  BaseColumns {
+        public static final String NOME_DA_TABELA = "tb_DiasDaSemana";
+        public static final String COLUNA_ID = "IdDiaSemana";
+        public static final String COLUNA_SEGUNDA = "Segunda";
+        public static final String COLUNA_TERCA = "Terca";
+        public static final String COLUNA_QUARTA = "Quarta";
+        public static final String COLUNA_QUINTA = "Quinta";
+        public static final String COLUNA_SEXTA = "Sexta";
+    }
 }

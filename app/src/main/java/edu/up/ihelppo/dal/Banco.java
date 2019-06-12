@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import edu.up.ihelppo.model.Atividade;
 import edu.up.ihelppo.model.Categoria;
 import edu.up.ihelppo.model.Usuario;
 
@@ -40,6 +41,18 @@ public class Banco extends SQLiteOpenHelper{
                     Contrato.TabelaUsuario.COLUNA_EMAIL + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO + TIPO_TEXTO  + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_SENHA + TIPO_TEXTO + ")";
+
+    /* ---------------- ATIVIDADE ------------------*/
+    private static final String SQL_CRIAR_TABELA_ATIVIDADE =
+            "CREATE TABLE IF NOT EXISTS " + Contrato.TabelaAtividade.NOME_DA_TABELA + " (" +
+                    Contrato.TabelaAtividade.COLUNA_ID + TIPO_INTEIRO + " PRIMARY KEY AUTOINCREMENT" + VIRGULA +
+                    Contrato.TabelaAtividade.COLUNA_TITULO + TIPO_TEXTO + VIRGULA +
+                    Contrato.TabelaAtividade.COLUNA_DESCRICAO + TIPO_TEXTO + VIRGULA +
+                    Contrato.TabelaAtividade.COLUNA_DATA_CRIACAO + TIPO_DATA + VIRGULA +
+                    Contrato.TabelaAtividade.COLUNA_DATA_VENCIMENTO + TIPO_DATA  + VIRGULA +
+                    Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA + TIPO_INTEIRO + VIRGULA +
+                    " FOREIGN KEY (" + Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA + ") REFERENCES " + Contrato.TabelaCategoria.NOME_DA_TABELA + "( " + Contrato.TabelaCategoria.COLUNA_ID + ")" +
+                    ")";
 
     private static final String SQL_DELETAR_TABELA_USUARIO =
             "DROP TABLE IF EXISTS " + Contrato.TabelaUsuario.NOME_DA_TABELA;
@@ -196,5 +209,16 @@ public class Banco extends SQLiteOpenHelper{
         String[] argumentos = {String.valueOf(usuario.getIdUsuario())};
 
         return db.delete(Contrato.TabelaUsuario.NOME_DA_TABELA, condicao, argumentos);
+    }
+
+    /* ----------- ATIVIDADE ------------ */
+    public long cadastrarAtividade(Atividade atividade) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Contrato.TabelaAtividade.COLUNA_TITULO, atividade.getTitulo() );
+        values.put(Contrato.TabelaAtividade.COLUNA_DESCRICAO, atividade.getDescricaoAtividade());
+        values.put(Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA, atividade.getIdCategoria());
+        return db.insert(Contrato.TabelaAtividade.NOME_DA_TABELA, null, values);
     }
 }

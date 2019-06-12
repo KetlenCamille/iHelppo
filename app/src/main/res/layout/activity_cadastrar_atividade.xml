@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="CADASTRAR ATIVIDADE"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="#082c66"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/edtTituloAtividade"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="Título"
+        android:textSize="25sp"
+        android:textColor="#082c66"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/edtDecricaoAtividade"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:hint="Descrição"
+        android:textSize="25sp"
+        android:textColor="#082c66"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/edtCategoriaAtividade"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="Categoria"
+        android:textSize="25sp"
+        android:textColor="#082c66"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/btnSalvarAtividade"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#082c66"
+        android:text="SALVAR"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:onClick="SalvarAtividadeClick"/>
+
+</LinearLayout>

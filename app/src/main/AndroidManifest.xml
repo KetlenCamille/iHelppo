@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.CadastrarAtividadeActivity"></activity>
         <activity
             android:name=".view.CadastroCategoriaActivity"
             android:label="@string/title_activity_cadastro_categoria"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.CadastroUsuario" />
         <activity android:name=".view.MainActivity">
             <intent-filter>

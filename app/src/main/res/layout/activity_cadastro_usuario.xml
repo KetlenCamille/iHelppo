@@ -53,7 +53,6 @@
         android:layout_weight="1"
         android:gravity="center"
         android:hint="Data de nasc."
-        android:inputType="date"
         android:textColor="#082c66"
         android:textSize="27sp"/>
 
@@ -75,7 +74,9 @@
         android:orientation="vertical"
         android:gravity="center">
 
+
         <Button
+            android:id="@+id/btnCadastrar"
             android:layout_width="300dp"
             android:layout_height="80dp"
             android:gravity="center"
@@ -83,7 +84,8 @@
             android:textStyle="bold"
             android:textSize="27sp"
             android:textColor="@android:color/white"
-            android:background="#082c66"/>
+            android:background="#082C66"
+            android:onClick="btnCadastrarUsuarioClick"/>
 
     </LinearLayout>
 

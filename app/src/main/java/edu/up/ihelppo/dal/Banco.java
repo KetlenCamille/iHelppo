@@ -85,7 +85,7 @@ public class Banco extends SQLiteOpenHelper{
         return db.insert(Contrato.TabelaCategoria.NOME_DA_TABELA, null, values);
     }
 
-    //Listar Usuário
+    //Listar Categorias
     public ArrayList<Categoria> listarCategorias(){
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
         SQLiteDatabase db = getReadableDatabase();

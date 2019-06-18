@@ -42,6 +42,16 @@ public class Banco extends SQLiteOpenHelper{
                     Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO + TIPO_TEXTO  + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_SENHA + TIPO_TEXTO + ")";
 
+    /* -------------- DIAS DA SEMANA ------------- */
+    private static final String SQL_CRIAR_TABELA_DIAS_DA_SEMANA =
+            "CREATE TABLE IF NOT EXISTS " + Contrato.TabelaDiasDaSemana.NOME_DA_TABELA + " (" +
+                    Contrato.TabelaDiasDaSemana.COLUNA_ID + TIPO_INTEIRO + " PRIMARY KEY AUTOINCREMENT" + VIRGULA +
+                    Contrato.TabelaDiasDaSemana.COLUNA_SEGUNDA + TIPO_TEXTO + VIRGULA +
+                    Contrato.TabelaDiasDaSemana.COLUNA_TERCA + TIPO_TEXTO + VIRGULA +
+                    Contrato.TabelaDiasDaSemana.COLUNA_QUARTA + TIPO_TEXTO + VIRGULA +
+                    Contrato.TabelaDiasDaSemana.COLUNA_QUINTA + TIPO_TEXTO + VIRGULA +
+                    Contrato.TabelaDiasDaSemana.COLUNA_SEXTA + TIPO_TEXTO + ")";
+
     /* ---------------- ATIVIDADE ------------------*/
     private static final String SQL_CRIAR_TABELA_ATIVIDADE =
             "CREATE TABLE IF NOT EXISTS " + Contrato.TabelaAtividade.NOME_DA_TABELA + " (" +
@@ -67,6 +77,8 @@ public class Banco extends SQLiteOpenHelper{
         Log.v("CRIAR_BANCO", SQL_CRIAR_TABELA_CATEGORIA);
         db.execSQL(SQL_CRIAR_TABELA_CATEGORIA);
         db.execSQL(SQL_CRIAR_TABELA_USUARIO);
+        db.execSQL(SQL_CRIAR_TABELA_DIAS_DA_SEMANA);
+        db.execSQL(SQL_CRIAR_TABELA_ATIVIDADE);
     }
 
     @Override
@@ -219,6 +231,7 @@ public class Banco extends SQLiteOpenHelper{
         values.put(Contrato.TabelaAtividade.COLUNA_TITULO, atividade.getTitulo() );
         values.put(Contrato.TabelaAtividade.COLUNA_DESCRICAO, atividade.getDescricaoAtividade());
         values.put(Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA, atividade.getIdCategoria());
+
         return db.insert(Contrato.TabelaAtividade.NOME_DA_TABELA, null, values);
     }
 }

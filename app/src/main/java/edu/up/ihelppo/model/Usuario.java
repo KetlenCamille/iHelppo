@@ -10,6 +10,15 @@ public class Usuario {
     private String email;
     private String dataNascimento;
     private String senha;
+    private String ehInativo;
+
+    public String getEhInativo() {
+        return ehInativo;
+    }
+
+    public void setEhInativo(String ehInativo) {
+        this.ehInativo = ehInativo;
+    }
 
     public int getIdUsuario() {
         return idUsuario;

@@ -1,13 +1,10 @@
 package edu.up.ihelppo.view;
 
-import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,7 +22,6 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
     private EditText edtTituloAtividade, edtDescricaoAtividade, edtCategoriaAtividade;
     private Spinner categoria_spinner;
-    private Button btnSalvarAtividade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,34 +29,46 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         setContentView(R.layout.activity_cadastrar_atividade);
 
         edtTituloAtividade = (EditText) findViewById(R.id.edtTituloAtividade);
-        edtDescricaoAtividade = (EditText) findViewById(R.id.edtDescricaoAtividade);
+        edtDescricaoAtividade = (EditText) findViewById(R.id.edtDescricaoCategoria);
         categoria_spinner = (Spinner) findViewById(R.id.categoria_spinner);
 
-        ArrayList<String> categorias = CategoriaDAO.listarCategoriasPorNome(this);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categorias);
+        // Spinner Drop down elements
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+        categorias = CategoriaDAO.listarCategorias(this);
+
+        // !!! Criar um ArrayAdapter usando o array de string e um layout de spinner default
+        ArrayAdapter<Categoria> adapter = new ArrayAdapter<Categoria>(this, android.R.layout.simple_spinner_item, categorias);
+
+        // Especificar o layout a ser usado quando a lista de escolhas aparecer
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Aplicar o adapter para o spinner
         categoria_spinner.setAdapter(adapter);
 
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String item = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-        //categoria_spinner.setOnItemSelectedListener(this);
-    }
 
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
-    }
 
     public void SalvarAtividadeClick(View view) {
         Atividade atividade = new Atividade();
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
-        atividade.setIdCategoria(categoria_spinner.getId());
 
         long id = AtividadeDAO.cadastrarAtividade(this, atividade);
         Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+        String item = parent.getItemAtPosition(position).toString();
+
+        // Showing selected spinner item
+        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

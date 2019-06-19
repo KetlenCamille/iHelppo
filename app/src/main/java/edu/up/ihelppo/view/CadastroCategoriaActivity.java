@@ -32,6 +32,7 @@ public class CadastroCategoriaActivity extends AppCompatActivity {
     public void btnCadastrarCategoriaClick(View view) {
         Categoria categoria = new Categoria();
         categoria.setDescricao(edtDescricao.getText().toString());
+        categoria.setEhInativo("N");
 
         long id = CategoriaDAO.cadastrarCategoria(this, categoria);
         Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();

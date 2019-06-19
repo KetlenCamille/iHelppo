@@ -5,6 +5,15 @@ public class Categoria {
     //Atributos
     private int idCategoria;
     private String descricao;
+    private String ehInativo;
+
+    public String getEhInativo() {
+        return ehInativo;
+    }
+
+    public void setEhInativo(String ehInativo) {
+        this.ehInativo = ehInativo;
+    }
 
     public int getIdCategoria() {
         return idCategoria;

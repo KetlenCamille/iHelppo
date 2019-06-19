@@ -247,6 +247,8 @@ public class Banco extends SQLiteOpenHelper{
         return db.insert(Contrato.TabelaAtividade.NOME_DA_TABELA, null, values);
     }
 
+
+    /* -------------- DIAS DA SEMANA ----------------- */
     public long cadastrarDiasDaSemana(DiasDaSemana diasDaSemana){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -260,5 +262,73 @@ public class Banco extends SQLiteOpenHelper{
         values.put(Contrato.TabelaDiasDaSemana.COLUNA_DOMINGO, diasDaSemana.getDomingo());
 
         return  db.insert(Contrato.TabelaDiasDaSemana.NOME_DA_TABELA, null, values);
+    }
+
+    //Listar Dias Da Semana
+    public ArrayList<DiasDaSemana> listarDiasDaSemana(){
+        ArrayList<DiasDaSemana> diasDaSemanas = new ArrayList<DiasDaSemana>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        //
+        String[] colunas = {
+                Contrato.TabelaDiasDaSemana.COLUNA_ID,
+                Contrato.TabelaDiasDaSemana.COLUNA_SEGUNDA,
+                Contrato.TabelaDiasDaSemana.COLUNA_TERCA,
+                Contrato.TabelaDiasDaSemana.COLUNA_QUARTA,
+                Contrato.TabelaDiasDaSemana.COLUNA_QUINTA,
+                Contrato.TabelaDiasDaSemana.COLUNA_SEXTA,
+                Contrato.TabelaDiasDaSemana.COLUNA_SABADO,
+                Contrato.TabelaDiasDaSemana.COLUNA_DOMINGO
+        };
+
+        Cursor cursor = db.query(Contrato.TabelaDiasDaSemana.NOME_DA_TABELA, colunas, null,null,null,null, null);
+
+        //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
+        if(cursor.getCount()> 0)
+        {
+            do{
+                DiasDaSemana diaDaSemana = new DiasDaSemana();
+                diaDaSemana.setIdDiasDaSemana(cursor.getInt(0));
+                diaDaSemana.setSegunda(cursor.getString(1));
+                diaDaSemana.setTerca(cursor.getString(2));
+                diaDaSemana.setQuarta(cursor.getString(3));
+                diaDaSemana.setQuinta(cursor.getString(4));
+                diaDaSemana.setSexta(cursor.getString(5));
+                diaDaSemana.setSabado(cursor.getString(6));
+                diaDaSemana.setDomingo(cursor.getString(7));
+                diasDaSemanas.add(diaDaSemana);
+            }while(cursor.moveToNext());
+        }
+        return diasDaSemanas;
+    }
+
+    //Alterar Dias da Semana
+    public long alterarDiasDaSemana(DiasDaSemana diasDaSemana){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_SEGUNDA, diasDaSemana.getSegunda());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_TERCA, diasDaSemana.getTerca());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_QUARTA, diasDaSemana.getQuarta());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_QUINTA, diasDaSemana.getQuinta());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_SEXTA, diasDaSemana.getSexta());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_SABADO, diasDaSemana.getSabado());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_DOMINGO, diasDaSemana.getDomingo());
+
+        //No lugar do valor para comparar, colocar o ponto de interrogação
+        String condicao = Contrato.TabelaDiasDaSemana.COLUNA_ID + " = ?";
+        String[] argumentos = {String.valueOf(diasDaSemana.getIdDiasDaSemana())};
+
+        return db.update(Contrato.TabelaDiasDaSemana.NOME_DA_TABELA, values, condicao, argumentos);
+    }
+
+    //Remover Dias da Semana
+    public long removerDiasDaSemana(DiasDaSemana diasDaSemana){
+        SQLiteDatabase db = getWritableDatabase();
+        String condicao = Contrato.TabelaDiasDaSemana.COLUNA_ID + " = ?";
+        String[] argumentos = {String.valueOf(diasDaSemana.getIdDiasDaSemana())};
+
+        return db.delete(Contrato.TabelaDiasDaSemana.NOME_DA_TABELA, condicao, argumentos);
     }
 }

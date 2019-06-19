@@ -12,6 +12,8 @@ public final class Contrato {
         public static final String NOME_DA_TABELA = "tb_Categorias";
         public static final String COLUNA_ID = "IdCategoria";
         public static final String COLUNA_DESCRICAO = "Descricao";
+        public static final String COLUNA_EHINATIVO = "Inativo";
+
     }
 
     public static abstract class TabelaUsuario implements  BaseColumns{

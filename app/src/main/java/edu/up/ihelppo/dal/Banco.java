@@ -1,5 +1,6 @@
 package edu.up.ihelppo.dal;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -28,7 +29,8 @@ public class Banco extends SQLiteOpenHelper{
     private static final String SQL_CRIAR_TABELA_CATEGORIA =
             "CREATE TABLE IF NOT EXISTS " + Contrato.TabelaCategoria.NOME_DA_TABELA + " (" +
                     Contrato.TabelaCategoria.COLUNA_ID + TIPO_INTEIRO + " PRIMARY KEY AUTOINCREMENT" + VIRGULA +
-                    Contrato.TabelaCategoria.COLUNA_DESCRICAO + TIPO_TEXTO + ")";
+                    Contrato.TabelaCategoria.COLUNA_DESCRICAO + TIPO_TEXTO + VIRGULA +
+                    Contrato.TabelaCategoria.COLUNA_EHINATIVO + TIPO_TEXTO  + ")";
 
     private static final String SQL_DELETAR_TABELA_CATEGORIA =
             "DROP TABLE IF EXISTS " + Contrato.TabelaCategoria.NOME_DA_TABELA;
@@ -96,6 +98,7 @@ public class Banco extends SQLiteOpenHelper{
 
         ContentValues values = new ContentValues();
         values.put(Contrato.TabelaCategoria.COLUNA_DESCRICAO, categoria.getDescricao());
+        values.put(Contrato.TabelaCategoria.COLUNA_EHINATIVO, categoria.getEhInativo());
 
         return db.insert(Contrato.TabelaCategoria.NOME_DA_TABELA, null, values);
     }
@@ -108,7 +111,8 @@ public class Banco extends SQLiteOpenHelper{
         //
         String[] colunas = {
                 Contrato.TabelaCategoria.COLUNA_ID,
-                Contrato.TabelaCategoria.COLUNA_DESCRICAO
+                Contrato.TabelaCategoria.COLUNA_DESCRICAO,
+                Contrato.TabelaCategoria.COLUNA_EHINATIVO
         };
 
         Cursor cursor = db.query(Contrato.TabelaCategoria.NOME_DA_TABELA, colunas, null,null,null,null, null);
@@ -121,6 +125,7 @@ public class Banco extends SQLiteOpenHelper{
                 Categoria categoria = new Categoria();
                 categoria.setIdCategoria(cursor.getInt(0));
                 categoria.setDescricao(cursor.getString(1));
+                categoria.setEhInativo(cursor.getString(2));
                 categorias.add(categoria);
             }while(cursor.moveToNext());
         }

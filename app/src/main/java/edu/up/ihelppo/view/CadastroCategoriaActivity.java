@@ -38,5 +38,6 @@ public class CadastroCategoriaActivity extends AppCompatActivity {
 
         /*Intent intent = new Intent(CadastroCategoriaActivity.this, MainActivity.class);
         startActivity(intent);*/
+
     }
 }

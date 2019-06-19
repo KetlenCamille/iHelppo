@@ -16,4 +16,10 @@ public class CategoriaDAO {
         Banco banco = new Banco(context);
         return banco.listarCategorias();
     }
+
+    public static ArrayList<String> listarCategoriasPorNome (Context context) {
+        Banco banco = new Banco(context);
+        return banco.listarCategoriasPorNome();
+
+    }
 }

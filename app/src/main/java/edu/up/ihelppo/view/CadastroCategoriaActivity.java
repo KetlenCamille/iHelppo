@@ -27,7 +27,6 @@ public class CadastroCategoriaActivity extends AppCompatActivity {
 
         edtDescricao = (EditText) findViewById(R.id.edtDescricaoCategoria);
         btnCadastrar = (Button) findViewById(R.id.btnCadastrarCategoria);
-
     }
 
     public void btnCadastrarCategoriaClick(View view) {
@@ -40,5 +39,6 @@ public class CadastroCategoriaActivity extends AppCompatActivity {
 
         /*Intent intent = new Intent(CadastroCategoriaActivity.this, MainActivity.class);
         startActivity(intent);*/
+
     }
 }

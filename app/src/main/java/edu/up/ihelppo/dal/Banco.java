@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import edu.up.ihelppo.model.Atividade;
 import edu.up.ihelppo.model.Categoria;
+import edu.up.ihelppo.model.DiasDaSemana;
 import edu.up.ihelppo.model.Usuario;
 
 public class Banco extends SQLiteOpenHelper{
@@ -40,7 +41,8 @@ public class Banco extends SQLiteOpenHelper{
                     Contrato.TabelaUsuario.COLUNA_SOBRENOME + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_EMAIL + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO + TIPO_TEXTO  + VIRGULA +
-                    Contrato.TabelaUsuario.COLUNA_SENHA + TIPO_TEXTO + ")";
+                    Contrato.TabelaUsuario.COLUNA_SENHA + TIPO_TEXTO + VIRGULA +
+                    Contrato.TabelaUsuario.COLUNA_EHINATIVO + TIPO_TEXTO + ")";
 
     /* -------------- DIAS DA SEMANA ------------- */
     private static final String SQL_CRIAR_TABELA_DIAS_DA_SEMANA =
@@ -50,7 +52,9 @@ public class Banco extends SQLiteOpenHelper{
                     Contrato.TabelaDiasDaSemana.COLUNA_TERCA + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaDiasDaSemana.COLUNA_QUARTA + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaDiasDaSemana.COLUNA_QUINTA + TIPO_TEXTO + VIRGULA +
-                    Contrato.TabelaDiasDaSemana.COLUNA_SEXTA + TIPO_TEXTO + ")";
+                    Contrato.TabelaDiasDaSemana.COLUNA_SEXTA + TIPO_TEXTO + VIRGULA +
+                    Contrato.TabelaDiasDaSemana.COLUNA_SABADO + TIPO_TEXTO + VIRGULA +
+                    Contrato.TabelaDiasDaSemana.COLUNA_DOMINGO + TIPO_TEXTO + ")";
 
     /* ---------------- ATIVIDADE ------------------*/
     private static final String SQL_CRIAR_TABELA_ATIVIDADE =
@@ -156,6 +160,7 @@ public class Banco extends SQLiteOpenHelper{
         values.put(Contrato.TabelaUsuario.COLUNA_EMAIL, usuario.getEmail());
         values.put(Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO, usuario.getDataNascimento());
         values.put(Contrato.TabelaUsuario.COLUNA_SENHA, usuario.getSenha());
+        values.put(Contrato.TabelaUsuario.COLUNA_EHINATIVO, usuario.getEhInativo());
 
         return  db.insert(Contrato.TabelaUsuario.NOME_DA_TABELA, null, values);
     }
@@ -172,7 +177,8 @@ public class Banco extends SQLiteOpenHelper{
                 Contrato.TabelaUsuario.COLUNA_SOBRENOME,
                 Contrato.TabelaUsuario.COLUNA_EMAIL,
                 Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO,
-                Contrato.TabelaUsuario.COLUNA_SENHA
+                Contrato.TabelaUsuario.COLUNA_SENHA,
+                Contrato.TabelaUsuario.COLUNA_EHINATIVO
         };
 
         Cursor cursor = db.query(Contrato.TabelaUsuario.NOME_DA_TABELA, colunas, null,null,null,null, null);
@@ -189,6 +195,7 @@ public class Banco extends SQLiteOpenHelper{
                 usuario.setEmail(cursor.getString(3));
                 usuario.setDataNascimento(cursor.getString(4));
                 usuario.setSenha(cursor.getString(5));
+                usuario.setEhInativo(cursor.getString(6));
                 usuarios.add(usuario);
             }while(cursor.moveToNext());
         }
@@ -205,6 +212,7 @@ public class Banco extends SQLiteOpenHelper{
         values.put(Contrato.TabelaUsuario.COLUNA_EMAIL, usuario.getNome());
         values.put(Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO, usuario.getDataNascimento());
         values.put(Contrato.TabelaUsuario.COLUNA_SENHA, usuario.getSenha());
+        values.put(Contrato.TabelaUsuario.COLUNA_EHINATIVO, usuario.getEhInativo());
 
         //No lugar do valor para comparar, colocar o ponto de interrogação
         String condicao = Contrato.TabelaUsuario.COLUNA_ID + " = ?";
@@ -232,5 +240,20 @@ public class Banco extends SQLiteOpenHelper{
         values.put(Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA, atividade.getIdCategoria());
 
         return db.insert(Contrato.TabelaAtividade.NOME_DA_TABELA, null, values);
+    }
+
+    public long cadastrarDiasDaSemana(DiasDaSemana diasDaSemana){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_SEGUNDA, diasDaSemana.getSegunda());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_TERCA, diasDaSemana.getTerca());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_QUARTA, diasDaSemana.getQuarta());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_QUINTA, diasDaSemana.getQuinta());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_SEXTA, diasDaSemana.getSexta());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_SABADO, diasDaSemana.getSabado());
+        values.put(Contrato.TabelaDiasDaSemana.COLUNA_DOMINGO, diasDaSemana.getDomingo());
+
+        return  db.insert(Contrato.TabelaDiasDaSemana.NOME_DA_TABELA, null, values);
     }
 }

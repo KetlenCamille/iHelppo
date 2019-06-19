@@ -22,6 +22,7 @@ public final class Contrato {
         public static final String COLUNA_EMAIL = "Email";
         public static final String COLUNA_SENHA = "Senha";
         public static final String COLUNA_DATANASCIMENTO = "DataNascimento";
+        public static final String COLUNA_EHINATIVO = "EhInativo";
     }
 
     public static abstract class TabelaAtividade implements  BaseColumns{
@@ -43,5 +44,7 @@ public final class Contrato {
         public static final String COLUNA_QUARTA = "Quarta";
         public static final String COLUNA_QUINTA = "Quinta";
         public static final String COLUNA_SEXTA = "Sexta";
+        public static final String COLUNA_SABADO = "Sabado";
+        public static final String COLUNA_DOMINGO = "Domingo";
     }
 }

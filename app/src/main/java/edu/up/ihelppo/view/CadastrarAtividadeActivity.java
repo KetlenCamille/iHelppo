@@ -15,8 +15,10 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import edu.up.ihelppo.R;
 import edu.up.ihelppo.dal.AtividadeDAO;
 import edu.up.ihelppo.dal.CategoriaDAO;
+import edu.up.ihelppo.dal.DiasDaSemanaDAO;
 import edu.up.ihelppo.model.Atividade;
 import edu.up.ihelppo.model.Categoria;
+import edu.up.ihelppo.model.DiasDaSemana;
 
 public class CadastrarAtividadeActivity extends AppCompatActivity implements OnItemSelectedListener{
 
@@ -57,12 +59,27 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
 
     public void SalvarAtividadeClick(View view) {
-        Atividade atividade = new Atividade();
+
+        DiasDaSemana diasDaSemana = new DiasDaSemana();
+        diasDaSemana.setSegunda("S");
+        diasDaSemana.setTerca("S");
+        diasDaSemana.setQuarta("N");
+        diasDaSemana.setQuinta("N");
+        diasDaSemana.setSexta("N");
+        diasDaSemana.setSabado("N");
+        diasDaSemana.setDomingo("N");
+
+        /*Atividade atividade = new Atividade();
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
         atividade.setDataCriacao(txtDataAtividade.getText().toString());
         long id = AtividadeDAO.cadastrarAtividade(this, atividade);
-        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();*/
+
+
+
+        long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
+        Toast.makeText(this, "Id:" + id, Toast.LENGTH_SHORT).show();
     }
 
     @Override

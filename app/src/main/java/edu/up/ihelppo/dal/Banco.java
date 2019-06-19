@@ -58,8 +58,7 @@ public class Banco extends SQLiteOpenHelper{
                     Contrato.TabelaAtividade.COLUNA_ID + TIPO_INTEIRO + " PRIMARY KEY AUTOINCREMENT" + VIRGULA +
                     Contrato.TabelaAtividade.COLUNA_TITULO + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaAtividade.COLUNA_DESCRICAO + TIPO_TEXTO + VIRGULA +
-                    Contrato.TabelaAtividade.COLUNA_DATA_CRIACAO + TIPO_DATA + VIRGULA +
-                    Contrato.TabelaAtividade.COLUNA_DATA_VENCIMENTO + TIPO_DATA  + VIRGULA +
+                    Contrato.TabelaAtividade.COLUNA_DATA_CRIACAO + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA + TIPO_INTEIRO + VIRGULA +
                     " FOREIGN KEY (" + Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA + ") REFERENCES " + Contrato.TabelaCategoria.NOME_DA_TABELA + "( " + Contrato.TabelaCategoria.COLUNA_ID + ")" +
                     ")";

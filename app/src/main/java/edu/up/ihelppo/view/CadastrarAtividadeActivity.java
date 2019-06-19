@@ -21,6 +21,7 @@ import edu.up.ihelppo.model.Categoria;
 public class CadastrarAtividadeActivity extends AppCompatActivity implements OnItemSelectedListener{
 
     private EditText edtTituloAtividade, edtDescricaoAtividade, edtCategoriaAtividade;
+    private TextView txtDataAtividade;
     private Spinner categoria_spinner;
 
     @Override
@@ -31,6 +32,12 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         edtTituloAtividade = (EditText) findViewById(R.id.edtTituloAtividade);
         edtDescricaoAtividade = (EditText) findViewById(R.id.edtDescricaoCategoria);
         categoria_spinner = (Spinner) findViewById(R.id.categoria_spinner);
+        txtDataAtividade = (TextView) findViewById(R.id.txtDataAtividade);
+
+        String dataAtividade =  getIntent().getStringExtra("DATA_ATIVIDADE");
+        if(dataAtividade != null){
+            txtDataAtividade.setText(dataAtividade);
+        }
 
         // Spinner Drop down elements
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
@@ -53,7 +60,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         Atividade atividade = new Atividade();
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
-
+        atividade.setDataCriacao(txtDataAtividade.getText().toString());
         long id = AtividadeDAO.cadastrarAtividade(this, atividade);
         Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
     }

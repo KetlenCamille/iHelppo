@@ -33,7 +33,6 @@ public final class Contrato {
         public static final String COLUNA_TITULO = "Titulo";
         public static final String COLUNA_DESCRICAO = "Descricao";
         public static final String COLUNA_DATA_CRIACAO = "DataCriacao";
-        public static final String COLUNA_DATA_VENCIMENTO = "DataVencimento";
     }
 
     public static abstract class TabelaDiasDaSemana implements  BaseColumns {

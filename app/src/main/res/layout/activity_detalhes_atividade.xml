@@ -1,0 +1,82 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="DETALHES ATIVIDADE"
+        android:textColor="#082c66"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtDataAtividade"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:hint="Data"
+        android:textColor="#082c66"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/edtTituloAtividade"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:hint="Título"
+        android:textColor="#082c66"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/edtDecricaoAtividade"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:hint="Descrição"
+        android:textColor="#082c66"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:padding="">
+
+        <Button
+            android:id="@+id/btnFeito"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="FEITO!"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="#16a50e"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+        <Button
+            android:id="@+id/btnExcluirAtv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="EXCLUIR ATIVIDADE"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="#ef0000"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+    </LinearLayout>
+</LinearLayout>

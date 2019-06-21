@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.CalendarioActivity"></activity>
+        <activity android:name=".view.ListarAtividadesActivity"></activity>
+        <activity android:name=".view.MenuActivity" />
+        <activity android:name=".view.DetalhesAtividadeActivity" />
+        <activity android:name=".view.CalendarioActivity" />
         <activity android:name=".view.CadastrarAtividadeActivity" />
         <activity
             android:name=".view.CadastroCategoriaActivity"

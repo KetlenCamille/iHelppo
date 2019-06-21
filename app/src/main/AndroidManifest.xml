@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.CadastrarAtividadeActivity"></activity>
+        <activity android:name=".view.AlterarCadastroActivity"></activity>
+        <activity android:name=".view.CadastrarAtividadeActivity" />
         <activity
             android:name=".view.CadastroCategoriaActivity"
             android:label="@string/title_activity_cadastro_categoria"

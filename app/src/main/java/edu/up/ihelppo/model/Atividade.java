@@ -10,7 +10,7 @@ public class Atividade {
     private int idDiasSemana;
     private String titulo;
     private String descricaoAtividade;
-    private Date dataCriacao;
+    private String dataCriacao;
 
     public int getIdAtividade() {
         return idAtividade;
@@ -60,11 +60,11 @@ public class Atividade {
         this.descricaoAtividade = descricaoAtividade;
     }
 
-    public Date getDataCriacao() {
+    public String getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(Date dataCriacao) {
+    public void setDataCriacao(String dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 }

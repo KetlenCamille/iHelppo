@@ -27,17 +27,18 @@ public class CadastroCategoriaActivity extends AppCompatActivity {
 
         edtDescricao = (EditText) findViewById(R.id.edtDescricaoCategoria);
         btnCadastrar = (Button) findViewById(R.id.btnCadastrarCategoria);
-
     }
 
     public void btnCadastrarCategoriaClick(View view) {
         Categoria categoria = new Categoria();
         categoria.setDescricao(edtDescricao.getText().toString());
+        categoria.setEhInativo("N");
 
         long id = CategoriaDAO.cadastrarCategoria(this, categoria);
         Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
         /*Intent intent = new Intent(CadastroCategoriaActivity.this, MainActivity.class);
         startActivity(intent);*/
+
     }
 }

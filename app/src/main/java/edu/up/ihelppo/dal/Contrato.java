@@ -12,6 +12,8 @@ public final class Contrato {
         public static final String NOME_DA_TABELA = "tb_Categorias";
         public static final String COLUNA_ID = "IdCategoria";
         public static final String COLUNA_DESCRICAO = "Descricao";
+        public static final String COLUNA_EHINATIVO = "Inativo";
+
     }
 
     public static abstract class TabelaUsuario implements  BaseColumns{
@@ -22,6 +24,7 @@ public final class Contrato {
         public static final String COLUNA_EMAIL = "Email";
         public static final String COLUNA_SENHA = "Senha";
         public static final String COLUNA_DATANASCIMENTO = "DataNascimento";
+        public static final String COLUNA_EHINATIVO = "EhInativo";
     }
 
     public static abstract class TabelaAtividade implements  BaseColumns{
@@ -33,7 +36,6 @@ public final class Contrato {
         public static final String COLUNA_TITULO = "Titulo";
         public static final String COLUNA_DESCRICAO = "Descricao";
         public static final String COLUNA_DATA_CRIACAO = "DataCriacao";
-        public static final String COLUNA_DATA_VENCIMENTO = "DataVencimento";
     }
 
     public static abstract class TabelaDiasDaSemana implements  BaseColumns {
@@ -44,5 +46,7 @@ public final class Contrato {
         public static final String COLUNA_QUARTA = "Quarta";
         public static final String COLUNA_QUINTA = "Quinta";
         public static final String COLUNA_SEXTA = "Sexta";
+        public static final String COLUNA_SABADO = "Sabado";
+        public static final String COLUNA_DOMINGO = "Domingo";
     }
 }

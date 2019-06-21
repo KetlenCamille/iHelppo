@@ -48,6 +48,7 @@ public class CadastroUsuario extends AppCompatActivity {
         usuario.setEmail(edtEmail.getText().toString());
         usuario.setDataNascimento(edtDataNasc.getText().toString());
         usuario.setSenha(edtSenha.getText().toString());
+        usuario.setEhInativo("N");
 
         //Chamar DAO
         long id = UsuarioDAO.cadastrarUsuario(this, usuario);

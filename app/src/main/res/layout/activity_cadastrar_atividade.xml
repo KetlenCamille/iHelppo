@@ -1,59 +1,174 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/txtDataAtividade"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="CADASTRAR ATIVIDADE"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="#082c66"
-        android:gravity="center"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/edtTituloAtividade"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:hint="Título"
-        android:textSize="25sp"
-        android:textColor="#082c66"
-        android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="CADASTRAR ATIVIDADE"
+            android:textColor="#082c66"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/edtDescricaoAtividade"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:hint="Descrição"
-        android:textSize="25sp"
-        android:textColor="#082c66"
-        android:gravity="center"/>
+        <EditText
+            android:id="@+id/edtDataAtividade"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:hint="Data"
+            android:textColor="#082c66"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/edtTituloAtividade"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:hint="Título"
+            android:textColor="#082c66"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/edtDecricaoAtividade"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:hint="Descrição"
+            android:textColor="#082c66"
+            android:textSize="25sp" />
 
 
-    <Spinner
-        android:id="@+id/categoria_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        <Spinner
+            android:id="@+id/categoria_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"/>
 
-    <Button
-        android:id="@+id/btnSalvarAtividade"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#082c66"
-        android:text="SALVAR"
-        android:textStyle="bold"
-        android:textSize="35sp"
-        android:textColor="@android:color/white"
-        android:gravity="center"
-        android:onClick="SalvarAtividadeClick"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="left|bottom"
+            android:text="REPRODUZIR EM:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chkDom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="DOM"
+                android:textSize="17sp"/>
+
+            <CheckBox
+                android:id="@+id/chkSeg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="SEG"
+                android:textSize="17sp"/>
+
+            <CheckBox
+                android:id="@+id/chkTer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="TER"
+                android:textSize="17sp"/>
+
+            <CheckBox
+                android:id="@+id/chkQua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="QUA"
+                android:textSize="17sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chkQui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="QUI"
+                android:textSize="17sp"/>
+
+            <CheckBox
+                android:id="@+id/chkSex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="SEX"
+                android:textSize="17sp"/>
+
+            <CheckBox
+                android:id="@+id/chkSab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onCheckboxClicked"
+                android:text="SAB"
+                android:textSize="17sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="left|bottom"
+                android:text="ALARME"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/chkAlarme"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Criar alarme"
+                android:textSize="17sp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSalvarAtividade"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="#082c66"
+            android:gravity="center"
+            android:onClick="SalvarAtividadeClick"
+            android:text="SALVAR"
+            android:textColor="@android:color/white"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+</ScrollView>

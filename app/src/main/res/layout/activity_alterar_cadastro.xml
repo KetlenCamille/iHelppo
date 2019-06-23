@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Dados de usuário"
+        android:textColor="#082c66"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtNomeAlterar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:hint="Nome"
+        android:textColor="#082c66"
+        android:textSize="27sp" />
+
+    <EditText
+        android:id="@+id/edtSobrenomeAlterar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:hint="Sobrenome"
+        android:textColor="#082c66"
+        android:textSize="27sp" />
+
+    <EditText
+        android:id="@+id/edtEmailAlterar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:textColor="#082c66"
+        android:textSize="27sp" />
+
+    <EditText
+        android:id="@+id/edtDataNascAlterar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:hint="Data de nasc."
+        android:textColor="#082c66"
+        android:textSize="27sp"/>
+
+    <EditText
+        android:id="@+id/edtSenhaAlterar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:textColor="#082c66"
+        android:textSize="27sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+        <Button
+            android:id="@+id/btnSalvarAlteracoes"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="SALVAR ALTERAÇÕES"
+            android:textStyle="bold"
+            android:textSize="23sp"
+            android:textColor="@android:color/white"
+            android:background="#082C66"
+            android:onClick="btnAlterarCadastro"/>
+
+    </LinearLayout>
+
+</LinearLayout>

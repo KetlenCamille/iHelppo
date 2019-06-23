@@ -24,7 +24,6 @@ public class CalendarioActivity extends AppCompatActivity {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 String data = dayOfMonth + "/" + month + "/" + year;
 
-                Toast.makeText(CalendarioActivity.this, "DATA SELECIONADA" + data, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CalendarioActivity.this, CadastrarAtividadeActivity.class);
                 intent.putExtra("DATA_ATIVIDADE", data);
                 startActivity(intent);

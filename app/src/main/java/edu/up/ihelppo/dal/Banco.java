@@ -15,7 +15,7 @@ import edu.up.ihelppo.model.Categoria;
 import edu.up.ihelppo.model.DiasDaSemana;
 import edu.up.ihelppo.model.Usuario;
 
-public class Banco extends SQLiteOpenHelper{
+public class Banco extends SQLiteOpenHelper {
 
     private static final String NOME_BANCO = "iHelppo.db";
     private static final int VERSAO_BANCO = 1;
@@ -30,7 +30,7 @@ public class Banco extends SQLiteOpenHelper{
             "CREATE TABLE IF NOT EXISTS " + Contrato.TabelaCategoria.NOME_DA_TABELA + " (" +
                     Contrato.TabelaCategoria.COLUNA_ID + TIPO_INTEIRO + " PRIMARY KEY AUTOINCREMENT" + VIRGULA +
                     Contrato.TabelaCategoria.COLUNA_DESCRICAO + TIPO_TEXTO + VIRGULA +
-                    Contrato.TabelaCategoria.COLUNA_EHINATIVO + TIPO_TEXTO  + ")";
+                    Contrato.TabelaCategoria.COLUNA_EHINATIVO + TIPO_TEXTO + ")";
 
     private static final String SQL_DELETAR_TABELA_CATEGORIA =
             "DROP TABLE IF EXISTS " + Contrato.TabelaCategoria.NOME_DA_TABELA;
@@ -42,9 +42,12 @@ public class Banco extends SQLiteOpenHelper{
                     Contrato.TabelaUsuario.COLUNA_NOME + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_SOBRENOME + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_EMAIL + TIPO_TEXTO + VIRGULA +
-                    Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO + TIPO_TEXTO  + VIRGULA +
+                    Contrato.TabelaUsuario.COLUNA_DATANASCIMENTO + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_SENHA + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaUsuario.COLUNA_EHINATIVO + TIPO_TEXTO + ")";
+
+    private static final String SQL_DELETAR_TABELA_USUARIO =
+            "DROP TABLE IF EXISTS " + Contrato.TabelaUsuario.NOME_DA_TABELA;
 
     /* -------------- DIAS DA SEMANA ------------- */
     private static final String SQL_CRIAR_TABELA_DIAS_DA_SEMANA =
@@ -58,6 +61,9 @@ public class Banco extends SQLiteOpenHelper{
                     Contrato.TabelaDiasDaSemana.COLUNA_SABADO + TIPO_TEXTO + VIRGULA +
                     Contrato.TabelaDiasDaSemana.COLUNA_DOMINGO + TIPO_TEXTO + ")";
 
+    private static final String SQL_DELETAR_TABELA_DIAS_DA_SEMANA =
+            "DROP TABLE IF EXISTS " + Contrato.TabelaDiasDaSemana.NOME_DA_TABELA;
+
     /* ---------------- ATIVIDADE ------------------*/
     private static final String SQL_CRIAR_TABELA_ATIVIDADE =
             "CREATE TABLE IF NOT EXISTS " + Contrato.TabelaAtividade.NOME_DA_TABELA + " (" +
@@ -68,9 +74,8 @@ public class Banco extends SQLiteOpenHelper{
                     Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA + TIPO_INTEIRO + VIRGULA +
                     " FOREIGN KEY (" + Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA + ") REFERENCES " + Contrato.TabelaCategoria.NOME_DA_TABELA + "( " + Contrato.TabelaCategoria.COLUNA_ID + ")" +
                     ")";
-
-    private static final String SQL_DELETAR_TABELA_USUARIO =
-            "DROP TABLE IF EXISTS " + Contrato.TabelaUsuario.NOME_DA_TABELA;
+    private static final String SQL_DELETAR_TABELA_ATIVIDADE =
+            "DROP TABLE IF EXISTS " + Contrato.TabelaAtividade.NOME_DA_TABELA;
 
     //Contrutor da classe
     public Banco(Context context) {
@@ -104,7 +109,7 @@ public class Banco extends SQLiteOpenHelper{
     }
 
     //Listar Categorias
-    public ArrayList<Categoria> listarCategorias(){
+    public ArrayList<Categoria> listarCategorias() {
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
         SQLiteDatabase db = getReadableDatabase();
 
@@ -115,41 +120,42 @@ public class Banco extends SQLiteOpenHelper{
                 Contrato.TabelaCategoria.COLUNA_EHINATIVO
         };
 
-        Cursor cursor = db.query(Contrato.TabelaCategoria.NOME_DA_TABELA, colunas, null,null,null,null, null);
+        Cursor cursor = db.query(Contrato.TabelaCategoria.NOME_DA_TABELA, colunas, null, null, null, null, null);
 
         //Colando o cursor para a 1a posição
         cursor.moveToFirst();
-        if(cursor.getCount()> 0)
-        {
-            do{
+        if (cursor.getCount() > 0) {
+            do {
                 Categoria categoria = new Categoria();
                 categoria.setIdCategoria(cursor.getInt(0));
                 categoria.setDescricao(cursor.getString(1));
                 categoria.setEhInativo(cursor.getString(2));
                 categorias.add(categoria);
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return categorias;
     }
 
-    public ArrayList<String> listarCategoriasPorNome(){
+    //Listar Categorias Por Nome
+    public ArrayList<String> listarCategoriasPorNome() {
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<String> categorias = new ArrayList<String>();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+ Contrato.TabelaCategoria.NOME_DA_TABELA,null);
-        if(cursor != null && cursor.moveToFirst()){
-            do{
+        Cursor cursor = db.rawQuery("SELECT * FROM " + Contrato.TabelaCategoria.NOME_DA_TABELA, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
                 categorias.add(cursor.getString(cursor.getColumnIndex("Descricao")));
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return categorias;
     }
 
     //Alterar Categoria
-    public long alterarCategoria(Categoria categoria){
+    public long alterarCategoria(Categoria categoria) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(Contrato.TabelaCategoria.COLUNA_DESCRICAO, categoria.getDescricao());
+        values.put(Contrato.TabelaCategoria.COLUNA_EHINATIVO, categoria.getEhInativo());
 
         //No lugar do valor para comparar, colocar o ponto de interrogação
         String condicao = Contrato.TabelaCategoria.COLUNA_ID + " = ?";
@@ -159,7 +165,7 @@ public class Banco extends SQLiteOpenHelper{
     }
 
     //Remover Categoria
-    public long removerCategoria(Categoria categoria){
+    public long removerCategoria(Categoria categoria) {
         SQLiteDatabase db = getWritableDatabase();
         String condicao = Contrato.TabelaCategoria.COLUNA_ID + " = ?";
         String[] argumentos = {String.valueOf(categoria.getIdCategoria())};
@@ -168,7 +174,7 @@ public class Banco extends SQLiteOpenHelper{
     }
 
     /* ------------- USUÁRIO ---------------- */
-    public long cadastrarUsuario(Usuario usuario){
+    public long cadastrarUsuario(Usuario usuario) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -179,11 +185,11 @@ public class Banco extends SQLiteOpenHelper{
         values.put(Contrato.TabelaUsuario.COLUNA_SENHA, usuario.getSenha());
         values.put(Contrato.TabelaUsuario.COLUNA_EHINATIVO, usuario.getEhInativo());
 
-        return  db.insert(Contrato.TabelaUsuario.NOME_DA_TABELA, null, values);
+        return db.insert(Contrato.TabelaUsuario.NOME_DA_TABELA, null, values);
     }
 
     //Listar Usuário
-    public ArrayList<Usuario> listarUsuarios(){
+    public ArrayList<Usuario> listarUsuarios() {
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
         SQLiteDatabase db = getReadableDatabase();
 
@@ -198,13 +204,12 @@ public class Banco extends SQLiteOpenHelper{
                 Contrato.TabelaUsuario.COLUNA_EHINATIVO
         };
 
-        Cursor cursor = db.query(Contrato.TabelaUsuario.NOME_DA_TABELA, colunas, null,null,null,null, null);
+        Cursor cursor = db.query(Contrato.TabelaUsuario.NOME_DA_TABELA, colunas, null, null, null, null, null);
 
         //Colando o cursor para a 1a posição
         cursor.moveToFirst();
-        if(cursor.getCount()> 0)
-        {
-            do{
+        if (cursor.getCount() > 0) {
+            do {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsuario(cursor.getInt(0));
                 usuario.setNome(cursor.getString(1));
@@ -214,13 +219,13 @@ public class Banco extends SQLiteOpenHelper{
                 usuario.setSenha(cursor.getString(5));
                 usuario.setEhInativo(cursor.getString(6));
                 usuarios.add(usuario);
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return usuarios;
     }
 
     //Alterar Usuário
-    public long alterarUsuario(Usuario usuario){
+    public long alterarUsuario(Usuario usuario) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -239,7 +244,7 @@ public class Banco extends SQLiteOpenHelper{
     }
 
     //Remover Usuário
-    public long removerUsuario(Usuario usuario){
+    public long removerUsuario(Usuario usuario) {
         SQLiteDatabase db = getWritableDatabase();
         String condicao = Contrato.TabelaUsuario.COLUNA_ID + " = ?";
         String[] argumentos = {String.valueOf(usuario.getIdUsuario())};
@@ -252,16 +257,81 @@ public class Banco extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(Contrato.TabelaAtividade.COLUNA_TITULO, atividade.getTitulo() );
-        values.put(Contrato.TabelaAtividade.COLUNA_DESCRICAO, atividade.getDescricaoAtividade());
+        values.put(Contrato.TabelaAtividade.COLUNA_ID_USUARIO, atividade.getIdUsuario());
         values.put(Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA, atividade.getIdCategoria());
+        values.put(Contrato.TabelaAtividade.COLUNA_ID_DIASDASEMANA, atividade.getIdDiasSemana());
+        values.put(Contrato.TabelaAtividade.COLUNA_TITULO, atividade.getTitulo());
+        values.put(Contrato.TabelaAtividade.COLUNA_DESCRICAO, atividade.getDescricaoAtividade());
+        values.put(Contrato.TabelaAtividade.COLUNA_DATA_CRIACAO, atividade.getDataCriacao());
 
         return db.insert(Contrato.TabelaAtividade.NOME_DA_TABELA, null, values);
     }
 
+    //Listar Atividade
+    public ArrayList<Atividade> listarAtividades() {
+        ArrayList<Atividade> atividades = new ArrayList<Atividade>();
+        SQLiteDatabase db = getReadableDatabase();
+        //
+        String[] colunas = {
+                Contrato.TabelaAtividade.COLUNA_ID,
+                Contrato.TabelaAtividade.COLUNA_ID_USUARIO,
+                Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA,
+                Contrato.TabelaAtividade.COLUNA_ID_DIASDASEMANA,
+                Contrato.TabelaAtividade.COLUNA_TITULO,
+                Contrato.TabelaAtividade.COLUNA_DESCRICAO,
+                Contrato.TabelaAtividade.COLUNA_DATA_CRIACAO
+        };
+
+        Cursor cursor = db.query(Contrato.TabelaAtividade.NOME_DA_TABELA, colunas, null, null, null, null, null);
+
+        //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0) {
+            do {
+                Atividade atividade = new Atividade();
+                atividade.setIdAtividade(cursor.getInt(0));
+                atividade.setIdUsuario(cursor.getInt(1));
+                atividade.setIdCategoria(cursor.getInt(2));
+                atividade.setIdDiasSemana(cursor.getInt(3));
+                atividade.setTitulo(cursor.getString(4));
+                atividade.setDescricaoAtividade(cursor.getString(5));
+                atividade.setDataCriacao(cursor.getString(6));
+                atividades.add(atividade);
+            } while (cursor.moveToNext());
+        }
+        return atividades;
+    }
+
+    //Alterar Atividade
+    public long alterarAtividade(Atividade atividade) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Contrato.TabelaAtividade.COLUNA_ID_USUARIO, atividade.getIdUsuario());
+        values.put(Contrato.TabelaAtividade.COLUNA_ID_CATEGORIA, atividade.getIdCategoria());
+        values.put(Contrato.TabelaAtividade.COLUNA_ID_DIASDASEMANA, atividade.getIdDiasSemana());
+        values.put(Contrato.TabelaAtividade.COLUNA_TITULO, atividade.getTitulo());
+        values.put(Contrato.TabelaAtividade.COLUNA_DESCRICAO, atividade.getDescricaoAtividade());
+        values.put(Contrato.TabelaAtividade.COLUNA_DATA_CRIACAO, atividade.getDataCriacao());
+
+        //No lugar do valor para comparar, colocar o ponto de interrogação
+        String condicao = Contrato.TabelaAtividade.COLUNA_ID + " = ?";
+        String[] argumentos = {String.valueOf(atividade.getIdAtividade())};
+
+        return db.update(Contrato.TabelaAtividade.NOME_DA_TABELA, values, condicao, argumentos);
+    }
+
+    //Remover Atividade
+    public long removerAtividade(Atividade atividade) {
+        SQLiteDatabase db = getWritableDatabase();
+        String condicao = Contrato.TabelaAtividade.COLUNA_ID + " = ?";
+        String[] argumentos = {String.valueOf(atividade.getIdAtividade())};
+
+        return db.delete(Contrato.TabelaAtividade.NOME_DA_TABELA, condicao, argumentos);
+    }
 
     /* -------------- DIAS DA SEMANA ----------------- */
-    public long cadastrarDiasDaSemana(DiasDaSemana diasDaSemana){
+    public long cadastrarDiasDaSemana(DiasDaSemana diasDaSemana) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -273,11 +343,11 @@ public class Banco extends SQLiteOpenHelper{
         values.put(Contrato.TabelaDiasDaSemana.COLUNA_SABADO, diasDaSemana.getSabado());
         values.put(Contrato.TabelaDiasDaSemana.COLUNA_DOMINGO, diasDaSemana.getDomingo());
 
-        return  db.insert(Contrato.TabelaDiasDaSemana.NOME_DA_TABELA, null, values);
+        return db.insert(Contrato.TabelaDiasDaSemana.NOME_DA_TABELA, null, values);
     }
 
     //Listar Dias Da Semana
-    public ArrayList<DiasDaSemana> listarDiasDaSemana(){
+    public ArrayList<DiasDaSemana> listarDiasDaSemana() {
         ArrayList<DiasDaSemana> diasDaSemanas = new ArrayList<DiasDaSemana>();
         SQLiteDatabase db = getReadableDatabase();
 
@@ -293,13 +363,12 @@ public class Banco extends SQLiteOpenHelper{
                 Contrato.TabelaDiasDaSemana.COLUNA_DOMINGO
         };
 
-        Cursor cursor = db.query(Contrato.TabelaDiasDaSemana.NOME_DA_TABELA, colunas, null,null,null,null, null);
+        Cursor cursor = db.query(Contrato.TabelaDiasDaSemana.NOME_DA_TABELA, colunas, null, null, null, null, null);
 
         //Colando o cursor para a 1a posição
         cursor.moveToFirst();
-        if(cursor.getCount()> 0)
-        {
-            do{
+        if (cursor.getCount() > 0) {
+            do {
                 DiasDaSemana diaDaSemana = new DiasDaSemana();
                 diaDaSemana.setIdDiasDaSemana(cursor.getInt(0));
                 diaDaSemana.setSegunda(cursor.getString(1));
@@ -310,13 +379,13 @@ public class Banco extends SQLiteOpenHelper{
                 diaDaSemana.setSabado(cursor.getString(6));
                 diaDaSemana.setDomingo(cursor.getString(7));
                 diasDaSemanas.add(diaDaSemana);
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         return diasDaSemanas;
     }
 
     //Alterar Dias da Semana
-    public long alterarDiasDaSemana(DiasDaSemana diasDaSemana){
+    public long alterarDiasDaSemana(DiasDaSemana diasDaSemana) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -336,7 +405,7 @@ public class Banco extends SQLiteOpenHelper{
     }
 
     //Remover Dias da Semana
-    public long removerDiasDaSemana(DiasDaSemana diasDaSemana){
+    public long removerDiasDaSemana(DiasDaSemana diasDaSemana) {
         SQLiteDatabase db = getWritableDatabase();
         String condicao = Contrato.TabelaDiasDaSemana.COLUNA_ID + " = ?";
         String[] argumentos = {String.valueOf(diasDaSemana.getIdDiasDaSemana())};

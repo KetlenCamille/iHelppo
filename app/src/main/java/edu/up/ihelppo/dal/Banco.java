@@ -149,6 +149,32 @@ public class Banco extends SQLiteOpenHelper {
         return categorias;
     }
 
+    //Listar Categorias Ativas
+    public ArrayList<Categoria> listarCategoriasAtivas() {
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        //
+        String[] colunas = {
+                Contrato.TabelaCategoria.COLUNA_ID,
+                Contrato.TabelaCategoria.COLUNA_DESCRICAO,
+                Contrato.TabelaCategoria.COLUNA_EHINATIVO
+        };
+        Cursor cursor = db.rawQuery("SELECT * FROM " + Contrato.TabelaCategoria.NOME_DA_TABELA + " WHERE " + Contrato.TabelaCategoria.COLUNA_EHINATIVO + " = 'N'", null);
+        //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0) {
+            do {
+                Categoria categoria = new Categoria();
+                categoria.setIdCategoria(cursor.getInt(0));
+                categoria.setDescricao(cursor.getString(1));
+                categoria.setEhInativo(cursor.getString(2));
+                categorias.add(categoria);
+            } while (cursor.moveToNext());
+        }
+        return categorias;
+    }
+
     //Alterar Categoria
     public long alterarCategoria(Categoria categoria) {
         SQLiteDatabase db = getWritableDatabase();

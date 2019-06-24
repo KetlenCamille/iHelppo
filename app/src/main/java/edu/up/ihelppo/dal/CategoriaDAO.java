@@ -22,4 +22,10 @@ public class CategoriaDAO {
         return banco.listarCategoriasPorNome();
 
     }
+
+    public static ArrayList<Categoria> listarCategoriasAtivas(Context context) {
+        Banco banco = new Banco(context);
+        return banco.listarCategoriasAtivas();
+
+    }
 }

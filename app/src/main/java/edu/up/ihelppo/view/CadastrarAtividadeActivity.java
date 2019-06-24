@@ -1,5 +1,7 @@
 package edu.up.ihelppo.view;
 
+import android.content.Intent;
+import android.provider.AlarmClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +36,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
     public String sabado = "";
     public String domingo = "";
     public String diasDaSemana = "";
+    public String alarme = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,19 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
         atividade.setIdCategoria(categoria_spinner.getId());
+
+        if(alarme == "S"){
+            Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+
+            //Mensagem do alarme
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, edtTituloAtividade.getText().toString());
+            //Definir Hora
+            intent.putExtra(AlarmClock.EXTRA_HOUR, 9);
+            //Definir Minuto
+            intent.putExtra(AlarmClock.EXTRA_MINUTES, 50);
+
+            startActivity(intent);
+        }
 
         if(chkDom.isChecked())
         {
@@ -147,5 +163,11 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
     public void diasDaSemanaCheck(String segunda, String terca, String quarta, String quinta, String sexta, String sabado, String domingo){
 
+    }
+
+    public void checkAlarmeClick(View view) {
+        alarme = "S";
+
+        //Habilitar Spiner de hora e minuto
     }
 }

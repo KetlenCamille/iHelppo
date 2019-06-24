@@ -1,6 +1,8 @@
 package edu.up.ihelppo.model;
 
-public class Categoria {
+import java.io.Serializable;
+
+public class Categoria implements Serializable {
 
     //Atributos
     private int idCategoria;

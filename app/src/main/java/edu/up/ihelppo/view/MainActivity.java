@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void CadastrarClick(View view) {
-        Intent intent = new Intent(MainActivity.this, CalendarioActivity.class );
+        Intent intent = new Intent(MainActivity.this, ListarCategoriasActivity.class );
         startActivity(intent);
     }
 }

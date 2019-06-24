@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:gravity="center"
-        android:text="Dados da Categoria"
+        android:text="DADOS DA CATEGORIA"
         android:textColor="#082c66"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -34,20 +34,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
-
+        android:layout_weight="0.5"
+        android:orientation="vertical">
         <Button
             android:id="@+id/btnCadastrarCategoria"
             android:layout_width="300dp"
-            android:layout_height="80dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="CADASTRAR"
             android:textStyle="bold"
             android:textSize="27sp"
             android:textColor="@android:color/white"
             android:background="#082c66"
+            android:layout_gravity="center"
             android:onClick="btnCadastrarCategoriaClick"/>
     </LinearLayout>
 </LinearLayout>

@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:gravity="center"
-        android:text="Dados da Categoria"
+        android:text="DADOS DA CATEGORIA"
         android:textColor="#082c66"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -41,25 +41,29 @@
         <Button
             android:id="@+id/btnAlterarCategoria"
             android:layout_width="300dp"
-            android:layout_height="80dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="SALVAR"
             android:textStyle="bold"
             android:textSize="27sp"
             android:textColor="@android:color/white"
             android:background="#082c66"
+            android:layout_marginBottom="10dp"
             android:onClick="btnAlterarCategoriaClick"/>
 
         <Button
             android:id="@+id/btnRemoverCategoria"
             android:layout_width="300dp"
-            android:layout_height="80dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="REMOVER"
             android:textStyle="bold"
             android:textSize="27sp"
             android:textColor="@android:color/white"
             android:background="#082c66"
+            android:layout_marginBottom="10dp"
             android:onClick="btnRemoverCategoriaClick"/>
     </LinearLayout>
 </LinearLayout>

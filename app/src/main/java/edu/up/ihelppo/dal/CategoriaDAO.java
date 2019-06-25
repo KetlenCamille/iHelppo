@@ -17,15 +17,23 @@ public class CategoriaDAO {
         return banco.listarCategorias();
     }
 
+    public static long alterarCategoria (Context context, Categoria categoria) {
+        Banco banco = new Banco(context);
+        return banco.alterarCategoria(categoria);
+    }
+
     public static ArrayList<String> listarCategoriasPorNome (Context context) {
         Banco banco = new Banco(context);
         return banco.listarCategoriasPorNome();
-
     }
 
     public static ArrayList<Categoria> listarCategoriasAtivas(Context context) {
         Banco banco = new Banco(context);
         return banco.listarCategoriasAtivas();
+    }
 
+    public static Categoria buscarCategoriaPorId(Context context, Categoria categoria) {
+        Banco banco = new Banco(context);
+        return banco.buscarCategoriaPorID(categoria.getIdCategoria());
     }
 }

@@ -25,7 +25,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
     private EditText edtTituloAtividade, edtDescricaoAtividade, edtCategoriaAtividade;
     private TextView txtDataAtividade;
-    private Spinner categoria_spinner;
+    private Spinner categoria_spinner, horas_spinner, minutos_spinner;
     private CheckBox chkDom, chkSeg, chkTer, chkQua, chkQui, chkSex, chkSab;
 
     public String segunda = "";
@@ -48,16 +48,40 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         txtDataAtividade = (TextView) findViewById(R.id.txtDataAtividade);
         chkDom = (CheckBox) findViewById(R.id.chkDom);
         categoria_spinner = (Spinner) findViewById(R.id.categoria_spinner);
+        horas_spinner = (Spinner) findViewById(R.id.horas_spinner);
+        minutos_spinner = (Spinner) findViewById(R.id.minutos_spinner);
+        categoria_spinner.setOnItemSelectedListener(this);
+        horas_spinner.setOnItemSelectedListener(this);
+        minutos_spinner.setOnItemSelectedListener(this);
 
         String data = (String) getIntent().getSerializableExtra("DATA_ATIVIDADE");
         txtDataAtividade.setText(data);
 
 
-        ArrayList<String> categorias = CategoriaDAO.listarCategoriasPorNome(this);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categorias);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Populando o Spinner de Categorias:
 
-        categoria_spinner.setAdapter(adapter);
+        ArrayList<String> categorias = CategoriaDAO.listarCategoriasPorNome(this);
+        ArrayAdapter adapterCategorias = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,
+                categorias);
+        adapterCategorias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        categoria_spinner.setAdapter(adapterCategorias);
+
+        // Populando o Spinner de Horas:
+
+        ArrayAdapter<CharSequence> adapterHoras = ArrayAdapter.createFromResource(this,
+                R.array.horas_array, android.R.layout.simple_spinner_item);
+        adapterHoras.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        horas_spinner.setAdapter(adapterHoras);
+
+        // Populando o Spinner de Minutos:
+
+        ArrayAdapter<CharSequence> adapterMinutos = ArrayAdapter.createFromResource(this,
+                R.array.minutos_array, android.R.layout.simple_spinner_item);
+        adapterMinutos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        minutos_spinner.setAdapter(adapterMinutos);
 
     }
 
@@ -83,6 +107,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
         atividade.setIdCategoria(categoria_spinner.getId());
+        //atribuir hora e minutos do spinner ao alarme!
 
         if(alarme == "S"){
             Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);

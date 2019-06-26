@@ -18,16 +18,19 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import edu.up.ihelppo.R;
 import edu.up.ihelppo.dal.AtividadeDAO;
 import edu.up.ihelppo.dal.CategoriaDAO;
+import edu.up.ihelppo.dal.DiasDaSemanaDAO;
 import edu.up.ihelppo.model.Atividade;
 import edu.up.ihelppo.model.Categoria;
+import edu.up.ihelppo.model.DiasDaSemana;
 
 public class CadastrarAtividadeActivity extends AppCompatActivity implements OnItemSelectedListener{
 
     private EditText edtTituloAtividade, edtDescricaoAtividade, edtCategoriaAtividade;
     private TextView txtDataAtividade;
     private Spinner categoria_spinner, horas_spinner, minutos_spinner;
-    private CheckBox chkDom, chkSeg, chkTer, chkQua, chkQui, chkSex, chkSab;
+    private CheckBox chkDom, chkSeg, chkTer, chkQua, chkQui, chkSex, chkSab, chkAlarme;
 
+    public String[] diasPreenchidos = new String[7];
     public String segunda = "";
     public String terca = "";
     public String quarta = "";
@@ -36,7 +39,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
     public String sabado = "";
     public String domingo = "";
     public String diasDaSemana = "";
-    public String alarme = "";
+    public String alarme = "N";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +47,17 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         setContentView(R.layout.activity_cadastrar_atividade);
 
         edtTituloAtividade = (EditText) findViewById(R.id.edtTituloAtividade);
-        edtDescricaoAtividade = (EditText) findViewById(R.id.edtDescricaoCategoria);
+        edtDescricaoAtividade = (EditText) findViewById(R.id.edtDescricaoAtividade);
         txtDataAtividade = (TextView) findViewById(R.id.txtDataAtividade);
         chkDom = (CheckBox) findViewById(R.id.chkDom);
+        chkSeg = (CheckBox) findViewById(R.id.chkSeg);
+        chkTer = (CheckBox) findViewById(R.id.chkTer);
+        chkQua = (CheckBox) findViewById(R.id.chkQua);
+        chkQui = (CheckBox) findViewById(R.id.chkQui);
+        chkSex = (CheckBox) findViewById(R.id.chkSex);
+        chkSab = (CheckBox) findViewById(R.id.chkSab);
         categoria_spinner = (Spinner) findViewById(R.id.categoria_spinner);
+        chkAlarme = (CheckBox) findViewById(R.id.chkAlarme);
         horas_spinner = (Spinner) findViewById(R.id.horas_spinner);
         minutos_spinner = (Spinner) findViewById(R.id.minutos_spinner);
         categoria_spinner.setOnItemSelectedListener(this);
@@ -83,6 +93,9 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
         minutos_spinner.setAdapter(adapterMinutos);
 
+        horas_spinner.setEnabled(false);
+        minutos_spinner.setEnabled(false);
+
     }
 
 
@@ -107,25 +120,35 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
         atividade.setIdCategoria(categoria_spinner.getId());
-        //atribuir hora e minutos do spinner ao alarme!
 
+        //Pegar Usuario da Sessao
+
+
+        //Atribuir hora e minutos do spinner ao alarme!
         if(alarme == "S"){
             Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
 
             //Mensagem do alarme
             intent.putExtra(AlarmClock.EXTRA_MESSAGE, edtTituloAtividade.getText().toString());
             //Definir Hora
-            intent.putExtra(AlarmClock.EXTRA_HOUR, 9);
+            intent.putExtra(AlarmClock.EXTRA_HOUR, String.valueOf(horas_spinner.getSelectedItem()));
             //Definir Minuto
-            intent.putExtra(AlarmClock.EXTRA_MINUTES, 50);
+            intent.putExtra(AlarmClock.EXTRA_MINUTES, String.valueOf(minutos_spinner.getSelectedItem()));
 
             startActivity(intent);
         }
 
-        if(chkDom.isChecked())
-        {
-            Toast.makeText(this, "Domingo CHECK!", Toast.LENGTH_SHORT).show();
-        }
+        DiasDaSemana diasDaSemana = new DiasDaSemana();
+        diasDaSemana.setDomingo(diasPreenchidos[0]);
+        diasDaSemana.setSegunda(diasPreenchidos[1]);
+        diasDaSemana.setTerca(diasPreenchidos[2]);
+        diasDaSemana.setQuarta(diasPreenchidos[3]);
+        diasDaSemana.setQuinta(diasPreenchidos[4]);
+        diasDaSemana.setSexta(diasPreenchidos[5]);
+        diasDaSemana.setSabado(diasPreenchidos[6]);
+
+        long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
+        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
         /*long id = AtividadeDAO.cadastrarAtividade(this, atividade);
         Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();*/
@@ -183,16 +206,38 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
             sabado = "N";
         }
 
-        diasDaSemanaCheck(segunda,terca,quarta,quinta,sexta,sabado,domingo);
-    }
-
-    public void diasDaSemanaCheck(String segunda, String terca, String quarta, String quinta, String sexta, String sabado, String domingo){
-
+        for(int i=0; i< diasPreenchidos.length; i++)
+        {
+            if(i == 0){
+                diasPreenchidos[0] = domingo;
+            }else if(i == 1){
+                diasPreenchidos[1] = segunda;
+            }else if(i == 2){
+                diasPreenchidos[2] = terca;
+            }else if(i == 3){
+                diasPreenchidos[3] = quarta;
+            }else if(i == 4){
+                diasPreenchidos[4] = quinta;
+            }else if(i == 5){
+                diasPreenchidos[5] = sexta;
+            }
+            else if(i == 6){
+                diasPreenchidos[6] = sabado;
+            }
+        }
     }
 
     public void checkAlarmeClick(View view) {
         alarme = "S";
 
-        //Habilitar Spiner de hora e minuto
+        //Habilitar Spinner de hora e minuto
+        if(chkAlarme.isChecked()){
+            horas_spinner.setEnabled(true);
+            minutos_spinner.setEnabled(true);
+        }
+        else{
+            horas_spinner.setEnabled(false);
+            minutos_spinner.setEnabled(false);
+        }
     }
 }

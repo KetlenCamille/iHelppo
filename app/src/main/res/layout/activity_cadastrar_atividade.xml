@@ -37,7 +37,7 @@
             android:textSize="25sp" />
 
         <EditText
-            android:id="@+id/edtDecricaoAtividade"
+            android:id="@+id/edtDescricaoAtividade"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:gravity="center"
@@ -169,7 +169,7 @@
                 android:id="@+id/horas_spinner"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="0dp"

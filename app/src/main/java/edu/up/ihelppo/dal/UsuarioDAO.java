@@ -22,4 +22,9 @@ public class UsuarioDAO {
         Banco banco = new Banco(context);
         return banco.listarUsuarios();
     }
+
+    public static Usuario buscarUsuarioPorID(Context context, int idUsuario){
+        Banco banco = new Banco(context);
+        return  banco.buscarUsuarioPorID(idUsuario);
+    }
 }

@@ -212,13 +212,6 @@ public class Banco extends SQLiteOpenHelper {
         return db.delete(TabelaCategoria.NOME_DA_TABELA, condicao, argumentos);
     }
 
-    /*public Categoria buscarCategoriaPorId(int idCategoria){
-        SQLiteDatabase db = getWritableDatabase();
-        String condicao = Contrato.TabelaCategoria.COLUNA_ID + " = ?";
-        String[] argumentos = {String.valueOf(idCategoria};
-
-    }*/
-
     /* ------------- USUÁRIO ---------------- */
     public long cadastrarUsuario(Usuario usuario) {
         SQLiteDatabase db = getWritableDatabase();
@@ -268,6 +261,27 @@ public class Banco extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return usuarios;
+    }
+
+    //Buscar Usuarios Por ID
+    public Usuario buscarUsuarioPorID(int idUsuario) {
+        Usuario usuario = new Usuario();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaUsuario.NOME_DA_TABELA + " WHERE " + TabelaUsuario.COLUNA_ID + " = " + idUsuario, null);
+        //Colando o cursor para a 1a posição
+
+        if (cursor.moveToFirst()) {
+            usuario.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaUsuario.COLUNA_ID)));
+            usuario.setNome(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_NOME)));
+            usuario.setSobrenome(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_SOBRENOME)));
+            usuario.setEmail(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_EMAIL)));
+            usuario.setDataNascimento(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_DATANASCIMENTO)));
+            usuario.setSenha(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_SENHA)));
+            usuario.setSenha(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_EHINATIVO)));
+        }
+        cursor.close();
+        return usuario;
     }
 
     //Alterar Usuário
@@ -346,6 +360,27 @@ public class Banco extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return atividades;
+    }
+
+    //Buscar Atividade Por ID
+    public Atividade buscarAtividadePorID(int idAtividade) {
+        Atividade atividade = new Atividade();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID + " = " + idAtividade, null);
+        //Colando o cursor para a 1a posição
+
+        if (cursor.moveToFirst()) {
+            atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
+            atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
+            atividade.setIdCategoria(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_CATEGORIA)));
+            atividade.setIdDiasSemana(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_DIASDASEMANA)));
+            atividade.setTitulo(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_TITULO)));
+            atividade.setDescricaoAtividade(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DESCRICAO)));
+            atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
+        }
+        cursor.close();
+        return atividade;
     }
 
     //Alterar Atividade

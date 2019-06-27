@@ -30,16 +30,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnEntrarClick(View view) {
-        Usuario usuario = UsuarioDAO.validarUsuarioLogin(this, edtEmail.getText().toString(), edtSenha.getText().toString());
-
-        if(usuario.getIdUsuario() == 0)
-        {
-            Toast.makeText(this, "E-mail ou Senha incorreta!", Toast.LENGTH_SHORT).show();
+        if(edtSenha.getText().toString().equals("") || edtEmail.getText().toString().equals("")){
+            Toast.makeText(this, "Insira um valor válido!", Toast.LENGTH_SHORT).show();
         }
         else{
-            UsuarioDAO.setarUsuario(usuario.getIdUsuario());
-            Intent intent = new Intent(MainActivity.this, CadastroCategoriaActivity.class );
-            startActivity(intent);
+            Usuario usuario = UsuarioDAO.validarUsuarioLogin(this, edtEmail.getText().toString(), edtSenha.getText().toString());
+
+            if(usuario.getIdUsuario() == 0)
+            {
+                Toast.makeText(this, "E-mail ou Senha incorreta!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                UsuarioDAO.setarUsuario(usuario.getIdUsuario());
+                Intent intent = new Intent(MainActivity.this, CadastroCategoriaActivity.class );
+                startActivity(intent);
+            }
         }
+
     }
 }

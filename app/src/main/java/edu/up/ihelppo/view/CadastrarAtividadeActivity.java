@@ -19,6 +19,7 @@ import edu.up.ihelppo.R;
 import edu.up.ihelppo.dal.AtividadeDAO;
 import edu.up.ihelppo.dal.CategoriaDAO;
 import edu.up.ihelppo.dal.DiasDaSemanaDAO;
+import edu.up.ihelppo.dal.UsuarioDAO;
 import edu.up.ihelppo.model.Atividade;
 import edu.up.ihelppo.model.Categoria;
 import edu.up.ihelppo.model.DiasDaSemana;
@@ -117,6 +118,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
         atividade.setIdCategoria(categoria_spinner.getId());
+        atividade.setIdUsuario(UsuarioDAO.retornarUsuario());
 
         //Pegar Usuario da Sessao
 
@@ -137,9 +139,8 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         }
         DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
 
+        Toast.makeText(this, "Id: " + diasPesq.getIdDiasDaSemana(), Toast.LENGTH_SHORT).show();
         atividade.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
-
-        //Toast.makeText(this, "Id: " + diasPesq.getIdDiasDaSemana(), Toast.LENGTH_SHORT).show();
 
         /*long id = AtividadeDAO.cadastrarAtividade(this, atividade);
         Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();*/

@@ -48,7 +48,8 @@
             android:text="ENTRAR"
             android:textColor="@android:color/white"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="btnEntrarClick"/>
 
         <TextView
             android:id="@+id/txtCadastrar"

@@ -284,6 +284,28 @@ public class Banco extends SQLiteOpenHelper {
         return usuario;
     }
 
+    //Validando Usuario
+    public Usuario validacaoLogin(String email, String senha) {
+        Usuario usuario = new Usuario();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaUsuario.NOME_DA_TABELA +
+                        " WHERE " + TabelaUsuario.COLUNA_EMAIL + " = '" + email + "'" + " AND " +
+                TabelaUsuario.COLUNA_SENHA + " = '" + senha + "'", null);
+        //Colando o cursor para a 1a posição
+
+        if (cursor.moveToFirst()) {
+            usuario.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaUsuario.COLUNA_ID)));
+            usuario.setNome(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_NOME)));
+            usuario.setSobrenome(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_SOBRENOME)));
+            usuario.setEmail(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_EMAIL)));
+            usuario.setDataNascimento(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_DATANASCIMENTO)));
+            usuario.setSenha(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_SENHA)));
+            usuario.setSenha(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_EHINATIVO)));
+        }
+        cursor.close();
+        return usuario;
+    }
     //Alterar Usuário
     public long alterarUsuario(Usuario usuario) {
         SQLiteDatabase db = getWritableDatabase();

@@ -22,4 +22,9 @@ public class DiasDaSemanaDAO {
         Banco banco = new Banco(context);
         return banco.listarDiasDaSemana();
     }
+
+    public static DiasDaSemana buscarDiasDaSemanaExistente(Context context, DiasDaSemana diasDaSemana){
+        Banco banco = new Banco(context);
+        return  banco.buscarDiasDaSemanaExistente(diasDaSemana);
+    }
 }

@@ -161,7 +161,7 @@ public class Banco extends SQLiteOpenHelper {
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             Categoria categoria = new Categoria();
-            while (cursor.moveToNext()){
+            while (cursor.moveToNext()) {
                 categoria.setIdCategoria(cursor.getInt(cursor.getColumnIndex(TabelaCategoria.COLUNA_ID)));
                 categoria.setDescricao(cursor.getString(cursor.getColumnIndex(TabelaCategoria.COLUNA_DESCRICAO)));
                 categoria.setEhInativo(cursor.getString(cursor.getColumnIndex(TabelaCategoria.COLUNA_EHINATIVO)));
@@ -463,6 +463,36 @@ public class Banco extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return diasDaSemanas;
+    }
+
+    //Buscar Dia Da Semana Igual
+    public DiasDaSemana buscarDiasDaSemanaExistente(DiasDaSemana p_diasDaSemana) {
+        DiasDaSemana diasDaSemana = new DiasDaSemana();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaDiasDaSemana.NOME_DA_TABELA +
+                " WHERE " + TabelaDiasDaSemana.COLUNA_SEGUNDA + " = '" + p_diasDaSemana.getSegunda() + "'" + " AND " +
+                TabelaDiasDaSemana.COLUNA_TERCA + " = '" + p_diasDaSemana.getTerca() + "'" + " AND " +
+                TabelaDiasDaSemana.COLUNA_QUARTA + " = '" + p_diasDaSemana.getQuarta() + "'" +  " AND " +
+                TabelaDiasDaSemana.COLUNA_QUINTA + " = '" + p_diasDaSemana.getQuinta() + "'" + " AND " +
+                TabelaDiasDaSemana.COLUNA_SEXTA + " = '" + p_diasDaSemana.getSexta() + "'" + " AND " +
+                TabelaDiasDaSemana.COLUNA_SABADO + " = '" + p_diasDaSemana.getSabado() + "'" + " AND " +
+                TabelaDiasDaSemana.COLUNA_DOMINGO + " = '" + p_diasDaSemana.getDomingo() + "'", null);
+        //
+        //Colando o cursor para a 1a posição
+
+        if (cursor.moveToFirst()) {
+            diasDaSemana.setIdDiasDaSemana(cursor.getInt(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_ID)));
+            diasDaSemana.setSegunda(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_SEGUNDA)));
+            diasDaSemana.setTerca(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_TERCA)));
+            diasDaSemana.setQuarta(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_QUARTA)));
+            diasDaSemana.setQuinta(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_QUINTA)));
+            diasDaSemana.setSexta(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_SEXTA)));
+            diasDaSemana.setSabado(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_SABADO)));
+            diasDaSemana.setDomingo(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_DOMINGO)));
+        }
+        cursor.close();
+        return diasDaSemana;
     }
 
     //Alterar Dias da Semana

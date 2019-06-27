@@ -103,9 +103,6 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
         String item = parent.getItemAtPosition(position).toString();
-
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -123,6 +120,30 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
         //Pegar Usuario da Sessao
 
+        DiasDaSemana diasDaSemana = new DiasDaSemana();
+        diasDaSemana.setDomingo(diasPreenchidos[0]);
+        diasDaSemana.setSegunda(diasPreenchidos[1]);
+        diasDaSemana.setTerca(diasPreenchidos[2]);
+        diasDaSemana.setQuarta(diasPreenchidos[3]);
+        diasDaSemana.setQuinta(diasPreenchidos[4]);
+        diasDaSemana.setSexta(diasPreenchidos[5]);
+        diasDaSemana.setSabado(diasPreenchidos[6]);
+
+        DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
+
+        if( dia.getIdDiasDaSemana() == 0){
+            long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
+            Toast.makeText(this, "Id Cadastro: " + id, Toast.LENGTH_SHORT).show();
+        }
+        DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
+
+        atividade.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
+
+        //Toast.makeText(this, "Id: " + diasPesq.getIdDiasDaSemana(), Toast.LENGTH_SHORT).show();
+
+        /*long id = AtividadeDAO.cadastrarAtividade(this, atividade);
+        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();*/
+
 
         //Atribuir hora e minutos do spinner ao alarme!
         if(alarme == "S"){
@@ -137,21 +158,6 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
             startActivity(intent);
         }
-
-        DiasDaSemana diasDaSemana = new DiasDaSemana();
-        diasDaSemana.setDomingo(diasPreenchidos[0]);
-        diasDaSemana.setSegunda(diasPreenchidos[1]);
-        diasDaSemana.setTerca(diasPreenchidos[2]);
-        diasDaSemana.setQuarta(diasPreenchidos[3]);
-        diasDaSemana.setQuinta(diasPreenchidos[4]);
-        diasDaSemana.setSexta(diasPreenchidos[5]);
-        diasDaSemana.setSabado(diasPreenchidos[6]);
-
-        long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
-        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
-
-        /*long id = AtividadeDAO.cadastrarAtividade(this, atividade);
-        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();*/
     }
 
 

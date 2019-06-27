@@ -117,10 +117,20 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         atividade.setDataCriacao(txtDataAtividade.getText().toString());
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
-        atividade.setIdCategoria(categoria_spinner.getId());
-        atividade.setIdUsuario(UsuarioDAO.retornarUsuario());
 
         //Pegar Usuario da Sessao
+        atividade.setIdUsuario(UsuarioDAO.retornarUsuario());
+
+
+        String categoria = String.valueOf(categoria_spinner.getSelectedItem());
+
+        Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorNome(this, categoria);
+        if(categoriaPesq.getIdCategoria() == 0){
+            Toast.makeText(this, "Selecione uma categoria válida!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            atividade.setIdCategoria(categoriaPesq.getIdCategoria());
+        }
 
         DiasDaSemana diasDaSemana = new DiasDaSemana();
         diasDaSemana.setDomingo(diasPreenchidos[0]);
@@ -139,11 +149,10 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         }
         DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
 
-        Toast.makeText(this, "Id: " + diasPesq.getIdDiasDaSemana(), Toast.LENGTH_SHORT).show();
         atividade.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
 
-        /*long id = AtividadeDAO.cadastrarAtividade(this, atividade);
-        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();*/
+        long id = AtividadeDAO.cadastrarAtividade(this, atividade);
+        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
 
         //Atribuir hora e minutos do spinner ao alarme!

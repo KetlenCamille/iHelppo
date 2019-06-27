@@ -36,4 +36,9 @@ public class CategoriaDAO {
         Banco banco = new Banco(context);
         return banco.buscarCategoriaPorID(categoria.getIdCategoria());
     }
+
+    public static Categoria buscarCategoriaPorNome(Context context, String categoria) {
+        Banco banco = new Banco(context);
+        return banco.buscarCategoriaPorNome(categoria);
+    }
 }

@@ -74,7 +74,9 @@ public class Banco extends SQLiteOpenHelper {
                     TabelaAtividade.COLUNA_DESCRICAO + TIPO_TEXTO + VIRGULA +
                     TabelaAtividade.COLUNA_DATA_CRIACAO + TIPO_TEXTO + VIRGULA +
                     TabelaAtividade.COLUNA_ID_CATEGORIA + TIPO_INTEIRO + VIRGULA +
-                    " FOREIGN KEY (" + TabelaAtividade.COLUNA_ID_CATEGORIA + ") REFERENCES " + TabelaCategoria.NOME_DA_TABELA + "( " + TabelaCategoria.COLUNA_ID + ")" +
+                    " FOREIGN KEY (" + TabelaAtividade.COLUNA_ID_CATEGORIA + ") REFERENCES " + TabelaCategoria.NOME_DA_TABELA + "( " + TabelaCategoria.COLUNA_ID + ")" + VIRGULA +
+                    " FOREIGN KEY (" + TabelaAtividade.COLUNA_ID_USUARIO + ") REFERENCES " + TabelaUsuario.NOME_DA_TABELA + "( " + TabelaUsuario.COLUNA_ID + ")" + VIRGULA +
+                    " FOREIGN KEY (" + TabelaAtividade.COLUNA_ID_DIASDASEMANA + ") REFERENCES " + TabelaDiasDaSemana.NOME_DA_TABELA + "( " + TabelaDiasDaSemana.COLUNA_ID + ")" +
                     ")";
     private static final String SQL_DELETAR_TABELA_ATIVIDADE =
             "DROP TABLE IF EXISTS " + TabelaAtividade.NOME_DA_TABELA;
@@ -88,8 +90,11 @@ public class Banco extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.v("CRIAR_BANCO", SQL_CRIAR_TABELA_CATEGORIA);
         db.execSQL(SQL_CRIAR_TABELA_CATEGORIA);
+        Log.v("CRIAR_BANCO", SQL_CRIAR_TABELA_USUARIO);
         db.execSQL(SQL_CRIAR_TABELA_USUARIO);
+        Log.v("CRIAR_BANCO", SQL_CRIAR_TABELA_DIAS_DA_SEMANA);
         db.execSQL(SQL_CRIAR_TABELA_DIAS_DA_SEMANA);
+        Log.v("CRIAR_BANCO", SQL_CRIAR_TABELA_ATIVIDADE);
         db.execSQL(SQL_CRIAR_TABELA_ATIVIDADE);
     }
 
@@ -149,6 +154,22 @@ public class Banco extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return categorias;
+    }
+
+    public Categoria buscarCategoriaPorNome(String p_categoria) {
+        Categoria categoria = new Categoria();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaCategoria.NOME_DA_TABELA + " WHERE " + TabelaCategoria.COLUNA_DESCRICAO + " = '" + p_categoria + "'", null);
+        //Colando o cursor para a 1a posição
+
+        if (cursor.moveToFirst()) {
+            categoria.setIdCategoria(cursor.getInt(cursor.getColumnIndex(TabelaCategoria.COLUNA_ID)));
+            categoria.setDescricao(cursor.getString(cursor.getColumnIndex(TabelaCategoria.COLUNA_DESCRICAO)));
+            categoria.setEhInativo(cursor.getString(cursor.getColumnIndex(TabelaCategoria.COLUNA_EHINATIVO)));
+        }
+        cursor.close();
+        return categoria;
     }
 
     //Listar Categorias Ativas

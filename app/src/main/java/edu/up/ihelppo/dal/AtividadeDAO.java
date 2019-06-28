@@ -48,6 +48,14 @@ public class AtividadeDAO {
         return banco.listarHistoricoAtividades(dataFormatada, idUsuario);
     }
 
+    public static ArrayList<Atividade> listarAtividadesFuturas(Context context, int idUsuario) {
+        Banco banco = new Banco(context);
+        SimpleDateFormat formataData = new SimpleDateFormat("dd/M/yyyy");
+        Date data = new Date();
+        String dataFormatada = formataData.format(data);
+        return banco.listarHistoricoAtividades(dataFormatada, idUsuario);
+    }
+
     public static ArrayList<Atividade> listarAtividadesPendentes(Context context, int idUsuario) {
         Banco banco = new Banco(context);
         return banco.listarAtividadesPendentes(idUsuario);

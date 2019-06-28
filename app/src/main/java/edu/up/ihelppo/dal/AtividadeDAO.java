@@ -21,6 +21,11 @@ public class AtividadeDAO {
         return banco.listarAtividades();
     }
 
+    public static Atividade buscarAtividadePorId(Context context, Atividade atividade) {
+        Banco banco = new Banco(context);
+        return banco.buscarAtividadePorID(atividade.getIdAtividade());
+    }
+
     public static long alterarAtividade(Context context, Atividade atividade) {
         Banco banco = new Banco(context);
         return banco.alterarAtividade(atividade);
@@ -41,5 +46,10 @@ public class AtividadeDAO {
         Date data = new Date();
         String dataFormatada = formataData.format(data);
         return banco.listarHistoricoAtividades(dataFormatada, idUsuario);
+    }
+
+    public static long excluirAtividade(Context context, Atividade atividade){
+        Banco banco = new Banco(context);
+        return banco.removerAtividade(atividade);
     }
 }

@@ -74,6 +74,7 @@ public class Banco extends SQLiteOpenHelper {
                     TabelaAtividade.COLUNA_TITULO + TIPO_TEXTO + VIRGULA +
                     TabelaAtividade.COLUNA_DESCRICAO + TIPO_TEXTO + VIRGULA +
                     TabelaAtividade.COLUNA_DATA_CRIACAO + TIPO_TEXTO + VIRGULA +
+                    TabelaAtividade.COLUNA_FOI_REALIZADO + TIPO_TEXTO + VIRGULA +
                     TabelaAtividade.COLUNA_ID_CATEGORIA + TIPO_INTEIRO + VIRGULA +
                     TabelaAtividade.COLUNA_ID_USUARIO + TIPO_INTEIRO + VIRGULA +
                     TabelaAtividade.COLUNA_ID_DIASDASEMANA + TIPO_INTEIRO + VIRGULA +
@@ -369,6 +370,7 @@ public class Banco extends SQLiteOpenHelper {
         values.put(TabelaAtividade.COLUNA_TITULO, atividade.getTitulo());
         values.put(TabelaAtividade.COLUNA_DESCRICAO, atividade.getDescricaoAtividade());
         values.put(TabelaAtividade.COLUNA_DATA_CRIACAO, atividade.getDataCriacao());
+        values.put(TabelaAtividade.COLUNA_FOI_REALIZADO, atividade.getFoiRealizada());
 
         return db.insert(TabelaAtividade.NOME_DA_TABELA, null, values);
     }

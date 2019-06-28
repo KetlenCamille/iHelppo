@@ -20,7 +20,6 @@ import edu.up.ihelppo.model.Atividade;
 public class HistoricoAtividadesActivity extends AppCompatActivity {
 
     private ListView lstAvancada;
-    private Button btnAdicionarAtividade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,6 @@ public class HistoricoAtividadesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_historico_atividades);
 
         lstAvancada = (ListView) findViewById(R.id.lstAvancada);
-        btnAdicionarAtividade = (Button) findViewById(R.id.btnAdicionarAtividade);
 
         final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarHistoricoAtividades(this, UsuarioDAO.retornarUsuario());
         String[] atividades = new String[atividadesArray.size()];

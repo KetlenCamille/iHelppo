@@ -114,6 +114,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
     public void SalvarAtividadeClick(View view) {
         Atividade atividade = new Atividade();
+        atividade.setFoiRealizada("N");
         atividade.setDataCriacao(txtDataAtividade.getText().toString());
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());

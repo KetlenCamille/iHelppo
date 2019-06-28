@@ -19,4 +19,9 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(MenuActivity.this, HistoricoAtividadesActivity.class );
         startActivity(intent);
     }
+
+    public void btnCadastrarCategoriaClick(View view) {
+        Intent intent = new Intent(MenuActivity.this, CadastroCategoriaActivity.class );
+        startActivity(intent);
+    }
 }

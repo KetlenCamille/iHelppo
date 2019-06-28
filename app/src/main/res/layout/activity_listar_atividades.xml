@@ -13,14 +13,16 @@
         android:textColor="#082c66"
         android:gravity="center"/>
 
-    <TextView
+    <Button
+        android:id="@+id/btnAdicionarAtividade"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="+ Adicionar Atividade"
         android:textSize="15sp"
         android:textColor="@android:color/black"
         android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:onClick="btnAdicionarAtividadeClick"/>
 
     <ListView
         android:id="@+id/lstAvancada"

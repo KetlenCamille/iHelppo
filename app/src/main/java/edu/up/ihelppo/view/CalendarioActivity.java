@@ -22,6 +22,7 @@ public class CalendarioActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                month += 1;
                 String data = dayOfMonth + "/" + month + "/" + year;
 
                 Intent intent = new Intent(CalendarioActivity.this, CadastrarAtividadeActivity.class);

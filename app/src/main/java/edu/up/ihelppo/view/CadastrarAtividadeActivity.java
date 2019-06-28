@@ -154,6 +154,11 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         long id = AtividadeDAO.cadastrarAtividade(this, atividade);
         Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
+        if(id > 0){
+            Intent intent = new Intent(CadastrarAtividadeActivity.this, ListarAtividadesActivity.class );
+            startActivity(intent);
+        }
+
 
         //Atribuir hora e minutos do spinner ao alarme!
         if(alarme == "S"){

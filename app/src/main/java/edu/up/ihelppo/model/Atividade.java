@@ -1,8 +1,9 @@
 package edu.up.ihelppo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Atividade {
+public class Atividade implements Serializable {
 
     private int idAtividade;
     private int idUsuario;

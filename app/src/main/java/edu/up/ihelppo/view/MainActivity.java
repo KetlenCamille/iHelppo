@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 UsuarioDAO.setarUsuario(usuario.getIdUsuario());
-                Intent intent = new Intent(MainActivity.this, CalendarioActivity.class );
+                Intent intent = new Intent(MainActivity.this, ListarAtividadesActivity.class );
                 startActivity(intent);
             }
         }

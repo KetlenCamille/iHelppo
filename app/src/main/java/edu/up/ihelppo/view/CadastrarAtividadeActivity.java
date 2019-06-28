@@ -153,11 +153,14 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         atividade.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
 
         long id = AtividadeDAO.cadastrarAtividade(this, atividade);
-        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
         if(id > 0){
+            Toast.makeText(this, "Atividade Cadastrada com Sucesso!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(CadastrarAtividadeActivity.this, ListarAtividadesActivity.class );
             startActivity(intent);
+        }
+        else if(id < 0){
+            Toast.makeText(this, "Atividade não pode ser cadastrada! " + id, Toast.LENGTH_SHORT).show();
         }
 
 

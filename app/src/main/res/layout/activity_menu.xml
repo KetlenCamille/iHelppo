@@ -28,6 +28,7 @@
         android:padding="16dp">
 
         <Button
+            android:id="@+id/btnMeusDados"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
@@ -40,6 +41,7 @@
             android:layout_marginBottom="10dp"/>
 
         <Button
+            android:id="@+id/btnCadastrarCategoria"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
@@ -53,6 +55,7 @@
             android:onClick="btnCadastrarCategoriaClick"/>
 
         <Button
+            android:id="@+id/btnHistoricoAtividades"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
@@ -64,6 +67,20 @@
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:onClick="btnHistoricoAtivClick"/>
+
+        <Button
+            android:id="@+id/btnAtividadesPendentes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:text="ATIVIDADES PENDENTES"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:background="#082c66"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:onClick="btnAtividadesPendentesClick"/>
 
 </LinearLayout>
 

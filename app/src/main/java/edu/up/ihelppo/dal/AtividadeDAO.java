@@ -48,6 +48,11 @@ public class AtividadeDAO {
         return banco.listarHistoricoAtividades(dataFormatada, idUsuario);
     }
 
+    public static ArrayList<Atividade> listarAtividadesPendentes(Context context, int idUsuario) {
+        Banco banco = new Banco(context);
+        return banco.listarAtividadesPendentes(idUsuario);
+    }
+
     public static long excluirAtividade(Context context, Atividade atividade){
         Banco banco = new Banco(context);
         return banco.removerAtividade(atividade);

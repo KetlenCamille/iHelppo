@@ -458,6 +458,30 @@ public class Banco extends SQLiteOpenHelper {
         return atividades;
     }
 
+    //Listar Atividades Pendentes
+    public ArrayList<Atividade> listarAtividadesPendentes(int idUsuario) {
+        ArrayList<Atividade> atividades = new ArrayList<Atividade>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +  TabelaAtividade.COLUNA_FOI_REALIZADO + " = 'N'", null);
+        //Colando o cursor para a 1a posição
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (cursor.moveToNext()) {
+                Atividade atividade = new Atividade();
+                atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
+                atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
+                atividade.setIdCategoria(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_CATEGORIA)));
+                atividade.setIdDiasSemana(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_DIASDASEMANA)));
+                atividade.setTitulo(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_TITULO)));
+                atividade.setDescricaoAtividade(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DESCRICAO)));
+                atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
+                atividades.add(atividade);
+            }
+        }
+        return atividades;
+    }
+
     //Buscar Atividade Por ID
     public Atividade buscarAtividadePorID(int idAtividade) {
         Atividade atividade = new Atividade();

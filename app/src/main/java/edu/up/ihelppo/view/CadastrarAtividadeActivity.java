@@ -162,9 +162,9 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
             //Mensagem do alarme
             intent.putExtra(AlarmClock.EXTRA_MESSAGE, edtTituloAtividade.getText().toString());
             //Definir Hora
-            intent.putExtra(AlarmClock.EXTRA_HOUR, String.valueOf(horas_spinner.getSelectedItem()));
+            intent.putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(String.valueOf(horas_spinner.getSelectedItem())));
             //Definir Minuto
-            intent.putExtra(AlarmClock.EXTRA_MINUTES, String.valueOf(minutos_spinner.getSelectedItem()));
+            intent.putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(String.valueOf(minutos_spinner.getSelectedItem())));
 
             startActivity(intent);
         }
@@ -244,14 +244,14 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
     }
 
     public void checkAlarmeClick(View view) {
-        alarme = "S";
-
         //Habilitar Spinner de hora e minuto
         if(chkAlarme.isChecked()){
+            alarme = "S";
             horas_spinner.setEnabled(true);
             minutos_spinner.setEnabled(true);
         }
         else{
+            alarme = "N";
             horas_spinner.setEnabled(false);
             minutos_spinner.setEnabled(false);
         }

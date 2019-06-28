@@ -23,6 +23,11 @@ public class MenuActivity extends AppCompatActivity {
         btnAtividadesPendentes = (Button) findViewById(R.id.btnAtividadesPendentes);
     }
 
+    public void btnMeusDadosClick(View view){
+        Intent intent = new Intent(MenuActivity.this, MeusDadosActivity.class);
+        startActivity(intent);
+    }
+
     public void btnHistoricoAtivClick(View view) {
         Intent intent = new Intent(MenuActivity.this, HistoricoAtividadesActivity.class );
         startActivity(intent);

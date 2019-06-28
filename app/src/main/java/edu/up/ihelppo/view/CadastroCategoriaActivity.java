@@ -35,10 +35,10 @@ public class CadastroCategoriaActivity extends AppCompatActivity {
         categoria.setEhInativo("N");
 
         long id = CategoriaDAO.cadastrarCategoria(this, categoria);
-        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Categoria Cadastrada com Sucesso!" + id, Toast.LENGTH_SHORT).show();
 
-        /*Intent intent = new Intent(CadastroCategoriaActivity.this, MainActivity.class);
-        startActivity(intent);*/
+        Intent intent = new Intent(CadastroCategoriaActivity.this, MainActivity.class);
+        startActivity(intent);
 
     }
 }

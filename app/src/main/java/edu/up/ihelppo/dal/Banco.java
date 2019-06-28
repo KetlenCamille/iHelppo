@@ -293,7 +293,7 @@ public class Banco extends SQLiteOpenHelper {
         Usuario usuario = new Usuario();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaUsuario.NOME_DA_TABELA + " WHERE " + TabelaUsuario.COLUNA_ID + " = " + idUsuario, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaUsuario.NOME_DA_TABELA + " WHERE " + TabelaUsuario.COLUNA_ID + " = " + idUsuario+ " AND " + TabelaUsuario.COLUNA_EHINATIVO + " = 'N'", null);
         //Colando o cursor para a 1a posição
 
         if (cursor.moveToFirst()) {
@@ -303,7 +303,7 @@ public class Banco extends SQLiteOpenHelper {
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_EMAIL)));
             usuario.setDataNascimento(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_DATANASCIMENTO)));
             usuario.setSenha(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_SENHA)));
-            usuario.setSenha(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_EHINATIVO)));
+            usuario.setEhInativo(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_EHINATIVO)));
         }
         cursor.close();
         return usuario;
@@ -326,7 +326,7 @@ public class Banco extends SQLiteOpenHelper {
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_EMAIL)));
             usuario.setDataNascimento(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_DATANASCIMENTO)));
             usuario.setSenha(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_SENHA)));
-            usuario.setSenha(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_EHINATIVO)));
+            usuario.setEhInativo(cursor.getString(cursor.getColumnIndex(TabelaUsuario.COLUNA_EHINATIVO)));
         }
         cursor.close();
         return usuario;
@@ -338,7 +338,7 @@ public class Banco extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(TabelaUsuario.COLUNA_NOME, usuario.getNome());
         values.put(TabelaUsuario.COLUNA_SOBRENOME, usuario.getSobrenome());
-        values.put(TabelaUsuario.COLUNA_EMAIL, usuario.getNome());
+        values.put(TabelaUsuario.COLUNA_EMAIL, usuario.getEmail());
         values.put(TabelaUsuario.COLUNA_DATANASCIMENTO, usuario.getDataNascimento());
         values.put(TabelaUsuario.COLUNA_SENHA, usuario.getSenha());
         values.put(TabelaUsuario.COLUNA_EHINATIVO, usuario.getEhInativo());

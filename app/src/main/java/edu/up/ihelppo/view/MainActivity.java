@@ -40,9 +40,12 @@ public class MainActivity extends AppCompatActivity {
             {
                 Toast.makeText(this, "E-mail ou Senha incorreta!", Toast.LENGTH_SHORT).show();
             }
+            else if(usuario.getEhInativo().equals("S")){
+                Toast.makeText(this, "Usuário Inativo!", Toast.LENGTH_SHORT).show();
+            }
             else{
                 UsuarioDAO.setarUsuario(usuario.getIdUsuario());
-                Intent intent = new Intent(MainActivity.this, ListarAtividadesActivity.class );
+                Intent intent = new Intent(MainActivity.this, MenuActivity.class );
                 startActivity(intent);
             }
         }

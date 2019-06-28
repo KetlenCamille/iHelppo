@@ -30,9 +30,8 @@ public class AtividadeDAO {
         Banco banco = new Banco(context);
         SimpleDateFormat formataData = new SimpleDateFormat("dd/M/yyyy");
         Date data = new Date();
-
         String dataFormatada = formataData.format(data);
-        Toast.makeText(context, "DATA HOJE FORMAT" + dataFormatada, Toast.LENGTH_SHORT).show();
+
         return banco.listarAtividadesDoDia(dataFormatada, idUsuario);
     }
 }

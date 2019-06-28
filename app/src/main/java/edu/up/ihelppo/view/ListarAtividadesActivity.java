@@ -33,7 +33,7 @@ public class ListarAtividadesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listar_atividades);
 
         lstAvancada = (ListView) findViewById(R.id.lstAvancada);
-        //btnAdicionarAtividade = (Button) findViewById(R.id.btnAdicionarAtividade);
+        btnAdicionarAtividade = (Button) findViewById(R.id.btnAdicionarAtividade);
 
         final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarAtividadesDoDia(this, UsuarioDAO.retornarUsuario());
         String[] atividades = new String[atividadesArray.size()];
@@ -50,7 +50,7 @@ public class ListarAtividadesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView textView = (TextView) view;
                 Intent intent = new Intent(ListarAtividadesActivity.this, DetalhesAtividadeActivity.class);
-                intent.putExtra("CATEGORIA", atividadesArray.get(position));
+                intent.putExtra("ATIVIDADE", atividadesArray.get(position));
                 startActivity(intent);
             }
         });

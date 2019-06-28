@@ -36,7 +36,7 @@
         android:textSize="25sp" />
 
     <EditText
-        android:id="@+id/edtDecricaoAtividade"
+        android:id="@+id/edtDescricaoAtividade"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
@@ -62,7 +62,8 @@
             android:textColor="@android:color/white"
             android:background="#16a50e"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:onClick="btnFeitoClick"/>
 
         <Button
             android:id="@+id/btnExcluirAtv"
@@ -75,7 +76,8 @@
             android:textColor="@android:color/white"
             android:background="#ef0000"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:onClick="btnExcluirClick"/>
 
     </LinearLayout>
 </LinearLayout>

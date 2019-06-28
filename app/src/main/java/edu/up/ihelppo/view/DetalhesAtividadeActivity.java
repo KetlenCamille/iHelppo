@@ -50,5 +50,8 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
     public void btnExcluirClick(View view) {
         long id = AtividadeDAO.excluirAtividade(this, atividade);
         Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class );
+        startActivity(intent);
     }
 }

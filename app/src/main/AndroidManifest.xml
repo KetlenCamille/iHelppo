@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.DetalheCategoriaActivity"></activity>
+        <activity android:name=".view.HistoricoAtividadesActivity"></activity>
+        <activity android:name=".view.DetalheCategoriaActivity" />
         <activity android:name=".view.ListarCategoriasActivity" />
         <activity android:name=".view.ListarAtividadesActivity" />
         <activity android:name=".view.MenuActivity" />

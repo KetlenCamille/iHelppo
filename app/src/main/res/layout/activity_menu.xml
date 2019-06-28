@@ -61,7 +61,8 @@
             android:textStyle="bold"
             android:background="#082c66"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:onClick="btnHistoricoAtivClick"/>
 
 </LinearLayout>
 

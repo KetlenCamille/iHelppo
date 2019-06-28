@@ -38,5 +38,6 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
     }
 
     public void btnExcluirClick(View view) {
+
     }
 }

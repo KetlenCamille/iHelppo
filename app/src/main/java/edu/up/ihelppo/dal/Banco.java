@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.up.ihelppo.model.Atividade;
 import edu.up.ihelppo.model.Categoria;
@@ -413,6 +414,30 @@ public class Banco extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "'" , null);
+        //Colando o cursor para a 1a posição
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (cursor.moveToNext()) {
+                Atividade atividade = new Atividade();
+                atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
+                atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
+                atividade.setIdCategoria(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_CATEGORIA)));
+                atividade.setIdDiasSemana(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_DIASDASEMANA)));
+                atividade.setTitulo(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_TITULO)));
+                atividade.setDescricaoAtividade(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DESCRICAO)));
+                atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
+                atividades.add(atividade);
+            }
+        }
+        return atividades;
+    }
+
+    //Listar Historico de Atividades
+    public ArrayList<Atividade> listarHistoricoAtividades(String datahoje, int idUsuario) {
+        ArrayList<Atividade> atividades = new ArrayList<Atividade>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +  TabelaAtividade.COLUNA_DATA_CRIACAO + " < '" + datahoje + "'", null);
         //Colando o cursor para a 1a posição
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();

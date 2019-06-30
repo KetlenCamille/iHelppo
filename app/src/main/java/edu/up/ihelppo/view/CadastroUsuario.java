@@ -52,7 +52,13 @@ public class CadastroUsuario extends AppCompatActivity {
 
         //Chamar DAO
         long id = UsuarioDAO.cadastrarUsuario(this, usuario);
-        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
+        if(id > 0){
+            Toast.makeText(this, "Usuário Cadastrado com Sucesso!", Toast.LENGTH_SHORT).show();
+        }
+        else if(id < 0){
+            Toast.makeText(this, "Erro ao cadastrar Usuário!" + id, Toast.LENGTH_SHORT).show();
+        }
+
 
         /*Redirecionando pra Main (tela de ínicio)*/
         Intent intent = new Intent(CadastroUsuario.this, MainActivity.class );

@@ -417,7 +417,10 @@ public class Banco extends SQLiteOpenHelper {
         ArrayList<Atividade> atividades = new ArrayList<Atividade>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "'" , null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " +
+                TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "'" , null);
+
         //Colando o cursor para a 1a posição
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -437,12 +440,56 @@ public class Banco extends SQLiteOpenHelper {
         return atividades;
     }
 
+    //Listar Atividades Do Dia e Sábado
+    public ArrayList<Atividade> listarAtividadesDoDiaSabado(String data, int idUsuario) {
+        ArrayList<Atividade> atividades = new ArrayList<Atividade>();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID  + VIRGULA +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_USUARIO + VIRGULA +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_CATEGORIA + VIRGULA +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_DIASDASEMANA + VIRGULA +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_TITULO + VIRGULA +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DESCRICAO + VIRGULA +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO + VIRGULA +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_FOI_REALIZADO +
+                " FROM " + TabelaAtividade.NOME_DA_TABELA + " INNER JOIN " +
+                TabelaDiasDaSemana.NOME_DA_TABELA + " ON " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_DIASDASEMANA  + " = " +
+                TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_ID + " WHERE " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "'" + " OR " +
+                TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_SABADO + " = 'S'", null);
+
+        //Colando o cursor para a 1a posição
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (cursor.moveToNext()) {
+                Atividade atividade = new Atividade();
+                atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
+                atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
+                atividade.setIdCategoria(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_CATEGORIA)));
+                atividade.setIdDiasSemana(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_DIASDASEMANA)));
+                atividade.setTitulo(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_TITULO)));
+                atividade.setDescricaoAtividade(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DESCRICAO)));
+                atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
+                atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
+                atividades.add(atividade);
+            }
+        }
+        cursor.close();
+        return atividades;
+    }
+
     //Listar Historico de Atividades
     public ArrayList<Atividade> listarHistoricoAtividades(String datahoje, int idUsuario) {
         ArrayList<Atividade> atividades = new ArrayList<Atividade>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +  TabelaAtividade.COLUNA_DATA_CRIACAO + " < '" + datahoje + "'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA +
+                " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.COLUNA_DATA_CRIACAO + " < '" + datahoje + "'", null);
         //Colando o cursor para a 1a posição
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -615,6 +662,28 @@ public class Banco extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return diasDaSemanas;
+    }
+
+    //Buscar Dia da Semana Por ID
+    public DiasDaSemana buscarDiaDaSemanaPorID(int idDiaDaSemana) {
+        DiasDaSemana diasDaSemana = new DiasDaSemana();
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaDiasDaSemana.NOME_DA_TABELA + " WHERE " + TabelaDiasDaSemana.COLUNA_ID + " = " + idDiaDaSemana, null);
+        //Colando o cursor para a 1a posição
+
+        if (cursor.moveToFirst()) {
+            diasDaSemana.setIdDiasDaSemana(cursor.getInt(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_ID)));
+            diasDaSemana.setDomingo(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_DOMINGO)));
+            diasDaSemana.setSegunda(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_SEGUNDA)));
+            diasDaSemana.setTerca(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_TERCA)));
+            diasDaSemana.setQuarta(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_QUARTA)));
+            diasDaSemana.setQuinta(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_QUINTA)));
+            diasDaSemana.setSexta(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_SEXTA)));
+            diasDaSemana.setSabado(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_SABADO)));
+        }
+        cursor.close();
+        return diasDaSemana;
     }
 
     //Buscar Dia Da Semana Igual

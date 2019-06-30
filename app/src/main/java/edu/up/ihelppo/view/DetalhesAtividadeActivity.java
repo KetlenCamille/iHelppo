@@ -54,4 +54,14 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
         Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class );
         startActivity(intent);
     }
+
+    public void btnNaoFeitoClick(View view) {
+        Atividade atividadePesq =  AtividadeDAO.buscarAtividadePorId(this, atividade);
+        atividadePesq.setFoiRealizada("N");
+
+        AtividadeDAO.alterarAtividade(this,atividadePesq);
+
+        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class );
+        startActivity(intent);
+    }
 }

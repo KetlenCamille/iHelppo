@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import edu.up.ihelppo.model.Atividade;
+import edu.up.ihelppo.model.DiasDaSemana;
 
 public class AtividadeDAO {
 
@@ -38,6 +39,15 @@ public class AtividadeDAO {
         String dataFormatada = formataData.format(data);
 
         return banco.listarAtividadesDoDia(dataFormatada, idUsuario);
+    }
+
+    public static ArrayList<Atividade> listarAtividadesDoDiaSabado(Context context, int idUsuario) {
+        Banco banco = new Banco(context);
+        SimpleDateFormat formataData = new SimpleDateFormat("dd/M/yyyy");
+        Date data = new Date();
+        String dataFormatada = formataData.format(data);
+        Toast.makeText(context, "" + dataFormatada, Toast.LENGTH_SHORT).show();
+        return banco.listarAtividadesDoDiaSabado(dataFormatada, idUsuario);
     }
 
     public static ArrayList<Atividade> listarHistoricoAtividades(Context context, int idUsuario) {

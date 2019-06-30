@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+    <LinearLayout
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="#082c66"
+        android:text="Meus Dados"
+        android:gravity="center"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:textSize="27sp"
+        android:textColor="#082c66"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:hint="Nome"
+        android:id="@+id/edtNome"/>
+
+    <EditText
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:textSize="27sp"
+        android:textColor="#082c66"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:hint="Sobrenome"
+        android:id="@+id/edtSobrenome"/>
+
+    <EditText
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:textSize="27sp"
+        android:textColor="#082c66"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:hint="E-mail"
+        android:id="@+id/edtEmail"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:textSize="27sp"
+        android:textColor="#082c66"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:hint="Data de nasc."
+        android:id="@+id/edtDataNasc"/>
+
+    <EditText
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:textSize="27sp"
+        android:textColor="#082c66"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:hint="Senha"
+        android:id="@+id/edtSenha"
+        android:inputType="textPassword"/>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_weight="1.5">
+
+    <Button
+        android:layout_height="0dp"
+        android:layout_width="300dp"
+        android:textStyle="bold"
+        android:textSize="27sp"
+        android:textColor="@android:color/white"
+        android:text="Editar"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:id="@+id/btnAlterarUsuario"
+        android:layout_marginBottom="10dp"
+        android:onClick="btnAlterarUsuarioClick"
+        android:background="#082C66"/>
+
+    <Button
+        android:layout_height="0dp"
+        android:layout_width="300dp"
+        android:textStyle="bold"
+        android:textSize="27sp"
+        android:textColor="@android:color/white"
+        android:text="Deletar Perfil"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:id="@+id/btnInativarUsuario"
+        android:layout_marginBottom="10dp"
+        android:onClick="btnInativarUsuarioClick"
+        android:background="#082C66"/>
+
+</LinearLayout>
+
+</LinearLayout>

@@ -14,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import org.w3c.dom.Text;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import android.widget.AdapterView.OnItemSelectedListener;
 import edu.up.ihelppo.R;
 import edu.up.ihelppo.dal.AtividadeDAO;
@@ -68,7 +71,6 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         String data = (String) getIntent().getSerializableExtra("DATA_ATIVIDADE");
         txtDataAtividade.setText(data);
 
-
         // Populando o Spinner de Categorias:
 
         ArrayList<String> categorias = CategoriaDAO.listarCategoriasPorNome(this);
@@ -114,13 +116,13 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
     public void SalvarAtividadeClick(View view) {
         Atividade atividade = new Atividade();
+        atividade.setFoiRealizada("");
         atividade.setDataCriacao(txtDataAtividade.getText().toString());
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
 
         //Pegar Usuario da Sessao
         atividade.setIdUsuario(UsuarioDAO.retornarUsuario());
-
 
         String categoria = String.valueOf(categoria_spinner.getSelectedItem());
 
@@ -141,22 +143,40 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         diasDaSemana.setSexta(diasPreenchidos[5]);
         diasDaSemana.setSabado(diasPreenchidos[6]);
 
+        if(diasPreenchidos[0] == null && diasPreenchidos[1] == null &&diasPreenchidos[2] == null
+                && diasPreenchidos[3] == null && diasPreenchidos[4] == null && diasPreenchidos[5] == null && diasPreenchidos[6] == null){
+                Toast.makeText(this, "Dia Da Semana Null: " , Toast.LENGTH_SHORT).show();
+            diasDaSemana.setDomingo("N");
+            diasDaSemana.setSegunda("N");
+            diasDaSemana.setTerca("N");
+            diasDaSemana.setQuarta("N");
+            diasDaSemana.setQuinta("N");
+            diasDaSemana.setSexta("N");
+            diasDaSemana.setSabado("N");
+
+        }
+
         DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
 
         if( dia.getIdDiasDaSemana() == 0){
             long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
-            Toast.makeText(this, "Id Cadastro: " + id, Toast.LENGTH_SHORT).show();
+            if (id < 1) {
+                Toast.makeText(this, "Erro ao cadastrar Dia da Semana: " + id, Toast.LENGTH_SHORT).show();
+            }
         }
         DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
 
         atividade.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
 
         long id = AtividadeDAO.cadastrarAtividade(this, atividade);
-        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
         if(id > 0){
+            Toast.makeText(this, "Atividade Cadastrada com Sucesso!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(CadastrarAtividadeActivity.this, ListarAtividadesActivity.class );
             startActivity(intent);
+        }
+        else if(id < 0){
+            Toast.makeText(this, "Atividade não pode ser cadastrada! " + id, Toast.LENGTH_SHORT).show();
         }
 
 

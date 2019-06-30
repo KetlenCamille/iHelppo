@@ -12,6 +12,15 @@ public class Atividade implements Serializable {
     private String titulo;
     private String descricaoAtividade;
     private String dataCriacao;
+    private String foiRealizada;
+
+    public String getFoiRealizada() {
+        return foiRealizada;
+    }
+
+    public void setFoiRealizada(String foiRealizada) {
+        this.foiRealizada = foiRealizada;
+    }
 
     public int getIdAtividade() {
         return idAtividade;

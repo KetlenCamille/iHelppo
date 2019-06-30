@@ -1,12 +1,15 @@
 package edu.up.ihelppo.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import edu.up.ihelppo.R;
+import edu.up.ihelppo.dal.AtividadeDAO;
 import edu.up.ihelppo.model.Atividade;
 
 public class DetalhesAtividadeActivity extends AppCompatActivity {
@@ -35,8 +38,30 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
     }
 
     public void btnFeitoClick(View view) {
+        Atividade atividadePesq =  AtividadeDAO.buscarAtividadePorId(this, atividade);
+        atividadePesq.setFoiRealizada("S");
+
+        AtividadeDAO.alterarAtividade(this,atividadePesq);
+
+        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class );
+        startActivity(intent);
     }
 
     public void btnExcluirClick(View view) {
+        long id = AtividadeDAO.excluirAtividade(this, atividade);
+        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class );
+        startActivity(intent);
+    }
+
+    public void btnNaoFeitoClick(View view) {
+        Atividade atividadePesq =  AtividadeDAO.buscarAtividadePorId(this, atividade);
+        atividadePesq.setFoiRealizada("N");
+
+        AtividadeDAO.alterarAtividade(this,atividadePesq);
+
+        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class );
+        startActivity(intent);
     }
 }

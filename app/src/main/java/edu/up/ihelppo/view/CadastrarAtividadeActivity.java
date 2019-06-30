@@ -14,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import org.w3c.dom.Text;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import android.widget.AdapterView.OnItemSelectedListener;
 import edu.up.ihelppo.R;
 import edu.up.ihelppo.dal.AtividadeDAO;
@@ -67,7 +70,6 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
         String data = (String) getIntent().getSerializableExtra("DATA_ATIVIDADE");
         txtDataAtividade.setText(data);
-
 
         // Populando o Spinner de Categorias:
 

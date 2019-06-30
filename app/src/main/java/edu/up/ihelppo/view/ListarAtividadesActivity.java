@@ -39,8 +39,7 @@ public class ListarAtividadesActivity extends AppCompatActivity {
         lstAvancada = (ListView) findViewById(R.id.lstAvancada);
         btnAdicionarAtividade = (Button) findViewById(R.id.btnAdicionarAtividade);
 
-        //final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarAtividades(this);
-        final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarAtividadesDoDiaSabado(this, UsuarioDAO.retornarUsuario());
+        final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarAtividadesDoDia(this, UsuarioDAO.retornarUsuario());
         String[] atividades = new String[atividadesArray.size()];
 
         for(int i=0; i < atividadesArray.size(); i++){

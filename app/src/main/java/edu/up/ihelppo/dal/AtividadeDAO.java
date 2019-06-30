@@ -6,6 +6,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import edu.up.ihelppo.model.Atividade;
 import edu.up.ihelppo.model.DiasDaSemana;
@@ -38,16 +39,27 @@ public class AtividadeDAO {
         Date data = new Date();
         String dataFormatada = formataData.format(data);
 
-        return banco.listarAtividadesDoDia(dataFormatada, idUsuario);
-    }
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(data);
+        int diaDaSemana = gc.get(GregorianCalendar.DAY_OF_WEEK);
 
-    public static ArrayList<Atividade> listarAtividadesDoDiaSabado(Context context, int idUsuario) {
-        Banco banco = new Banco(context);
-        SimpleDateFormat formataData = new SimpleDateFormat("dd/M/yyyy");
-        Date data = new Date();
-        String dataFormatada = formataData.format(data);
-        Toast.makeText(context, "" + dataFormatada, Toast.LENGTH_SHORT).show();
-        return banco.listarAtividadesDoDiaSabado(dataFormatada, idUsuario);
+        if(diaDaSemana == 1){
+            return banco.listarAtividadesDoDiaDomingo(dataFormatada, idUsuario);
+        }else if(diaDaSemana == 2){
+            return  banco.listarAtividadesDoDiaSegunda(dataFormatada,idUsuario);
+        }else if(diaDaSemana == 3){
+            return banco.listarAtividadesDoDiaTerca(dataFormatada, idUsuario);
+        }else if(diaDaSemana == 4){
+            return  banco.listarAtividadesDoDiaQuarta(dataFormatada, idUsuario);
+        }else if (diaDaSemana == 5) {
+            return  banco.listarAtividadesDoDiaQuinta(dataFormatada, idUsuario);
+        }else if(diaDaSemana == 6){
+            return  banco.listarAtividadesDoDiaSexta(dataFormatada, idUsuario);
+        }else if(diaDaSemana == 7){
+            return banco.listarAtividadesDoDiaSabado(dataFormatada, idUsuario);
+        }
+
+        return banco.listarAtividadesDoDia(dataFormatada, idUsuario);
     }
 
     public static ArrayList<Atividade> listarHistoricoAtividades(Context context, int idUsuario) {

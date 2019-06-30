@@ -41,8 +41,6 @@ public class AtividadeDAO {
         Date data = new Date();
         String dataFormatada = formataData.format(data);
 
-        Toast.makeText(context, "" + dataFormatada, Toast.LENGTH_SHORT).show();
-
         //Pegando o dia da semana em número
         /* 1 - Domingo
         *  2 - Segunda

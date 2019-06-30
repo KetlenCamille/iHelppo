@@ -1,17 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="8dp"
+    android:gravity="center|center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:gravity="left|center_vertical">
+        android:gravity="center|center_horizontal">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabMain"
@@ -57,49 +58,4 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:gravity="center"
-        android:text="DADOS DA CATEGORIA"
-        android:textColor="#082c66"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
-
-    <EditText
-        android:id="@+id/edtDescricaoCategoria"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:gravity="center"
-        android:hint="Descrição da Categoria"
-        android:textColor="#082c66"
-        android:textSize="27sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <Button
-            android:id="@+id/btnCadastrarCategoria"
-            android:layout_width="300dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="CADASTRAR"
-            android:textStyle="bold"
-            android:textSize="27sp"
-            android:textColor="@android:color/white"
-            android:background="#082c66"
-            android:layout_gravity="center"
-            android:onClick="btnCadastrarCategoriaClick"/>
-    </LinearLayout>
 </LinearLayout>

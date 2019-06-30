@@ -7,6 +7,17 @@
     android:maxHeight="200dp">
 
     <TextView
+        android:id="@+id/txtDataAtividade"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Data: "
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center|left"/>
+
+    <TextView
         android:id="@+id/txtTituloAtividade"
         android:layout_width="match_parent"
         android:layout_height="0dp"

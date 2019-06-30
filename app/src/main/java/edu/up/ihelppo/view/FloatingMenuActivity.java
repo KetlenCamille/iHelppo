@@ -1,27 +1,15 @@
 package edu.up.ihelppo.view;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import edu.up.ihelppo.R;
-import edu.up.ihelppo.dal.CategoriaDAO;
-import edu.up.ihelppo.model.Categoria;
 
-public class CadastroCategoriaActivity extends AppCompatActivity implements View.OnClickListener {
+public class FloatingMenuActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText edtDescricao;
-    private Button btnCadastrar;
-
-    //Botões Menu
     FloatingActionButton fabMain, fabListarAtv, fabPerfil, fabSair;
     Float translationY = 10f;
     Boolean isMenuOpen = false;
@@ -30,26 +18,8 @@ public class CadastroCategoriaActivity extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_categoria);
-
-        edtDescricao = (EditText) findViewById(R.id.edtDescricaoCategoria);
-        btnCadastrar = (Button) findViewById(R.id.btnCadastrarCategoria);
-
+        setContentView(R.layout.activity_floating_menu);
         InitiFabMenu();
-
-    }
-
-    public void btnCadastrarCategoriaClick(View view) {
-        Categoria categoria = new Categoria();
-        categoria.setDescricao(edtDescricao.getText().toString());
-        categoria.setEhInativo("N");
-
-        long id = CategoriaDAO.cadastrarCategoria(this, categoria);
-        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
-
-        /*Intent intent = new Intent(CadastroCategoriaActivity.this, MainActivity.class);
-        startActivity(intent);*/
-
     }
 
     private void InitiFabMenu() {
@@ -92,6 +62,7 @@ public class CadastroCategoriaActivity extends AppCompatActivity implements View
         fabSair.animate().translationY(translationY).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
     }
 
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fabMain:
@@ -103,16 +74,10 @@ public class CadastroCategoriaActivity extends AppCompatActivity implements View
                 }
                 break;
             case R.id.fabListarAtv:
-                Intent intent = new Intent(CadastroCategoriaActivity.this, ListarAtividadesActivity.class);
-                startActivity(intent);
                 break;
             case R.id.fabPerfil:
-                intent = new Intent(CadastroCategoriaActivity.this, MenuActivity.class);
-                startActivity(intent);
                 break;
             case R.id.fabSair:
-                finish();
-                System.exit(0);
                 break;
         }
     }

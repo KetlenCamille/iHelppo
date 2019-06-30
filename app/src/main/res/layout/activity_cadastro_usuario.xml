@@ -46,7 +46,7 @@
         android:textColor="#082c66"
         android:textSize="27sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/edtDataNasc"
         android:layout_width="match_parent"
         android:layout_height="0dp"

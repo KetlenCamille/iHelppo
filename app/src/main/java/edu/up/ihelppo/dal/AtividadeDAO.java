@@ -35,14 +35,25 @@ public class AtividadeDAO {
 
     public static ArrayList<Atividade> listarAtividadesDoDia(Context context, int idUsuario) {
         Banco banco = new Banco(context);
+
+        //Pegando a data de hoje
         SimpleDateFormat formataData = new SimpleDateFormat("dd/M/yyyy");
         Date data = new Date();
         String dataFormatada = formataData.format(data);
 
+        //Pegando o dia da semana em número
+        /* 1 - Domingo
+        *  2 - Segunda
+        *  3 - Terça
+        *  4 - Quarta
+        *  5 - Quinta
+        *  6 - Sexta
+        *  7 - Sábado */
         GregorianCalendar gc = new GregorianCalendar();
         gc.setTime(data);
         int diaDaSemana = gc.get(GregorianCalendar.DAY_OF_WEEK);
 
+        //Chamando o método correspondete ao dia da Semana
         if(diaDaSemana == 1){
             return banco.listarAtividadesDoDiaDomingo(dataFormatada, idUsuario);
         }else if(diaDaSemana == 2){
@@ -58,7 +69,6 @@ public class AtividadeDAO {
         }else if(diaDaSemana == 7){
             return banco.listarAtividadesDoDiaSabado(dataFormatada, idUsuario);
         }
-
         return banco.listarAtividadesDoDia(dataFormatada, idUsuario);
     }
 

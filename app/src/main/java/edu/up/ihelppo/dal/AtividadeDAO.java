@@ -37,9 +37,11 @@ public class AtividadeDAO {
         Banco banco = new Banco(context);
 
         //Pegando a data de hoje
-        SimpleDateFormat formataData = new SimpleDateFormat("dd/M/yyyy");
+        SimpleDateFormat formataData = new SimpleDateFormat("d/M/yyyy");
         Date data = new Date();
         String dataFormatada = formataData.format(data);
+
+        Toast.makeText(context, "" + dataFormatada, Toast.LENGTH_SHORT).show();
 
         //Pegando o dia da semana em número
         /* 1 - Domingo

@@ -42,6 +42,25 @@ public class ListarAtividadesActivity extends AppCompatActivity {
         final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarAtividadesDoDia(this, UsuarioDAO.retornarUsuario());
         String[] atividades = new String[atividadesArray.size()];
 
+
+        for(int i=0; i < atividadesArray.size(); i++){
+            atividades[i] = atividadesArray.get(i).getTitulo();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, atividades);
+        lstAvancada.setAdapter(adapter);
+
+        lstAvancada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView textView = (TextView) view;
+                Intent intent = new Intent(ListarAtividadesActivity.this, DetalhesAtividadeActivity.class);
+                intent.putExtra("ATIVIDADE", atividadesArray.get(position));
+                startActivity(intent);
+            }
+        });
+
+        //Notificação
         final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         //Criar um canal de comunicação
@@ -77,22 +96,6 @@ public class ListarAtividadesActivity extends AppCompatActivity {
 
         notificationManager.notify(1, builder.build());
 
-        for(int i=0; i < atividadesArray.size(); i++){
-            atividades[i] = atividadesArray.get(i).getTitulo();
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, atividades);
-        lstAvancada.setAdapter(adapter);
-
-        lstAvancada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = (TextView) view;
-                Intent intent = new Intent(ListarAtividadesActivity.this, DetalhesAtividadeActivity.class);
-                intent.putExtra("ATIVIDADE", atividadesArray.get(position));
-                startActivity(intent);
-            }
-        });
 
     }
 

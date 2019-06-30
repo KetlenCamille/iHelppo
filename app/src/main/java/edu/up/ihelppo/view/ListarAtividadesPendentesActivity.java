@@ -32,8 +32,6 @@ public class ListarAtividadesPendentesActivity extends AppCompatActivity {
         final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarAtividadesPendentes(this, UsuarioDAO.retornarUsuario());
         String[] atividades = new String[atividadesArray.size()];
 
-        final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
         for(int i=0; i < atividadesArray.size(); i++){
             atividades[i] = atividadesArray.get(i).getTitulo();
         }

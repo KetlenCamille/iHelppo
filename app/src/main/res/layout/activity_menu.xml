@@ -83,6 +83,20 @@
             android:layout_marginBottom="10dp"
             android:onClick="btnAtividadesPendentesClick"/>
 
+        <Button
+            android:id="@+id/btnAtividadesFuturas"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:text="ATIVIDADES FUTURAS"
+            android:textColor="@android:color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:background="#082c66"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:onClick="btnAtividadesFuturasClick"/>
+
 </LinearLayout>
 
 

@@ -459,7 +459,7 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_DIASDASEMANA  + " = " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_ID + " WHERE " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
-                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "'" + " OR " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " = '"+ data + "'" + " OR " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_DOMINGO + " = 'S'", null);
 
         //Colando o cursor para a 1a posição
@@ -766,7 +766,7 @@ public class Banco extends SQLiteOpenHelper {
         ArrayList<Atividade> atividades = new ArrayList<Atividade>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +  TabelaAtividade.COLUNA_DATA_CRIACAO + " >= '" + datahoje + "'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +  TabelaAtividade.COLUNA_DATA_CRIACAO + " > '" + datahoje + "'", null);
         //Colando o cursor para a 1a posição
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -791,7 +791,7 @@ public class Banco extends SQLiteOpenHelper {
         ArrayList<Atividade> atividades = new ArrayList<Atividade>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +  TabelaAtividade.COLUNA_FOI_REALIZADO + " = 'N'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +  TabelaAtividade.COLUNA_FOI_REALIZADO + " = ''", null);
         //Colando o cursor para a 1a posição
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();

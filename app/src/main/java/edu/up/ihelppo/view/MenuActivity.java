@@ -10,7 +10,7 @@ import edu.up.ihelppo.R;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private  Button btnMeusDados, btnCadastrarCategoria, btnHistoricoAtividades, btnAtividadesPendentes;
+    private  Button btnMeusDados, btnCadastrarCategoria, btnHistoricoAtividades, btnAtividadesPendentes, btnAtividadesFuturas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,7 @@ public class MenuActivity extends AppCompatActivity {
         btnCadastrarCategoria = (Button) findViewById(R.id.btnCadastrarCategoria);
         btnHistoricoAtividades = (Button) findViewById(R.id.btnHistoricoAtividades);
         btnAtividadesPendentes = (Button) findViewById(R.id.btnAtividadesPendentes);
+        btnAtividadesFuturas = (Button) findViewById(R.id.btnAtividadesFuturas);
     }
 
     public void btnMeusDadosClick(View view){
@@ -40,6 +41,11 @@ public class MenuActivity extends AppCompatActivity {
 
     public void btnAtividadesPendentesClick(View view) {
         Intent intent = new Intent(MenuActivity.this, ListarAtividadesPendentesActivity.class );
+        startActivity(intent);
+    }
+
+    public void btnAtividadesFuturasClick(View view) {
+        Intent intent = new Intent(MenuActivity.this, ListarAtividadesFuturasActivity.class );
         startActivity(intent);
     }
 }

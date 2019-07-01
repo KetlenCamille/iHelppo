@@ -1,13 +1,10 @@
 package edu.up.ihelppo.view;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,7 +16,7 @@ import edu.up.ihelppo.dal.AtividadeDAO;
 import edu.up.ihelppo.dal.UsuarioDAO;
 import edu.up.ihelppo.model.Atividade;
 
-public class ListarAtividadesPendentesActivity extends AppCompatActivity {
+public class ListarAtividadesFuturasActivity extends AppCompatActivity {
 
     private ListView lstAvancada;
 
@@ -30,14 +27,14 @@ public class ListarAtividadesPendentesActivity extends AppCompatActivity {
 
         lstAvancada = (ListView) findViewById(R.id.lstAvancada);
 
-        final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarAtividadesPendentes(this, UsuarioDAO.retornarUsuario());
+        final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarAtividadesFuturas(this, UsuarioDAO.retornarUsuario());
         String[] atividades = new String[atividadesArray.size()];
 
-        for(int i=0; i < atividadesArray.size(); i++){
+        for (int i = 0; i < atividadesArray.size(); i++) {
             atividades[i] = atividadesArray.get(i).getTitulo();
         }
 
-        ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarAtividadesPendentes(this, UsuarioDAO.retornarUsuario()));
+        ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarAtividadesFuturas(this, UsuarioDAO.retornarUsuario()));
 
         lstAvancada.setAdapter(arrayAdapterAtividade);
 
@@ -45,7 +42,7 @@ public class ListarAtividadesPendentesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView textView = (TextView) view;
-                Intent intent = new Intent(ListarAtividadesPendentesActivity.this, DetalhesAtividadeActivity.class);
+                Intent intent = new Intent(ListarAtividadesFuturasActivity.this, DetalhesAtividadeActivity.class);
                 intent.putExtra("ATIVIDADE", atividadesArray.get(position));
                 startActivity(intent);
             }

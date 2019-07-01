@@ -1,8 +1,12 @@
 package edu.up.ihelppo.view;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.opengl.EGLExt;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,12 +50,62 @@ public class ListarAtividadesActivity extends AppCompatActivity implements View.
         lstAvancada = (ListView) findViewById(R.id.lstAvancada);
         btnAdicionarAtividade = (Button) findViewById(R.id.btnAdicionarAtividade);
 
-        lstAvancada = (ListView) findViewById(R.id.lstAvancada);
-        btnAdicionarAtividade = (Button) findViewById(R.id.btnAdicionarAtividade);
+        final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarAtividadesDoDia(this, UsuarioDAO.retornarUsuario());
+        String[] atividades = new String[atividadesArray.size()];
 
-        ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarAtividadesDoDia(this, UsuarioDAO.retornarUsuario()));
+        for(int i=0; i < atividadesArray.size(); i++){
+            atividades[i] = atividadesArray.get(i).getTitulo();
+        }
+
+        ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarAtividades(this));
+        //ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarAtividadesDoDia(this, UsuarioDAO.retornarUsuario()));
+
+        final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        //Criar um canal de comunicação
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String nome = "CANAL_COMUNICADO";
+            String descricao = "DESCRICAO_CANAL";
+            int prioridade = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel notificationChannel = new NotificationChannel("idCanal01", nome, prioridade);
+            notificationChannel.setDescription(descricao);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+        //Criar a notificação
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "idCanal01enade");
+        builder.setContentText("Voce possui " + atividadesArray.size() + " atividades hoje!");
+        builder.setContentTitle("iHelppo INFORMA:");
+        builder.setSmallIcon(R.drawable.logo);
+        //builder.setContentIntent(pendingIntent);
+
+        Thread thread = new Thread(){
+            @Override
+            public void run(){
+                try{
+                    Thread.sleep(5000);
+                    notificationManager.notify(1, builder.build());
+                }catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
+
+        notificationManager.notify(1, builder.build());
 
         lstAvancada.setAdapter(arrayAdapterAtividade);
+
+        lstAvancada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView textView = (TextView) view;
+                Intent intent = new Intent(ListarAtividadesActivity.this, DetalhesAtividadeActivity.class);
+                intent.putExtra("ATIVIDADE", atividadesArray.get(position));
+                startActivity(intent);
+            }
+        });
 
     }
 

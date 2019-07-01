@@ -23,7 +23,7 @@ public class ListarAtividadesFuturasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listar_atividades_pendentes);
+        setContentView(R.layout.activity_listar_atividades_futuras);
 
         lstAvancada = (ListView) findViewById(R.id.lstAvancada);
 

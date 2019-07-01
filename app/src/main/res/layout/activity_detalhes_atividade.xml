@@ -39,11 +39,16 @@
         android:id="@+id/edtDescricaoAtividade"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:gravity="center"
         android:hint="Descrição"
         android:textColor="#082c66"
         android:textSize="25sp" />
+
+    <Spinner
+        android:id="@+id/categoria_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,7 +62,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="REALIZADO!"
-            android:textSize="35sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:background="#16a50e"
@@ -71,13 +76,27 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="NÃO REALIZADO!"
-            android:textSize="35sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:background="#ff751a"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:onClick="btnNaoFeitoClick"/>
+
+        <Button
+            android:id="@+id/btnAlterarAtv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="SALVAR ATIVIDADE"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="#16a50e"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="btnAlterarClick"/>
 
         <Button
             android:id="@+id/btnExcluirAtv"

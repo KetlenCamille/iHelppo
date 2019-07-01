@@ -54,11 +54,11 @@ public class ListarAtividadesActivity extends AppCompatActivity implements View.
         String[] atividades = new String[atividadesArray.size()];
 
         for(int i=0; i < atividadesArray.size(); i++){
-            atividades[i] = atividadesArray.get(i).getTitulo();
+            atividades[i] = atividadesArray.get(i).getDataCriacao();
         }
 
-        ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarAtividades(this));
-        //ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarAtividadesDoDia(this, UsuarioDAO.retornarUsuario()));
+        //ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarAtividades(this));
+        ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarAtividadesDoDia(this, UsuarioDAO.retornarUsuario()));
 
         final NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 

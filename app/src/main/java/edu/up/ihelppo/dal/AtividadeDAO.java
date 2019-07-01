@@ -37,11 +37,10 @@ public class AtividadeDAO {
         Banco banco = new Banco(context);
 
         //Pegando a data de hoje
-        SimpleDateFormat formataData = new SimpleDateFormat("yyyy/M/dd");
+        SimpleDateFormat formataData = new SimpleDateFormat("yyyy-MM-dd");
         Date data = new Date();
         String dataFormatada = formataData.format(data);
 
-        Toast.makeText(context, "" + dataFormatada, Toast.LENGTH_SHORT).show();
         //Pegando o dia da semana em número
         /* 1 - Domingo
         *  2 - Segunda
@@ -58,7 +57,7 @@ public class AtividadeDAO {
         if(diaDaSemana == 1){
             return banco.listarAtividadesDoDiaDomingo(dataFormatada, idUsuario);
         }else if(diaDaSemana == 2){
-            return  banco.listarAtividadesDoDiaSegunda(dataFormatada,idUsuario);
+            return  banco.listarAtividadesDoDiaSegunda(dataFormatada, idUsuario);
         }else if(diaDaSemana == 3){
             return banco.listarAtividadesDoDiaTerca(dataFormatada, idUsuario);
         }else if(diaDaSemana == 4){
@@ -75,19 +74,12 @@ public class AtividadeDAO {
 
     public static ArrayList<Atividade> listarHistoricoAtividades(Context context, int idUsuario) {
         Banco banco = new Banco(context);
-        SimpleDateFormat formataData = new SimpleDateFormat("yyyy/M/d");
-        Date data = new Date();
-        String dataFormatada = formataData.format(data);
-        Toast.makeText(context, "" + dataFormatada, Toast.LENGTH_SHORT).show();
-        return banco.listarHistoricoAtividades(dataFormatada, idUsuario);
+        return banco.listarHistoricoAtividades(idUsuario);
     }
 
     public static ArrayList<Atividade> listarAtividadesFuturas(Context context, int idUsuario) {
         Banco banco = new Banco(context);
-        SimpleDateFormat formataData = new SimpleDateFormat("yyyy/M/d");
-        Date data = new Date();
-        String dataFormatada = formataData.format(data);
-        return banco.listarAtividadesFuturas(dataFormatada, idUsuario);
+        return banco.listarAtividadesFuturas(idUsuario);
     }
 
     public static ArrayList<Atividade> listarAtividadesPendentes(Context context, int idUsuario) {

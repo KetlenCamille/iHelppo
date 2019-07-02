@@ -46,7 +46,6 @@ public class DetalheCategoriaActivity extends AppCompatActivity implements View.
         if (edtDescricaoCategoriaDet.getText().toString().equals("")) {
             Toast.makeText(this, "Informe a descrição!", Toast.LENGTH_SHORT).show();
         } else {
-
             categoriaPesq.setDescricao(edtDescricaoCategoriaDet.getText().toString());
             categoriaPesq.setEhInativo("N");
 

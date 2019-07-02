@@ -41,22 +41,22 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
         txtStatus = (TextView) findViewById(R.id.txtStatus);
         btnFeito = (Button) findViewById(R.id.btnFeito);
         btnNaoFeito = (Button) findViewById(R.id.btnNaoFeito);
-        btnExcluirAtv =(Button) findViewById(R.id.btnExcluirAtv);
+        btnExcluirAtv = (Button) findViewById(R.id.btnExcluirAtv);
         btnAlterarAtv = (Button) findViewById(R.id.btnAlterarAtv);
         categoria_spinner = (Spinner) findViewById(R.id.categoria_spinner);
 
         atividade = (Atividade) getIntent().getSerializableExtra("ATIVIDADE");
 
-        if(atividade.getFoiRealizada().equals("N")){
+        if (atividade.getFoiRealizada().equals("N")) {
             txtStatus.setText("Atividade Não Realizada!");
             btnAlterarAtv.setEnabled(true);
             btnFeito.setEnabled(false);
             btnNaoFeito.setEnabled(true);
-        }else if(atividade.getFoiRealizada().equals("S")){
+        } else if (atividade.getFoiRealizada().equals("S")) {
             txtStatus.setText("Atividade Realizada!");
             btnAlterarAtv.setEnabled(true);
             btnNaoFeito.setEnabled(true);
-        }else if(atividade.getFoiRealizada().equals("")){
+        } else if (atividade.getFoiRealizada().equals("")) {
             txtStatus.setText("Atividade Pendente!");
         }
 
@@ -77,12 +77,12 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
     }
 
     public void btnFeitoClick(View view) {
-        Atividade atividadePesq =  AtividadeDAO.buscarAtividadePorId(this, atividade);
+        Atividade atividadePesq = AtividadeDAO.buscarAtividadePorId(this, atividade);
         atividadePesq.setFoiRealizada("S");
 
-        AtividadeDAO.alterarAtividade(this,atividadePesq);
+        AtividadeDAO.alterarAtividade(this, atividadePesq);
 
-        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class );
+        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class);
         startActivity(intent);
     }
 
@@ -90,39 +90,44 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
         long id = AtividadeDAO.excluirAtividade(this, atividade);
         Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class );
+        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class);
         startActivity(intent);
     }
 
     public void btnNaoFeitoClick(View view) {
-        Atividade atividadePesq =  AtividadeDAO.buscarAtividadePorId(this, atividade);
+        Atividade atividadePesq = AtividadeDAO.buscarAtividadePorId(this, atividade);
         atividadePesq.setFoiRealizada("N");
 
-        AtividadeDAO.alterarAtividade(this,atividadePesq);
+        AtividadeDAO.alterarAtividade(this, atividadePesq);
 
-        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class );
+        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class);
         startActivity(intent);
     }
 
     public void btnAlterarClick(View view) {
-        Atividade atividadePesq =  AtividadeDAO.buscarAtividadePorId(this, atividade);
+        Atividade atividadePesq = AtividadeDAO.buscarAtividadePorId(this, atividade);
         atividadePesq.setDataCriacao(atividade.getDataCriacao().toString());
-        atividadePesq.setTitulo(edtTituloAtividade.getText().toString());
-        atividadePesq.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
+        if (edtTituloAtividade.getText().toString().equals("")) {
+            Toast.makeText(this, "Informe um título!", Toast.LENGTH_SHORT).show();
+        } else {
 
-        String categoria = String.valueOf(categoria_spinner.getSelectedItem());
 
-        Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorNome(this, categoria, UsuarioDAO.retornarUsuario());
-        if(categoria.equals("")){
-            Toast.makeText(this, "Selecione uma categoria válida!", Toast.LENGTH_SHORT).show();
+            atividadePesq.setTitulo(edtTituloAtividade.getText().toString());
+            atividadePesq.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
+
+            String categoria = String.valueOf(categoria_spinner.getSelectedItem());
+
+            Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorNome(this, categoria, UsuarioDAO.retornarUsuario());
+            if(categoriaPesq.getDescricao() == null){
+                Toast.makeText(this, "Selecione uma categoria válida!", Toast.LENGTH_SHORT).show();
+            } else {
+                atividade.setIdCategoria(categoriaPesq.getIdCategoria());
+
+                AtividadeDAO.alterarAtividade(this, atividadePesq);
+
+                Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class);
+                startActivity(intent);
+            }
         }
-        else{
-            atividade.setIdCategoria(categoriaPesq.getIdCategoria());
-        }
-
-        AtividadeDAO.alterarAtividade(this, atividadePesq);
-
-        Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class );
-        startActivity(intent);
     }
 }

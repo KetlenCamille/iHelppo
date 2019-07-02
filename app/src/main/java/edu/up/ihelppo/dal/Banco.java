@@ -459,6 +459,7 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_DIASDASEMANA  + " = " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_ID + " WHERE " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_FOI_REALIZADO + " <> 'S' AND " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '" + data + "' OR " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_DOMINGO + " = 'S'", null);
 
@@ -501,6 +502,7 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_DIASDASEMANA  + " = " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_ID + " WHERE " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_FOI_REALIZADO + " <> 'S' AND " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "' OR " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_SEGUNDA + " = 'S'", null);
         //Colando o cursor para a 1a posição
@@ -542,6 +544,7 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_DIASDASEMANA  + " = " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_ID + " WHERE " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_FOI_REALIZADO + " <> 'S' AND " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "' OR " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_TERCA + " = 'S'", null);
 
@@ -584,6 +587,7 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_DIASDASEMANA  + " = " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_ID + " WHERE " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_FOI_REALIZADO + " <> 'S' AND " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "' OR " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_QUARTA + " = 'S'", null);
 
@@ -626,6 +630,7 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_DIASDASEMANA  + " = " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_ID + " WHERE " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_FOI_REALIZADO + " <> 'S' AND " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "' OR " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_QUINTA + " = 'S'", null);
 
@@ -668,6 +673,7 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_DIASDASEMANA  + " = " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_ID + " WHERE " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_FOI_REALIZADO + " <> 'S' AND " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "' OR " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_SEXTA + " = 'S'", null);
 
@@ -710,6 +716,7 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_DIASDASEMANA  + " = " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_ID + " WHERE " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_FOI_REALIZADO + " <> 'S' AND " +
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "' OR " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_SABADO + " = 'S'", null);
 
@@ -740,6 +747,7 @@ public class Banco extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA +
                 " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                        TabelaAtividade.COLUNA_FOI_REALIZADO + " <> '' AND " +
                 "strftime('%Y%m%d'," + TabelaAtividade.COLUNA_DATA_CRIACAO + ") <  strftime('%Y%m%d', 'now')", null);
         //Colando o cursor para a 1a posição
         if (cursor.getCount() > 0) {
@@ -767,6 +775,7 @@ public class Banco extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA +
                 " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaAtividade.COLUNA_FOI_REALIZADO + " = '' AND " +
                 "strftime('%Y%m%d'," + TabelaAtividade.COLUNA_DATA_CRIACAO + ") >  strftime('%Y%m%d', 'now')", null);
         //Colando o cursor para a 1a posição
         if (cursor.getCount() > 0) {

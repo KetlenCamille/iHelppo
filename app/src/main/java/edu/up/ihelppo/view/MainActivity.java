@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtSenha = (EditText) findViewById(R.id.edtSenha);
+
+        UsuarioDAO.setarUsuario(0);
     }
 
     public void CadastrarClick(View view) {

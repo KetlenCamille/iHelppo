@@ -34,6 +34,16 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
     private CheckBox chkDom, chkSeg, chkTer, chkQua, chkQui, chkSex, chkSab;
     private Atividade atividade = new Atividade();
 
+    public String[] diasPreenchidos = new String[7];
+    public String segunda = "";
+    public String terca = "";
+    public String quarta = "";
+    public String quinta = "";
+    public String sexta = "";
+    public String sabado = "";
+    public String domingo = "";
+    public String diasDaSemana = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +159,37 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Selecione uma categoria válida!", Toast.LENGTH_SHORT).show();
             } else {
                 atividade.setIdCategoria(categoriaPesq.getIdCategoria());
+                DiasDaSemana diasDaSemana = new DiasDaSemana();
+                diasDaSemana.setDomingo(diasPreenchidos[0]);
+                diasDaSemana.setSegunda(diasPreenchidos[1]);
+                diasDaSemana.setTerca(diasPreenchidos[2]);
+                diasDaSemana.setQuarta(diasPreenchidos[3]);
+                diasDaSemana.setQuinta(diasPreenchidos[4]);
+                diasDaSemana.setSexta(diasPreenchidos[5]);
+                diasDaSemana.setSabado(diasPreenchidos[6]);
+
+                if(diasPreenchidos[0] == null && diasPreenchidos[1] == null &&diasPreenchidos[2] == null
+                        && diasPreenchidos[3] == null && diasPreenchidos[4] == null && diasPreenchidos[5] == null && diasPreenchidos[6] == null){
+                    diasDaSemana.setDomingo("N");
+                    diasDaSemana.setSegunda("N");
+                    diasDaSemana.setTerca("N");
+                    diasDaSemana.setQuarta("N");
+                    diasDaSemana.setQuinta("N");
+                    diasDaSemana.setSexta("N");
+                    diasDaSemana.setSabado("N");
+                }
+
+                DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
+
+                if( dia.getIdDiasDaSemana() == 0){
+                    long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
+                    if (id < 1) {
+                        Toast.makeText(this, "Erro ao cadastrar Dia da Semana: " + id, Toast.LENGTH_SHORT).show();
+                    }
+                }
+                DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
+
+                atividadePesq.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
 
                 AtividadeDAO.alterarAtividade(this, atividadePesq);
 

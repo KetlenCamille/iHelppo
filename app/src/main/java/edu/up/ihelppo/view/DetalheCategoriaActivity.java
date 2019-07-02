@@ -8,12 +8,13 @@ import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import edu.up.ihelppo.R;
 import edu.up.ihelppo.dal.CategoriaDAO;
 import edu.up.ihelppo.model.Categoria;
 
-public class DetalheCategoriaActivity extends AppCompatActivity implements View.OnClickListener{
+public class DetalheCategoriaActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText edtDescricaoCategoriaDet;
     private Button btnAlterar, btnRemover;
@@ -41,21 +42,26 @@ public class DetalheCategoriaActivity extends AppCompatActivity implements View.
     }
 
     public void btnAlterarCategoriaClick(View view) {
-        Categoria categoriaPesq =  CategoriaDAO.buscarCategoriaPorId(this, categoria);
-        categoriaPesq.setDescricao(edtDescricaoCategoriaDet.getText().toString());
-        categoriaPesq.setEhInativo("N");
+        Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorId(this, categoria);
+        if (edtDescricaoCategoriaDet.getText().toString().equals("")) {
+            Toast.makeText(this, "Informe a descrição!", Toast.LENGTH_SHORT).show();
+        } else {
 
-        CategoriaDAO.alterarCategoria(this,categoriaPesq);
+            categoriaPesq.setDescricao(edtDescricaoCategoriaDet.getText().toString());
+            categoriaPesq.setEhInativo("N");
 
-        Intent intent = new Intent(DetalheCategoriaActivity.this, ListarCategoriasActivity.class );
-        startActivity(intent);
+            CategoriaDAO.alterarCategoria(this, categoriaPesq);
+
+            Intent intent = new Intent(DetalheCategoriaActivity.this, ListarCategoriasActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void btnRemoverCategoriaClick(View view) {
-       Categoria categoriaPesq =  CategoriaDAO.buscarCategoriaPorId(this, categoria);
-       categoriaPesq.setEhInativo("S");
+        Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorId(this, categoria);
+        categoriaPesq.setEhInativo("S");
 
-       CategoriaDAO.alterarCategoria(this,categoriaPesq);
+        CategoriaDAO.alterarCategoria(this, categoriaPesq);
 
     }
 
@@ -102,10 +108,9 @@ public class DetalheCategoriaActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fabMain:
-                if(isMenuOpen) {
+                if (isMenuOpen) {
                     closeMenu();
-                }
-                else {
+                } else {
                     openMenu();
                 }
                 break;
@@ -119,7 +124,7 @@ public class DetalheCategoriaActivity extends AppCompatActivity implements View.
                 break;
             case R.id.fabSair:
                 Intent homeIntent = new Intent(DetalheCategoriaActivity.this, MainActivity.class);
-                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.addCategory(Intent.CATEGORY_HOME);
                 homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
                 break;

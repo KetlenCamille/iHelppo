@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,7 +24,8 @@ import edu.up.ihelppo.model.Categoria;
 public class DetalhesAtividadeActivity extends AppCompatActivity {
 
     private EditText edtDataAtividade, edtTituloAtividade, edtDescricaoAtividade;
-    private Button btnFeito, btnExcluirAtv, btnAlterarAtv;
+    private Button btnFeito, btnNaoFeito, btnExcluirAtv, btnAlterarAtv;
+    private TextView txtStatus;
     private Spinner categoria_spinner;
     private Atividade atividade = new Atividade();
 
@@ -35,12 +37,27 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
         edtDataAtividade = (EditText) findViewById(R.id.edtDataAtividade);
         edtTituloAtividade = (EditText) findViewById(R.id.edtTituloAtividade);
         edtDescricaoAtividade = (EditText) findViewById(R.id.edtDescricaoAtividade);
+        txtStatus = (TextView) findViewById(R.id.txtStatus);
         btnFeito = (Button) findViewById(R.id.btnFeito);
+        btnNaoFeito = (Button) findViewById(R.id.btnNaoFeito);
         btnExcluirAtv =(Button) findViewById(R.id.btnExcluirAtv);
         btnAlterarAtv = (Button) findViewById(R.id.btnAlterarAtv);
         categoria_spinner = (Spinner) findViewById(R.id.categoria_spinner);
 
         atividade = (Atividade) getIntent().getSerializableExtra("ATIVIDADE");
+
+        if(atividade.getFoiRealizada().equals("N")){
+            txtStatus.setText("Atividade Não Realizada!");
+            btnAlterarAtv.setEnabled(true);
+            btnFeito.setEnabled(false);
+            btnNaoFeito.setEnabled(true);
+        }else if(atividade.getFoiRealizada().equals("S")){
+            txtStatus.setText("Atividade Realizada!");
+            btnAlterarAtv.setEnabled(true);
+            btnNaoFeito.setEnabled(true);
+        }else if(atividade.getFoiRealizada().equals("")){
+            txtStatus.setText("Atividade Pendente!");
+        }
 
         edtDataAtividade.setText(Metodos.ConverterData(atividade.getDataCriacao()));
         edtTituloAtividade.setText(atividade.getTitulo());

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.animation.OvershootInterpolator;
 
 import edu.up.ihelppo.R;
+import edu.up.ihelppo.dal.UsuarioDAO;
 
 public class FloatingMenuActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -78,6 +79,7 @@ public class FloatingMenuActivity extends AppCompatActivity implements View.OnCl
             case R.id.fabPerfil:
                 break;
             case R.id.fabSair:
+                UsuarioDAO.setarUsuario(0);
                 break;
         }
     }

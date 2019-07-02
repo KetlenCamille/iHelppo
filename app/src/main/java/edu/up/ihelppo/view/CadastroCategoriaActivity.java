@@ -42,21 +42,25 @@ public class CadastroCategoriaActivity extends AppCompatActivity implements View
 
     public void btnCadastrarCategoriaClick(View view) {
         Categoria categoria = new Categoria();
-        categoria.setDescricao(edtDescricao.getText().toString());
-        categoria.setIdUsuario(UsuarioDAO.retornarUsuario());
-        categoria.setEhInativo("N");
-
-        long id = CategoriaDAO.cadastrarCategoria(this, categoria);
-        if(id > 0){
-            Toast.makeText(this, "Categoria Cadastrada com Sucesso!", Toast.LENGTH_SHORT).show();
+        if(edtDescricao.getText().toString().equals("")){
+            Toast.makeText(this, "Informe a descrição!", Toast.LENGTH_SHORT).show();
         }
-        else if(id < 0){
-            Toast.makeText(this, "Erro ao Cadastrar Categoria!" + id, Toast.LENGTH_SHORT).show();
+        else{
+            categoria.setDescricao(edtDescricao.getText().toString());
+            categoria.setIdUsuario(UsuarioDAO.retornarUsuario());
+            categoria.setEhInativo("N");
+
+            long id = CategoriaDAO.cadastrarCategoria(this, categoria);
+            if(id > 0){
+                Toast.makeText(this, "Categoria Cadastrada com Sucesso!", Toast.LENGTH_SHORT).show();
+            }
+            else if(id < 0){
+                Toast.makeText(this, "Erro ao Cadastrar Categoria!" + id, Toast.LENGTH_SHORT).show();
+            }
+
+            Intent intent = new Intent(CadastroCategoriaActivity.this, ListarAtividadesActivity.class);
+            startActivity(intent);
         }
-
-        Intent intent = new Intent(CadastroCategoriaActivity.this, ListarAtividadesActivity.class);
-        startActivity(intent);
-
     }
 
     private void InitiFabMenu() {

@@ -37,7 +37,7 @@ public class ArrayAdapterAtividade extends ArrayAdapter<Atividade> {
         txtTituloAtividade = (TextView) convertView.findViewById(R.id.txtTituloAtividade);
         txtDescricaoAtividade = (TextView) convertView.findViewById(R.id.txtDescricaoAtividade);
 
-        txtDataAtividade.setText(atividade.get(position).getDataCriacao());
+        txtDataAtividade.setText(Metodos.ConverterData(atividade.get(position).getDataCriacao()));
         txtTituloAtividade.setText(atividade.get(position).getTitulo());
         txtDescricaoAtividade.setText(String.valueOf(atividade.get(position).getDescricaoAtividade()));
 

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.up.ihelppo.R;
+import edu.up.ihelppo.Utils.ArrayAdapterAtividade;
 import edu.up.ihelppo.dal.AtividadeDAO;
 import edu.up.ihelppo.dal.UsuarioDAO;
 import edu.up.ihelppo.model.Atividade;
@@ -45,8 +46,9 @@ public class ListarAtividadesPendentesActivity extends AppCompatActivity impleme
             atividades[i] = atividadesArray.get(i).getTitulo();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, atividades);
-        lstAvancada.setAdapter(adapter);
+        ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarAtividadesPendentes(this, UsuarioDAO.retornarUsuario()));
+
+        lstAvancada.setAdapter(arrayAdapterAtividade);
 
         lstAvancada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -57,7 +59,6 @@ public class ListarAtividadesPendentesActivity extends AppCompatActivity impleme
                 startActivity(intent);
             }
         });
-
     }
 
     private void InitiFabMenu() {

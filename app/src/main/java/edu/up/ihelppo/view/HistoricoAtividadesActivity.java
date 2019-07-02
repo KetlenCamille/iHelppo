@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.up.ihelppo.R;
+import edu.up.ihelppo.Utils.ArrayAdapterAtividade;
 import edu.up.ihelppo.dal.AtividadeDAO;
 import edu.up.ihelppo.dal.UsuarioDAO;
 import edu.up.ihelppo.model.Atividade;
@@ -37,15 +38,16 @@ public class HistoricoAtividadesActivity extends AppCompatActivity implements Vi
 
         lstAvancada = (ListView) findViewById(R.id.lstAvancada);
 
-        final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarHistoricoAtividades(this, UsuarioDAO.retornarUsuario());
+        final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarHistoricoAtividades(this,UsuarioDAO.retornarUsuario());
         String[] atividades = new String[atividadesArray.size()];
 
         for(int i=0; i < atividadesArray.size(); i++){
-            atividades[i] = atividadesArray.get(i).getDataCriacao();
+            atividades[i] = atividadesArray.get(i).getTitulo();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, atividades);
-        lstAvancada.setAdapter(adapter);
+        ArrayAdapterAtividade arrayAdapterAtividade = new ArrayAdapterAtividade(this, AtividadeDAO.listarHistoricoAtividades(this, UsuarioDAO.retornarUsuario()));
+
+        lstAvancada.setAdapter(arrayAdapterAtividade);
 
         lstAvancada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

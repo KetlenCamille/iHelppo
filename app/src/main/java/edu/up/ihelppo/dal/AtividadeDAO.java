@@ -37,7 +37,7 @@ public class AtividadeDAO {
         Banco banco = new Banco(context);
 
         //Pegando a data de hoje
-        SimpleDateFormat formataData = new SimpleDateFormat("d/M/yyyy");
+        SimpleDateFormat formataData = new SimpleDateFormat("yyyy-MM-dd");
         Date data = new Date();
         String dataFormatada = formataData.format(data);
 
@@ -57,7 +57,7 @@ public class AtividadeDAO {
         if(diaDaSemana == 1){
             return banco.listarAtividadesDoDiaDomingo(dataFormatada, idUsuario);
         }else if(diaDaSemana == 2){
-            return  banco.listarAtividadesDoDiaSegunda(dataFormatada,idUsuario);
+            return  banco.listarAtividadesDoDiaSegunda(dataFormatada, idUsuario);
         }else if(diaDaSemana == 3){
             return banco.listarAtividadesDoDiaTerca(dataFormatada, idUsuario);
         }else if(diaDaSemana == 4){
@@ -74,18 +74,12 @@ public class AtividadeDAO {
 
     public static ArrayList<Atividade> listarHistoricoAtividades(Context context, int idUsuario) {
         Banco banco = new Banco(context);
-        SimpleDateFormat formataData = new SimpleDateFormat("dd/M/yyyy");
-        Date data = new Date();
-        String dataFormatada = formataData.format(data);
-        return banco.listarHistoricoAtividades(dataFormatada, idUsuario);
+        return banco.listarHistoricoAtividades(idUsuario);
     }
 
     public static ArrayList<Atividade> listarAtividadesFuturas(Context context, int idUsuario) {
         Banco banco = new Banco(context);
-        SimpleDateFormat formataData = new SimpleDateFormat("dd/M/yyyy");
-        Date data = new Date();
-        String dataFormatada = formataData.format(data);
-        return banco.listarHistoricoAtividades(dataFormatada, idUsuario);
+        return banco.listarAtividadesFuturas(idUsuario);
     }
 
     public static ArrayList<Atividade> listarAtividadesPendentes(Context context, int idUsuario) {

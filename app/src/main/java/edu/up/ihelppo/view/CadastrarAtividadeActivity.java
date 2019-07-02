@@ -19,6 +19,7 @@ import java.util.GregorianCalendar;
 
 import android.widget.AdapterView.OnItemSelectedListener;
 import edu.up.ihelppo.R;
+import edu.up.ihelppo.Utils.Metodos;
 import edu.up.ihelppo.dal.AtividadeDAO;
 import edu.up.ihelppo.dal.CategoriaDAO;
 import edu.up.ihelppo.dal.DiasDaSemanaDAO;
@@ -45,6 +46,8 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
     public String diasDaSemana = "";
     public String alarme = "N";
 
+    private String data;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,12 +67,13 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         chkAlarme = (CheckBox) findViewById(R.id.chkAlarme);
         horas_spinner = (Spinner) findViewById(R.id.horas_spinner);
         minutos_spinner = (Spinner) findViewById(R.id.minutos_spinner);
+
         categoria_spinner.setOnItemSelectedListener(this);
         horas_spinner.setOnItemSelectedListener(this);
         minutos_spinner.setOnItemSelectedListener(this);
 
-        String data = (String) getIntent().getSerializableExtra("DATA_ATIVIDADE");
-        txtDataAtividade.setText(data);
+        data = (String) getIntent().getSerializableExtra("DATA_ATIVIDADE");
+        txtDataAtividade.setText(Metodos.ConverterData(data));
 
         // Populando o Spinner de Categorias:
 
@@ -117,7 +121,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
     public void SalvarAtividadeClick(View view) {
         Atividade atividade = new Atividade();
         atividade.setFoiRealizada("");
-        atividade.setDataCriacao(txtDataAtividade.getText().toString());
+        atividade.setDataCriacao(data);
         atividade.setTitulo(edtTituloAtividade.getText().toString());
         atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
 
@@ -127,7 +131,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         String categoria = String.valueOf(categoria_spinner.getSelectedItem());
 
         Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorNome(this, categoria);
-        if(categoriaPesq.getIdCategoria() == 0){
+        if(categoria.equals("")){
             Toast.makeText(this, "Selecione uma categoria válida!", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -145,7 +149,6 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
         if(diasPreenchidos[0] == null && diasPreenchidos[1] == null &&diasPreenchidos[2] == null
                 && diasPreenchidos[3] == null && diasPreenchidos[4] == null && diasPreenchidos[5] == null && diasPreenchidos[6] == null){
-                Toast.makeText(this, "Dia Da Semana Null: " , Toast.LENGTH_SHORT).show();
             diasDaSemana.setDomingo("N");
             diasDaSemana.setSegunda("N");
             diasDaSemana.setTerca("N");
@@ -153,7 +156,6 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
             diasDaSemana.setQuinta("N");
             diasDaSemana.setSexta("N");
             diasDaSemana.setSabado("N");
-
         }
 
         DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);

@@ -432,9 +432,9 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "'" , null);
 
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -445,7 +445,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         return atividades;
     }
@@ -474,9 +474,9 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_DOMINGO + " = 'S'", null);
 
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -487,7 +487,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return atividades;
@@ -516,9 +516,9 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.NOME_DA_TABELA + "." + TabelaAtividade.COLUNA_DATA_CRIACAO +  " LIKE '"+ data + "' OR " +
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_SEGUNDA + " = 'S'", null);
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -529,7 +529,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return atividades;
@@ -559,9 +559,9 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_TERCA + " = 'S'", null);
 
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -572,7 +572,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return atividades;
@@ -602,9 +602,9 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_QUARTA + " = 'S'", null);
 
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -615,7 +615,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return atividades;
@@ -645,9 +645,9 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_QUINTA + " = 'S'", null);
 
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -658,7 +658,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return atividades;
@@ -688,9 +688,9 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_SEXTA + " = 'S'", null);
 
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -701,7 +701,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return atividades;
@@ -731,9 +731,9 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaDiasDaSemana.NOME_DA_TABELA + "." + TabelaDiasDaSemana.COLUNA_SABADO + " = 'S'", null);
 
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -744,7 +744,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return atividades;
@@ -760,9 +760,9 @@ public class Banco extends SQLiteOpenHelper {
                         TabelaAtividade.COLUNA_FOI_REALIZADO + " <> '' AND " +
                 "strftime('%Y%m%d'," + TabelaAtividade.COLUNA_DATA_CRIACAO + ") <  strftime('%Y%m%d', 'now')", null);
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -773,7 +773,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         return atividades;
     }
@@ -788,9 +788,9 @@ public class Banco extends SQLiteOpenHelper {
                 TabelaAtividade.COLUNA_FOI_REALIZADO + " = '' AND " +
                 "strftime('%Y%m%d'," + TabelaAtividade.COLUNA_DATA_CRIACAO + ") >  strftime('%Y%m%d', 'now')", null);
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -801,7 +801,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         return atividades;
     }
@@ -813,9 +813,9 @@ public class Banco extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA + " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +  TabelaAtividade.COLUNA_FOI_REALIZADO + " = ''", null);
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Atividade atividade = new Atividade();
                 atividade.setIdAtividade(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID)));
                 atividade.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaAtividade.COLUNA_ID_USUARIO)));
@@ -826,7 +826,7 @@ public class Banco extends SQLiteOpenHelper {
                 atividade.setDataCriacao(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_DATA_CRIACAO)));
                 atividade.setFoiRealizada(cursor.getString(cursor.getColumnIndex(TabelaAtividade.COLUNA_FOI_REALIZADO)));
                 atividades.add(atividade);
-            }
+            } while (cursor.moveToNext());
         }
         return atividades;
     }

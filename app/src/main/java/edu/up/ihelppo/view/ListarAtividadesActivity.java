@@ -170,8 +170,10 @@ public class ListarAtividadesActivity extends AppCompatActivity implements View.
                 startActivity(intent);
                 break;
             case R.id.fabSair:
-                finish();
-                System.exit(0);
+                Intent homeIntent = new Intent(ListarAtividadesActivity.this, MainActivity.class);
+                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
                 break;
         }
     }

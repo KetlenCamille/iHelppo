@@ -1,6 +1,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true">
 
     <LinearLayout
@@ -8,6 +10,57 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="left|center_vertical">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="normal"
+                app:srcCompat="@drawable/ic_menu"
+                tools:ignore="VectorDrawableCompat" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabListarAtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini"
+                android:layout_margin="2dp"
+                app:srcCompat="@drawable/ic_list"
+                tools:ignore="VectorDrawableCompat"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabPerfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini"
+                android:layout_margin="2dp"
+                app:srcCompat="@drawable/ic_perfil"
+                tools:ignore="VectorDrawableCompat"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabSair"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini"
+                android:layout_margin="2dp"
+                app:srcCompat="@drawable/ic_logout"
+                tools:ignore="VectorDrawableCompat"/>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"

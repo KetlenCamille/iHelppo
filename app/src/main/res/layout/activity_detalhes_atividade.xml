@@ -112,6 +112,88 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="left|bottom"
+        android:text="REPRODUZIR EM:"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/chkDom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="DOM"
+            android:textSize="17sp"/>
+
+        <CheckBox
+            android:id="@+id/chkSeg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="SEG"
+            android:textSize="17sp"/>
+
+        <CheckBox
+            android:id="@+id/chkTer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="TER"
+            android:textSize="17sp"/>
+
+        <CheckBox
+            android:id="@+id/chkQua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="QUA"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/chkQui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="QUI"
+            android:textSize="17sp"/>
+
+        <CheckBox
+            android:id="@+id/chkSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="SEX"
+            android:textSize="17sp"/>
+
+        <CheckBox
+            android:id="@+id/chkSab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="SAB"
+            android:textSize="17sp"/>
+
+    </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

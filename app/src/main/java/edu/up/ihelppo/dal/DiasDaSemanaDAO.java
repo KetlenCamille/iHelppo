@@ -27,4 +27,9 @@ public class DiasDaSemanaDAO {
         Banco banco = new Banco(context);
         return  banco.buscarDiasDaSemanaExistente(diasDaSemana);
     }
+
+    public static DiasDaSemana buscarCategoriaPorId(Context context, int  idDiasDaSemana) {
+        Banco banco = new Banco(context);
+        return banco.buscarDiaDaSemanaPorID(idDiasDaSemana);
+    }
 }

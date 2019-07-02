@@ -90,21 +90,27 @@ public class MeusDadosActivity extends AppCompatActivity implements View.OnClick
 
         int idUsu = UsuarioDAO.retornarUsuario();
         Usuario usuario = UsuarioDAO.buscarUsuarioPorID(this, idUsu);
-        usuario.setNome(edtNome.getText().toString());
-        usuario.setSobrenome(edtSobrenome.getText().toString());
-        usuario.setEmail(edtEmail.getText().toString());
-        usuario.setDataNascimento(edtDataNasc.getText().toString());
-        usuario.setSenha(edtSenha.getText().toString());
+        if(edtNome.getText().toString().equals("") || edtSobrenome.getText().toString().equals("") ||
+                edtEmail.getText().toString().equals("") || edtDataNasc.getText().toString().equals("") ||
+                edtSenha.getText().toString().equals("")){
+            Toast.makeText(this, "Todos os campos devem ser preenchidos!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            usuario.setNome(edtNome.getText().toString());
+            usuario.setSobrenome(edtSobrenome.getText().toString());
+            usuario.setEmail(edtEmail.getText().toString());
+            usuario.setDataNascimento(edtDataNasc.getText().toString());
+            usuario.setSenha(edtSenha.getText().toString());
 
-        usuario.setEhInativo("N");
+            usuario.setEhInativo("N");
 
-        UsuarioDAO.alterarUsuario(this,usuario);
+            UsuarioDAO.alterarUsuario(this, usuario);
 
-        Toast.makeText(this, "Dados Alterados com Sucesso!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Dados Alterados com Sucesso!", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(MeusDadosActivity.this, MenuActivity.class );
-        startActivity(intent);
-
+            Intent intent = new Intent(MeusDadosActivity.this, MenuActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void btnInativarUsuarioClick(View view) {

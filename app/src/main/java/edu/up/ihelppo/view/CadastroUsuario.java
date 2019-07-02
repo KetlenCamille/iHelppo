@@ -73,25 +73,32 @@ public class CadastroUsuario extends AppCompatActivity {
     public void btnCadastrarUsuarioClick(View view) {
         //Criando usuário
         Usuario usuario = new Usuario();
-        usuario.setNome(edtNome.getText().toString());
-        usuario.setSobrenome(edtSobrenome.getText().toString());
-        usuario.setEmail(edtEmail.getText().toString());
-        usuario.setDataNascimento(edtDataNasc.getText().toString());
-        usuario.setSenha(edtSenha.getText().toString());
-        usuario.setEhInativo("N");
-
-        //Chamar DAO
-        long id = UsuarioDAO.cadastrarUsuario(this, usuario);
-        if(id > 0){
-            Toast.makeText(this, "Usuário Cadastrado com Sucesso!", Toast.LENGTH_SHORT).show();
+        if(edtNome.getText().toString().equals("") || edtSobrenome.getText().toString().equals("") ||
+                edtEmail.getText().toString().equals("") || edtDataNasc.getText().toString().equals("") ||
+                edtSenha.getText().toString().equals("")){
+            Toast.makeText(this, "Todos os campos devem ser preenchidos!", Toast.LENGTH_SHORT).show();
         }
-        else if(id < 0){
-            Toast.makeText(this, "Erro ao cadastrar Usuário!" + id, Toast.LENGTH_SHORT).show();
+        else{
+            usuario.setNome(edtNome.getText().toString());
+            usuario.setSobrenome(edtSobrenome.getText().toString());
+            usuario.setEmail(edtEmail.getText().toString());
+            usuario.setDataNascimento(edtDataNasc.getText().toString());
+            usuario.setSenha(edtSenha.getText().toString());
+            usuario.setEhInativo("N");
+
+            //Chamar DAO
+            long id = UsuarioDAO.cadastrarUsuario(this, usuario);
+            if(id > 0){
+                Toast.makeText(this, "Usuário Cadastrado com Sucesso!", Toast.LENGTH_SHORT).show();
+            }
+            else if(id < 0){
+                Toast.makeText(this, "Erro ao cadastrar Usuário!" + id, Toast.LENGTH_SHORT).show();
+            }
+
+            /*Redirecionando pra Main (tela de ínicio)*/
+            Intent intent = new Intent(CadastroUsuario.this, MainActivity.class );
+            startActivity(intent);
         }
 
-
-        /*Redirecionando pra Main (tela de ínicio)*/
-        Intent intent = new Intent(CadastroUsuario.this, MainActivity.class );
-        startActivity(intent);
     }
 }

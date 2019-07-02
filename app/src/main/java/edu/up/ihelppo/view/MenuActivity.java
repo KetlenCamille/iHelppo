@@ -13,7 +13,7 @@ import edu.up.ihelppo.R;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private  Button btnMeusDados, btnCadastrarCategoria, btnHistoricoAtividades, btnAtividadesPendentes, btnAtividadesFuturas;
+    private  Button btnMeusDados, btnCadastrarCategoria, btnListarCategorias, btnHistoricoAtividades, btnAtividadesPendentes, btnAtividadesFuturas;
 
     FloatingActionButton fabMain, fabListarAtv, fabPerfil, fabSair;
     Float translationY = 10f;
@@ -32,6 +32,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         btnHistoricoAtividades = (Button) findViewById(R.id.btnHistoricoAtividades);
         btnAtividadesPendentes = (Button) findViewById(R.id.btnAtividadesPendentes);
         btnAtividadesFuturas = (Button) findViewById(R.id.btnAtividadesFuturas);
+        btnListarCategorias = (Button) findViewById(R.id.btnListarCategorias);
+
     }
 
     public void btnMeusDadosClick(View view){
@@ -122,4 +124,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void btnListarCategoriasClick(View view) {
+        Intent intent = new Intent(MenuActivity.this, ListarCategoriasActivity.class );
+        startActivity(intent);
+    }
 }

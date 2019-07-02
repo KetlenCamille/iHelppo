@@ -51,7 +51,7 @@ public class ListarAtividadesActivity extends AppCompatActivity implements View.
         btnAdicionarAtividade = (Button) findViewById(R.id.btnAdicionarAtividade);
 
         final ArrayList<Atividade> atividadesArray = AtividadeDAO.listarAtividadesDoDia(this, UsuarioDAO.retornarUsuario());
-        Toast.makeText(this, "" + UsuarioDAO.retornarUsuario(), Toast.LENGTH_SHORT).show();
+
         String[] atividades = new String[atividadesArray.size()];
 
         for(int i=0; i < atividadesArray.size(); i++){

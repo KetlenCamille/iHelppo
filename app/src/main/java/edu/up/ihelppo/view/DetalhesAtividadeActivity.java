@@ -18,6 +18,7 @@ import edu.up.ihelppo.R;
 import edu.up.ihelppo.Utils.Metodos;
 import edu.up.ihelppo.dal.AtividadeDAO;
 import edu.up.ihelppo.dal.CategoriaDAO;
+import edu.up.ihelppo.dal.UsuarioDAO;
 import edu.up.ihelppo.model.Atividade;
 import edu.up.ihelppo.model.Categoria;
 
@@ -66,7 +67,7 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
         //categoria_spinner.setOnItemSelectedListener(this);
         // Populando o Spinner de Categorias:
 
-        ArrayList<String> categorias = CategoriaDAO.listarCategoriasPorNome(this);
+        ArrayList<String> categorias = CategoriaDAO.listarCategoriasPorNome(this, UsuarioDAO.retornarUsuario());
         ArrayAdapter adapterCategorias = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,
                 categorias);
         adapterCategorias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -111,7 +112,7 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
 
         String categoria = String.valueOf(categoria_spinner.getSelectedItem());
 
-        Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorNome(this, categoria);
+        Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorNome(this, categoria, UsuarioDAO.retornarUsuario());
         if(categoria.equals("")){
             Toast.makeText(this, "Selecione uma categoria válida!", Toast.LENGTH_SHORT).show();
         }

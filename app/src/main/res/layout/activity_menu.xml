@@ -95,18 +95,32 @@
             android:onClick="btnMeusDadosClick"/>
 
         <Button
-            android:id="@+id/btnCadastrarCategoria"
+        android:id="@+id/btnCadastrarCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:text="CADASTRAR CATEGORIA"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:background="#082c66"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:onClick="btnCadastrarCategoriaClick"/>
+
+        <Button
+            android:id="@+id/btnListarCategorias"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
-            android:text="CADASTRAR CATEGORIA"
+            android:text="LISTAR CATEGORIAS"
             android:textColor="@android:color/white"
             android:textSize="25sp"
             android:textStyle="bold"
             android:background="#082c66"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:onClick="btnCadastrarCategoriaClick"/>
+            android:onClick="btnListarCategoriasClick"/>
 
         <Button
             android:id="@+id/btnHistoricoAtividades"

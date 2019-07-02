@@ -86,7 +86,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
 
         // Populando o Spinner de Categorias:
 
-        ArrayList<String> categorias = CategoriaDAO.listarCategoriasPorNome(this);
+        ArrayList<String> categorias = CategoriaDAO.listarCategoriasPorNome(this, UsuarioDAO.retornarUsuario());
         ArrayAdapter adapterCategorias = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,
                 categorias);
         adapterCategorias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -131,79 +131,83 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
         Atividade atividade = new Atividade();
         atividade.setFoiRealizada("");
         atividade.setDataCriacao(data);
-        atividade.setTitulo(edtTituloAtividade.getText().toString());
-        atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
-
-        //Pegar Usuario da Sessao
-        atividade.setIdUsuario(UsuarioDAO.retornarUsuario());
-
-        String categoria = String.valueOf(categoria_spinner.getSelectedItem());
-
-        Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorNome(this, categoria);
-        if(categoria.equals("")){
-            Toast.makeText(this, "Selecione uma categoria válida!", Toast.LENGTH_SHORT).show();
+        if(edtTituloAtividade.getText().toString().equals("")){
+            Toast.makeText(this, "Informe um título!", Toast.LENGTH_SHORT).show();
         }
         else{
-            atividade.setIdCategoria(categoriaPesq.getIdCategoria());
-        }
+            atividade.setTitulo(edtTituloAtividade.getText().toString());
+            atividade.setDescricaoAtividade(edtDescricaoAtividade.getText().toString());
 
-        DiasDaSemana diasDaSemana = new DiasDaSemana();
-        diasDaSemana.setDomingo(diasPreenchidos[0]);
-        diasDaSemana.setSegunda(diasPreenchidos[1]);
-        diasDaSemana.setTerca(diasPreenchidos[2]);
-        diasDaSemana.setQuarta(diasPreenchidos[3]);
-        diasDaSemana.setQuinta(diasPreenchidos[4]);
-        diasDaSemana.setSexta(diasPreenchidos[5]);
-        diasDaSemana.setSabado(diasPreenchidos[6]);
+            //Pegar Usuario da Sessao
+            atividade.setIdUsuario(UsuarioDAO.retornarUsuario());
 
-        if(diasPreenchidos[0] == null && diasPreenchidos[1] == null &&diasPreenchidos[2] == null
-                && diasPreenchidos[3] == null && diasPreenchidos[4] == null && diasPreenchidos[5] == null && diasPreenchidos[6] == null){
-            diasDaSemana.setDomingo("N");
-            diasDaSemana.setSegunda("N");
-            diasDaSemana.setTerca("N");
-            diasDaSemana.setQuarta("N");
-            diasDaSemana.setQuinta("N");
-            diasDaSemana.setSexta("N");
-            diasDaSemana.setSabado("N");
-        }
+            String categoria = String.valueOf(categoria_spinner.getSelectedItem());
 
-        DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
+            Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorNome(this, categoria, UsuarioDAO.retornarUsuario());
+            if(categoriaPesq.getDescricao() == null){
+                Toast.makeText(this, "Selecione uma categoria válida!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                atividade.setIdCategoria(categoriaPesq.getIdCategoria());
+                DiasDaSemana diasDaSemana = new DiasDaSemana();
+                diasDaSemana.setDomingo(diasPreenchidos[0]);
+                diasDaSemana.setSegunda(diasPreenchidos[1]);
+                diasDaSemana.setTerca(diasPreenchidos[2]);
+                diasDaSemana.setQuarta(diasPreenchidos[3]);
+                diasDaSemana.setQuinta(diasPreenchidos[4]);
+                diasDaSemana.setSexta(diasPreenchidos[5]);
+                diasDaSemana.setSabado(diasPreenchidos[6]);
 
-        if( dia.getIdDiasDaSemana() == 0){
-            long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
-            if (id < 1) {
-                Toast.makeText(this, "Erro ao cadastrar Dia da Semana: " + id, Toast.LENGTH_SHORT).show();
+                if(diasPreenchidos[0] == null && diasPreenchidos[1] == null &&diasPreenchidos[2] == null
+                        && diasPreenchidos[3] == null && diasPreenchidos[4] == null && diasPreenchidos[5] == null && diasPreenchidos[6] == null){
+                    diasDaSemana.setDomingo("N");
+                    diasDaSemana.setSegunda("N");
+                    diasDaSemana.setTerca("N");
+                    diasDaSemana.setQuarta("N");
+                    diasDaSemana.setQuinta("N");
+                    diasDaSemana.setSexta("N");
+                    diasDaSemana.setSabado("N");
+                }
+
+                DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
+
+                if( dia.getIdDiasDaSemana() == 0){
+                    long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
+                    if (id < 1) {
+                        Toast.makeText(this, "Erro ao cadastrar Dia da Semana: " + id, Toast.LENGTH_SHORT).show();
+                    }
+                }
+                DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
+
+                atividade.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
+
+                long id = AtividadeDAO.cadastrarAtividade(this, atividade);
+
+                if(id > 0){
+                    Toast.makeText(this, "Atividade Cadastrada com Sucesso!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CadastrarAtividadeActivity.this, ListarAtividadesActivity.class );
+                    startActivity(intent);
+                }
+                else if(id < 0){
+                    Toast.makeText(this, "Atividade não pode ser cadastrada! " + id, Toast.LENGTH_SHORT).show();
+                }
+
+                //Atribuir hora e minutos do spinner ao alarme!
+                if(alarme == "S"){
+                    Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+
+                    //Mensagem do alarme
+                    intent.putExtra(AlarmClock.EXTRA_MESSAGE, edtTituloAtividade.getText().toString());
+                    //Definir Hora
+                    intent.putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(String.valueOf(horas_spinner.getSelectedItem())));
+                    //Definir Minuto
+                    intent.putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(String.valueOf(minutos_spinner.getSelectedItem())));
+
+                    startActivity(intent);
+                }
             }
         }
-        DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
 
-        atividade.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
-
-        long id = AtividadeDAO.cadastrarAtividade(this, atividade);
-
-        if(id > 0){
-            Toast.makeText(this, "Atividade Cadastrada com Sucesso!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(CadastrarAtividadeActivity.this, ListarAtividadesActivity.class );
-            startActivity(intent);
-        }
-        else if(id < 0){
-            Toast.makeText(this, "Atividade não pode ser cadastrada! " + id, Toast.LENGTH_SHORT).show();
-        }
-
-
-        //Atribuir hora e minutos do spinner ao alarme!
-        if(alarme == "S"){
-            Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
-
-            //Mensagem do alarme
-            intent.putExtra(AlarmClock.EXTRA_MESSAGE, edtTituloAtividade.getText().toString());
-            //Definir Hora
-            intent.putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(String.valueOf(horas_spinner.getSelectedItem())));
-            //Definir Minuto
-            intent.putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(String.valueOf(minutos_spinner.getSelectedItem())));
-
-            startActivity(intent);
-        }
     }
 
 

@@ -13,7 +13,7 @@ public final class Contrato {
         public static final String COLUNA_ID = "IdCategoria";
         public static final String COLUNA_DESCRICAO = "Descricao";
         public static final String COLUNA_EHINATIVO = "Inativo";
-
+        public static final String COLUNA_IDUSUARIO = "IdUsuario";
     }
 
     public static abstract class TabelaUsuario implements  BaseColumns{

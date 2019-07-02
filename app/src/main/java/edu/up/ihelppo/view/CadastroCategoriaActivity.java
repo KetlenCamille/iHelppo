@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import edu.up.ihelppo.R;
 import edu.up.ihelppo.dal.CategoriaDAO;
+import edu.up.ihelppo.dal.UsuarioDAO;
 import edu.up.ihelppo.model.Categoria;
 
 public class CadastroCategoriaActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,6 +43,7 @@ public class CadastroCategoriaActivity extends AppCompatActivity implements View
     public void btnCadastrarCategoriaClick(View view) {
         Categoria categoria = new Categoria();
         categoria.setDescricao(edtDescricao.getText().toString());
+        categoria.setIdUsuario(UsuarioDAO.retornarUsuario());
         categoria.setEhInativo("N");
 
         long id = CategoriaDAO.cadastrarCategoria(this, categoria);

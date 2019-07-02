@@ -16,7 +16,9 @@ import java.util.ArrayList;
 
 import edu.up.ihelppo.R;
 import edu.up.ihelppo.dal.CategoriaDAO;
+import edu.up.ihelppo.dal.UsuarioDAO;
 import edu.up.ihelppo.model.Categoria;
+import edu.up.ihelppo.model.Usuario;
 
 public class ListarCategoriasActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -36,7 +38,7 @@ public class ListarCategoriasActivity extends AppCompatActivity implements View.
 
         lstCategorias = (ListView) findViewById(R.id.lstCategorias);
 
-        final ArrayList<Categoria> categoriasArray = CategoriaDAO.listarCategoriasAtivas(this);
+        final ArrayList<Categoria> categoriasArray = CategoriaDAO.listarCategoriasAtivas(this, UsuarioDAO.retornarUsuario());
         String[] categorias = new String[categoriasArray.size()];
 
         for(int i=0; i < categoriasArray.size(); i++){

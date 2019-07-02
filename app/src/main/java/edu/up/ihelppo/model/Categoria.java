@@ -6,8 +6,17 @@ public class Categoria implements Serializable {
 
     //Atributos
     private int idCategoria;
+    private int idUsuario;
     private String descricao;
     private String ehInativo;
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public String getEhInativo() {
         return ehInativo;

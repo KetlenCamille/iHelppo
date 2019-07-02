@@ -33,6 +33,7 @@ public class Banco extends SQLiteOpenHelper {
             "CREATE TABLE IF NOT EXISTS " + TabelaCategoria.NOME_DA_TABELA + " (" +
                     TabelaCategoria.COLUNA_ID + TIPO_INTEIRO + " PRIMARY KEY AUTOINCREMENT" + VIRGULA +
                     TabelaCategoria.COLUNA_DESCRICAO + TIPO_TEXTO + VIRGULA +
+                    TabelaCategoria.COLUNA_IDUSUARIO + TIPO_INTEIRO + VIRGULA +
                     TabelaCategoria.COLUNA_EHINATIVO + TIPO_TEXTO + ")";
 
     private static final String SQL_DELETAR_TABELA_CATEGORIA =
@@ -114,6 +115,7 @@ public class Banco extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(TabelaCategoria.COLUNA_DESCRICAO, categoria.getDescricao());
+        values.put(TabelaCategoria.COLUNA_IDUSUARIO, categoria.getIdUsuario());
         values.put(TabelaCategoria.COLUNA_EHINATIVO, categoria.getEhInativo());
 
         return db.insert(TabelaCategoria.NOME_DA_TABELA, null, values);
@@ -128,6 +130,7 @@ public class Banco extends SQLiteOpenHelper {
         String[] colunas = {
                 TabelaCategoria.COLUNA_ID,
                 TabelaCategoria.COLUNA_DESCRICAO,
+                TabelaCategoria.COLUNA_IDUSUARIO,
                 TabelaCategoria.COLUNA_EHINATIVO
         };
 
@@ -140,7 +143,8 @@ public class Banco extends SQLiteOpenHelper {
                 Categoria categoria = new Categoria();
                 categoria.setIdCategoria(cursor.getInt(0));
                 categoria.setDescricao(cursor.getString(1));
-                categoria.setEhInativo(cursor.getString(2));
+                categoria.setIdUsuario(cursor.getInt(2));
+                categoria.setEhInativo(cursor.getString(3));
                 categorias.add(categoria);
             } while (cursor.moveToNext());
         }
@@ -148,10 +152,11 @@ public class Banco extends SQLiteOpenHelper {
     }
 
     //Listar Categorias Por Nome
-    public ArrayList<String> listarCategoriasPorNome() {
+    public ArrayList<String> listarCategoriasPorNome(int idUsuario) {
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<String> categorias = new ArrayList<String>();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaCategoria.NOME_DA_TABELA, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaCategoria.NOME_DA_TABELA + " WHERE " +
+                TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 categorias.add(cursor.getString(cursor.getColumnIndex("Descricao")));
@@ -160,16 +165,19 @@ public class Banco extends SQLiteOpenHelper {
         return categorias;
     }
 
-    public Categoria buscarCategoriaPorNome(String p_categoria) {
+    public Categoria buscarCategoriaPorNome(String p_categoria, int idUsuario) {
         Categoria categoria = new Categoria();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaCategoria.NOME_DA_TABELA + " WHERE " + TabelaCategoria.COLUNA_DESCRICAO + " = '" + p_categoria + "'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaCategoria.NOME_DA_TABELA + " WHERE " +
+                TabelaCategoria.COLUNA_DESCRICAO + " = '" + p_categoria + "' AND " +
+                TabelaCategoria.COLUNA_IDUSUARIO + " = " + idUsuario, null);
         //Colando o cursor para a 1a posição
 
         if (cursor.moveToFirst()) {
             categoria.setIdCategoria(cursor.getInt(cursor.getColumnIndex(TabelaCategoria.COLUNA_ID)));
             categoria.setDescricao(cursor.getString(cursor.getColumnIndex(TabelaCategoria.COLUNA_DESCRICAO)));
+            categoria.setIdCategoria(cursor.getInt(cursor.getColumnIndex(TabelaCategoria.COLUNA_IDUSUARIO)));
             categoria.setEhInativo(cursor.getString(cursor.getColumnIndex(TabelaCategoria.COLUNA_EHINATIVO)));
         }
         cursor.close();
@@ -177,11 +185,13 @@ public class Banco extends SQLiteOpenHelper {
     }
 
     //Listar Categorias Ativas
-    public ArrayList<Categoria> listarCategoriasAtivas() {
+    public ArrayList<Categoria> listarCategoriasAtivas(int idUsuario) {
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
         SQLiteDatabase db = getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaCategoria.NOME_DA_TABELA + " WHERE " + TabelaCategoria.COLUNA_EHINATIVO + " = 'N'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaCategoria.NOME_DA_TABELA + " WHERE " +
+                TabelaCategoria.COLUNA_EHINATIVO + " = 'N' AND " +
+                TabelaCategoria.COLUNA_IDUSUARIO + " = " + idUsuario, null);
         //Colando o cursor para a 1a posição
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();

@@ -22,14 +22,14 @@ public class CategoriaDAO {
         return banco.alterarCategoria(categoria);
     }
 
-    public static ArrayList<String> listarCategoriasPorNome (Context context) {
+    public static ArrayList<String> listarCategoriasPorNome (Context context, int idUsuario) {
         Banco banco = new Banco(context);
-        return banco.listarCategoriasPorNome();
+        return banco.listarCategoriasPorNome(idUsuario);
     }
 
-    public static ArrayList<Categoria> listarCategoriasAtivas(Context context) {
+    public static ArrayList<Categoria> listarCategoriasAtivas(Context context, int idUsuario) {
         Banco banco = new Banco(context);
-        return banco.listarCategoriasAtivas();
+        return banco.listarCategoriasAtivas(idUsuario);
     }
 
     public static Categoria buscarCategoriaPorId(Context context, Categoria categoria) {
@@ -37,8 +37,8 @@ public class CategoriaDAO {
         return banco.buscarCategoriaPorID(categoria.getIdCategoria());
     }
 
-    public static Categoria buscarCategoriaPorNome(Context context, String categoria) {
+    public static Categoria buscarCategoriaPorNome(Context context, String categoria, int idUsuario) {
         Banco banco = new Banco(context);
-        return banco.buscarCategoriaPorNome(categoria);
+        return banco.buscarCategoriaPorNome(categoria, idUsuario);
     }
 }

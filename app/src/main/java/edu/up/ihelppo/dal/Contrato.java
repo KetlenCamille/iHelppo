@@ -49,5 +49,6 @@ public final class Contrato {
         public static final String COLUNA_SEXTA = "Sexta";
         public static final String COLUNA_SABADO = "Sabado";
         public static final String COLUNA_DOMINGO = "Domingo";
+        public static final String COLUNA_IDUSUARIO = "IdUsuario";
     }
 }

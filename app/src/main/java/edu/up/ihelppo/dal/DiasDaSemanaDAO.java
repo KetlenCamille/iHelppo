@@ -23,12 +23,12 @@ public class DiasDaSemanaDAO {
         return banco.listarDiasDaSemana();
     }
 
-    public static DiasDaSemana buscarDiasDaSemanaExistente(Context context, DiasDaSemana diasDaSemana){
+    public static DiasDaSemana buscarDiasDaSemanaExistente(Context context, DiasDaSemana diasDaSemana, int idUsuario){
         Banco banco = new Banco(context);
-        return  banco.buscarDiasDaSemanaExistente(diasDaSemana);
+        return  banco.buscarDiasDaSemanaExistente(diasDaSemana, idUsuario);
     }
 
-    public static DiasDaSemana buscarCategoriaPorId(Context context, int  idDiasDaSemana) {
+    public static DiasDaSemana buscarDiaDaSemanaPorId(Context context, int  idDiasDaSemana) {
         Banco banco = new Banco(context);
         return banco.buscarDiaDaSemanaPorID(idDiasDaSemana);
     }

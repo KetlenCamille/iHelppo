@@ -2,6 +2,7 @@ package edu.up.ihelppo.model;
 
 public class DiasDaSemana {
     private int IdDiasDaSemana;
+    private int idUsuario;
     private String Segunda;
     private String Terca;
     private String Quarta;
@@ -9,6 +10,14 @@ public class DiasDaSemana {
     private String Sexta;
     private String Sabado;
     private String Domingo;
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public int getIdDiasDaSemana() {
         return IdDiasDaSemana;

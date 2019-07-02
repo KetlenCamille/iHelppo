@@ -95,23 +95,27 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
 
         categoria_spinner.setAdapter(adapterCategorias);
 
-        DiasDaSemana diasDaSemana = DiasDaSemanaDAO.buscarCategoriaPorId(this, atividade.getIdDiasSemana());
+        DiasDaSemana diasDaSemana = DiasDaSemanaDAO.buscarDiaDaSemanaPorId(this, atividade.getIdDiasSemana());
 
         if(diasDaSemana.getDomingo().equals("S")){
             chkDom.setChecked(true);
-        }else if(diasDaSemana.getSegunda().equals("S")){
-            chkSeg.setChecked(true);
-        }else if(diasDaSemana.getTerca().equals("S")){
-            chkTer.setChecked(true);
-        }else if(diasDaSemana.getQuarta().equals("S")){
-            chkQua.setChecked(true);
-        }else if(diasDaSemana.getQuinta().equals("S")){
-            chkQui.setChecked(true);
-        }else if(diasDaSemana.getSexta().equals("S")){
-            chkSex.setChecked(true);
-        }else if(diasDaSemana.getSabado().equals("S")){
-            chkSab.setChecked(true);
+        }else {
+            chkDom.setChecked(false);
         }
+        if(diasDaSemana.getSegunda().equals("S")){
+                chkSeg.setChecked(true);
+            }else if(diasDaSemana.getTerca().equals("S")){
+                chkTer.setChecked(true);
+            }else if(diasDaSemana.getQuarta().equals("S")){
+                chkQua.setChecked(true);
+            }else if(diasDaSemana.getQuinta().equals("S")){
+                chkQui.setChecked(true);
+            }else if(diasDaSemana.getSexta().equals("S")){
+                chkSex.setChecked(true);
+            }else if(diasDaSemana.getSabado().equals("S")){
+                chkSab.setChecked(true);
+            }
+
     }
 
     public void btnFeitoClick(View view) {
@@ -179,15 +183,16 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
                     diasDaSemana.setSabado("N");
                 }
 
-                DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
+                DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana, UsuarioDAO.retornarUsuario());
 
                 if( dia.getIdDiasDaSemana() == 0){
+                    diasDaSemana.setIdUsuario(UsuarioDAO.retornarUsuario());
                     long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
                     if (id < 1) {
                         Toast.makeText(this, "Erro ao cadastrar Dia da Semana: " + id, Toast.LENGTH_SHORT).show();
                     }
                 }
-                DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana);
+                DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana, UsuarioDAO.retornarUsuario());
 
                 atividadePesq.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
 

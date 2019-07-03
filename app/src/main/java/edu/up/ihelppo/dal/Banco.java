@@ -1005,9 +1005,9 @@ public class Banco extends SQLiteOpenHelper {
             diasDaSemana.setQuinta(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_QUINTA)));
             diasDaSemana.setSexta(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_SEXTA)));
             diasDaSemana.setSabado(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_SABADO)));
-            diasDaSemana.setIdDiasDaSemana(cursor.getInt(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_IDUSUARIO)));
+            diasDaSemana.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_IDUSUARIO)));
         }
-        cursor.close();
+        //cursor.close();
         return diasDaSemana;
     }
 
@@ -1037,7 +1037,7 @@ public class Banco extends SQLiteOpenHelper {
             diasDaSemana.setSexta(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_SEXTA)));
             diasDaSemana.setSabado(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_SABADO)));
             diasDaSemana.setDomingo(cursor.getString(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_DOMINGO)));
-            diasDaSemana.setIdDiasDaSemana(cursor.getInt(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_IDUSUARIO)));
+            diasDaSemana.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaDiasDaSemana.COLUNA_IDUSUARIO)));
         }
         cursor.close();
         return diasDaSemana;

@@ -80,8 +80,8 @@
         android:textColor="#082c66"
         android:textSize="25sp" />
 
-    <EditText
-        android:id="@+id/edtDataAtividade"
+    <TextView
+        android:id="@+id/txtDataAtividade"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:gravity="center"

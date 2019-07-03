@@ -62,6 +62,9 @@ public class DetalheCategoriaActivity extends AppCompatActivity implements View.
 
         CategoriaDAO.alterarCategoria(this, categoriaPesq);
 
+        Intent intent = new Intent(DetalheCategoriaActivity.this, ListarCategoriasActivity.class);
+        startActivity(intent);
+
     }
 
     private void InitiFabMenu() {

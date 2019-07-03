@@ -34,15 +34,7 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
     private CheckBox chkDom, chkSeg, chkTer, chkQua, chkQui, chkSex, chkSab;
     private Atividade atividade = new Atividade();
 
-    public String[] diasPreenchidos = new String[7];
-    public String segunda = "";
-    public String terca = "";
-    public String quarta = "";
-    public String quinta = "";
-    public String sexta = "";
-    public String sabado = "";
-    public String domingo = "";
-    public String diasDaSemana = "";
+    DiasDaSemana diasDaSemanaPreenc = new DiasDaSemana();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +60,25 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
 
         atividade = (Atividade) getIntent().getSerializableExtra("ATIVIDADE");
 
+        Toast.makeText(this, "" + atividade.getIdDiasSemana(), Toast.LENGTH_SHORT).show();
+
         if (atividade.getFoiRealizada().equals("N")) {
             txtStatus.setText("Atividade Não Realizada!");
-            btnAlterarAtv.setEnabled(true);
-            btnFeito.setEnabled(false);
-            btnNaoFeito.setEnabled(true);
+            btnAlterarAtv.setEnabled(false);
+            btnFeito.setEnabled(true);
+            btnNaoFeito.setEnabled(false);
         } else if (atividade.getFoiRealizada().equals("S")) {
             txtStatus.setText("Atividade Realizada!");
-            btnAlterarAtv.setEnabled(true);
-            btnNaoFeito.setEnabled(true);
+            btnAlterarAtv.setEnabled(false);
+            btnFeito.setEnabled(false);
+            btnNaoFeito.setEnabled(false);
+            chkDom.setEnabled(false);
+            chkSeg.setEnabled(false);
+            chkTer.setEnabled(false);
+            chkQua.setEnabled(false);
+            chkQui.setEnabled(false);
+            chkSex.setEnabled(false);
+            chkSab.setEnabled(false);
         } else if (atividade.getFoiRealizada().equals("")) {
             txtStatus.setText("Atividade Pendente!");
         }
@@ -97,24 +99,55 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
 
         DiasDaSemana diasDaSemana = DiasDaSemanaDAO.buscarDiaDaSemanaPorId(this, atividade.getIdDiasSemana());
 
-        if(diasDaSemana.getDomingo().equals("S")){
+        if (diasDaSemana.getDomingo().equals("S")) {
             chkDom.setChecked(true);
-        }else {
+            diasDaSemanaPreenc.setDomingo("S");
+        } else {
             chkDom.setChecked(false);
+            diasDaSemanaPreenc.setDomingo("N");
         }
-        if(diasDaSemana.getSegunda().equals("S")){
-                chkSeg.setChecked(true);
-            }else if(diasDaSemana.getTerca().equals("S")){
-                chkTer.setChecked(true);
-            }else if(diasDaSemana.getQuarta().equals("S")){
-                chkQua.setChecked(true);
-            }else if(diasDaSemana.getQuinta().equals("S")){
-                chkQui.setChecked(true);
-            }else if(diasDaSemana.getSexta().equals("S")){
-                chkSex.setChecked(true);
-            }else if(diasDaSemana.getSabado().equals("S")){
-                chkSab.setChecked(true);
-            }
+        if (diasDaSemana.getSegunda().equals("S")) {
+            chkSeg.setChecked(true);
+            diasDaSemanaPreenc.setSegunda("S");
+        } else {
+            chkSeg.setChecked(false);
+            diasDaSemanaPreenc.setSegunda("N");
+        }
+        if (diasDaSemana.getTerca().equals("S")) {
+            chkTer.setChecked(true);
+            diasDaSemanaPreenc.setTerca("S");
+        } else {
+            chkTer.setChecked(false);
+            diasDaSemanaPreenc.setTerca("N");
+        }
+        if (diasDaSemana.getQuarta().equals("S")) {
+            chkQua.setChecked(true);
+            diasDaSemanaPreenc.setQuarta("S");
+        }else{
+            chkQua.setChecked(false);
+            diasDaSemanaPreenc.setQuarta("N");
+        }
+        if (diasDaSemana.getQuinta().equals("S")) {
+            chkQui.setChecked(true);
+            diasDaSemanaPreenc.setQuinta("S");
+        }else{
+            chkQui.setChecked(false);
+            diasDaSemanaPreenc.setQuinta("N");
+        }
+        if (diasDaSemana.getSexta().equals("S")) {
+            chkSex.setChecked(true);
+            diasDaSemanaPreenc.setSexta("S");
+        }else{
+            chkSex.setChecked(false);
+            diasDaSemanaPreenc.setSexta("N");
+        }if (diasDaSemana.getSabado().equals("S")) {
+            chkSab.setChecked(true);
+            diasDaSemanaPreenc.setSabado("S");
+        }
+        else{
+            chkSab.setChecked(false);
+            diasDaSemanaPreenc.setSabado("N");
+        }
 
     }
 
@@ -159,44 +192,26 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
             String categoria = String.valueOf(categoria_spinner.getSelectedItem());
 
             Categoria categoriaPesq = CategoriaDAO.buscarCategoriaPorNome(this, categoria, UsuarioDAO.retornarUsuario());
-            if(categoriaPesq.getDescricao() == null){
+            if (categoriaPesq.getDescricao() == null) {
                 Toast.makeText(this, "Selecione uma categoria válida!", Toast.LENGTH_SHORT).show();
             } else {
                 atividade.setIdCategoria(categoriaPesq.getIdCategoria());
-                DiasDaSemana diasDaSemana = new DiasDaSemana();
-                diasDaSemana.setDomingo(diasPreenchidos[0]);
-                diasDaSemana.setSegunda(diasPreenchidos[1]);
-                diasDaSemana.setTerca(diasPreenchidos[2]);
-                diasDaSemana.setQuarta(diasPreenchidos[3]);
-                diasDaSemana.setQuinta(diasPreenchidos[4]);
-                diasDaSemana.setSexta(diasPreenchidos[5]);
-                diasDaSemana.setSabado(diasPreenchidos[6]);
 
-                if(diasPreenchidos[0] == null && diasPreenchidos[1] == null &&diasPreenchidos[2] == null
-                        && diasPreenchidos[3] == null && diasPreenchidos[4] == null && diasPreenchidos[5] == null && diasPreenchidos[6] == null){
-                    diasDaSemana.setDomingo("N");
-                    diasDaSemana.setSegunda("N");
-                    diasDaSemana.setTerca("N");
-                    diasDaSemana.setQuarta("N");
-                    diasDaSemana.setQuinta("N");
-                    diasDaSemana.setSexta("N");
-                    diasDaSemana.setSabado("N");
-                }
+                DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemanaPreenc, UsuarioDAO.retornarUsuario());
 
-                DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana, UsuarioDAO.retornarUsuario());
-
-                if( dia.getIdDiasDaSemana() == 0){
-                    diasDaSemana.setIdUsuario(UsuarioDAO.retornarUsuario());
-                    long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
+                if (dia.getIdDiasDaSemana() == 0) {
+                    diasDaSemanaPreenc.setIdUsuario(UsuarioDAO.retornarUsuario());
+                    long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemanaPreenc);
                     if (id < 1) {
                         Toast.makeText(this, "Erro ao cadastrar Dia da Semana: " + id, Toast.LENGTH_SHORT).show();
                     }
                 }
-                DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana, UsuarioDAO.retornarUsuario());
+                DiasDaSemana diasPesq = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemanaPreenc, UsuarioDAO.retornarUsuario());
 
                 atividadePesq.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
 
-                AtividadeDAO.alterarAtividade(this, atividadePesq);
+                long id = AtividadeDAO.alterarAtividade(this, atividadePesq);
+                Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class);
                 startActivity(intent);
@@ -205,5 +220,40 @@ public class DetalhesAtividadeActivity extends AppCompatActivity {
     }
 
     public void onCheckboxClicked(View view) {
+        if (chkDom.isChecked()) {
+            diasDaSemanaPreenc.setDomingo("S");
+        } else {
+            diasDaSemanaPreenc.setDomingo("N");
+        }
+        if (chkSeg.isChecked()) {
+            diasDaSemanaPreenc.setSegunda("S");
+        } else {
+            diasDaSemanaPreenc.setSegunda("N");
+        }
+        if (chkTer.isChecked()) {
+            diasDaSemanaPreenc.setTerca("S");
+        } else {
+            diasDaSemanaPreenc.setTerca("N");
+        }
+        if (chkQua.isChecked()) {
+            diasDaSemanaPreenc.setQuarta("S");
+        } else {
+            diasDaSemanaPreenc.setQuarta("N");
+        }
+        if (chkQui.isChecked()) {
+            diasDaSemanaPreenc.setQuinta("S");
+        } else {
+            diasDaSemanaPreenc.setQuinta("N");
+        }
+        if (chkSex.isChecked()) {
+            diasDaSemanaPreenc.setSexta("S");
+        } else {
+            diasDaSemanaPreenc.setSexta("N");
+        }
+        if (chkSab.isChecked()) {
+            diasDaSemanaPreenc.setSabado("S");
+        } else {
+            diasDaSemanaPreenc.setSabado("N");
+        }
     }
 }

@@ -157,7 +157,8 @@ public class Banco extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<String> categorias = new ArrayList<String>();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaCategoria.NOME_DA_TABELA + " WHERE " +
-                TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario, null);
+                TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
+                TabelaCategoria.COLUNA_EHINATIVO + " = 'N'", null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 categorias.add(cursor.getString(cursor.getColumnIndex("Descricao")));
@@ -172,7 +173,8 @@ public class Banco extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaCategoria.NOME_DA_TABELA + " WHERE " +
                 TabelaCategoria.COLUNA_DESCRICAO + " = '" + p_categoria + "' AND " +
-                TabelaCategoria.COLUNA_IDUSUARIO + " = " + idUsuario, null);
+                TabelaCategoria.COLUNA_IDUSUARIO + " = " + idUsuario + " AND " +
+                TabelaCategoria.COLUNA_EHINATIVO + " = 'N'", null);
         //Colando o cursor para a 1a posição
 
         if (cursor.moveToFirst()) {
@@ -185,6 +187,7 @@ public class Banco extends SQLiteOpenHelper {
         return categoria;
     }
 
+
     //Listar Categorias Ativas
     public ArrayList<Categoria> listarCategoriasAtivas(int idUsuario) {
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
@@ -193,16 +196,18 @@ public class Banco extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaCategoria.NOME_DA_TABELA + " WHERE " +
                 TabelaCategoria.COLUNA_EHINATIVO + " = 'N' AND " +
                 TabelaCategoria.COLUNA_IDUSUARIO + " = " + idUsuario, null);
+
         //Colando o cursor para a 1a posição
+        cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            while (cursor.moveToNext()) {
+            do {
                 Categoria categoria = new Categoria();
+                categoria.setIdUsuario(cursor.getInt(cursor.getColumnIndex(TabelaCategoria.COLUNA_IDUSUARIO)));
                 categoria.setIdCategoria(cursor.getInt(cursor.getColumnIndex(TabelaCategoria.COLUNA_ID)));
                 categoria.setDescricao(cursor.getString(cursor.getColumnIndex(TabelaCategoria.COLUNA_DESCRICAO)));
                 categoria.setEhInativo(cursor.getString(cursor.getColumnIndex(TabelaCategoria.COLUNA_EHINATIVO)));
                 categorias.add(categoria);
-            }
+            } while (cursor.moveToNext());
         }
         return categorias;
     }
@@ -802,7 +807,7 @@ public class Banco extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + TabelaAtividade.NOME_DA_TABELA +
                 " WHERE " + TabelaAtividade.COLUNA_ID_USUARIO + " = " + idUsuario + " AND " +
-                "strftime('%Y%m%d'," + TabelaAtividade.COLUNA_DATA_CRIACAO + ") <  strftime('%Y%m%d', 'now')", null);
+                "strftime('%Y%m%d'," + TabelaAtividade.COLUNA_DATA_CRIACAO + ") <=  strftime('%Y%m%d', 'now')", null);
         //Colando o cursor para a 1a posição
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {

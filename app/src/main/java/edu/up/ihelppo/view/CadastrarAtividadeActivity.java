@@ -168,11 +168,11 @@ public class CadastrarAtividadeActivity extends AppCompatActivity implements OnI
                     diasDaSemana.setSexta("N");
                     diasDaSemana.setSabado("N");
                 }
-
+                diasDaSemana.setIdUsuario(UsuarioDAO.retornarUsuario());
                 DiasDaSemana dia = DiasDaSemanaDAO.buscarDiasDaSemanaExistente(this, diasDaSemana, UsuarioDAO.retornarUsuario());
 
                 if( dia.getIdDiasDaSemana() == 0){
-                    diasDaSemana.setIdUsuario(UsuarioDAO.retornarUsuario());
+
                     long id = DiasDaSemanaDAO.cadastrarDiasDaSemana(this, diasDaSemana);
                     if (id < 1) {
                         Toast.makeText(this, "Erro ao cadastrar Dia da Semana: " + id, Toast.LENGTH_SHORT).show();

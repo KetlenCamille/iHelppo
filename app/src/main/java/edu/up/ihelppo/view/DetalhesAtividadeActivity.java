@@ -100,8 +100,6 @@ public class DetalhesAtividadeActivity extends AppCompatActivity implements View
 
         atividade = (Atividade) getIntent().getSerializableExtra("ATIVIDADE");
 
-        Toast.makeText(this, "" + atividade.getIdDiasSemana(), Toast.LENGTH_SHORT).show();
-
         if (atividade.getFoiRealizada().equals("N")) {
             txtStatus.setText("Atividade Não Realizada!");
             btnAlterarAtv.setEnabled(false);
@@ -203,7 +201,13 @@ public class DetalhesAtividadeActivity extends AppCompatActivity implements View
 
     public void btnExcluirClick(View view) {
         long id = AtividadeDAO.excluirAtividade(this, atividade);
-        Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
+        if(id > 0){
+            Toast.makeText(this, "Atividade excluída com Sucesso!", Toast.LENGTH_SHORT).show();
+        }
+        else if(id < 0){
+            Toast.makeText(this, "Atividade não foi excluída! " + id, Toast.LENGTH_SHORT).show();
+        }
+
 
         Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class);
         startActivity(intent);
@@ -251,6 +255,12 @@ public class DetalhesAtividadeActivity extends AppCompatActivity implements View
                 atividadePesq.setIdDiasSemana(diasPesq.getIdDiasDaSemana());
 
                 long id = AtividadeDAO.alterarAtividade(this, atividadePesq);
+                if(id > 0){
+                    Toast.makeText(this, "Atividade alterada com Sucesso!", Toast.LENGTH_SHORT).show();
+                }
+                else if(id < 0){
+                    Toast.makeText(this, "Atividade não foi alterada! " + id, Toast.LENGTH_SHORT).show();
+                }
                 Toast.makeText(this, "Id: " + id, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(DetalhesAtividadeActivity.this, ListarAtividadesActivity.class);
